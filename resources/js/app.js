@@ -5,6 +5,7 @@ import App from './App.vue';
 import axios from 'axios';
 import {collectionUrl} from './utilize/collectionUrl.js'
 const app = createApp(App);
+require("./bootstrap");
 
 app.use(router);
 app.use(store);

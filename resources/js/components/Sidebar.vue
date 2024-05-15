@@ -1,6 +1,6 @@
 <template>
     <div id="Sidebar">
-        <div class="fixed z-50 inset-0 flex items-center justify-center overflow-hidden">
+        <!-- <div class="fixed z-50 inset-0 flex items-center justify-center overflow-hidden">
           <div class="fixed inset-0 transition-opacity">
             <div class="absolute inset-0 bg-blue-primary opacity-75"></div>
           </div>
@@ -32,7 +32,7 @@
               </button>
             </div>
           </div>
-        </div>
+        </div> -->
     </div>
 </template>
 <script setup>
