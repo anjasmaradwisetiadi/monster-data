@@ -1,11 +1,11 @@
 <template>
     <!-- <Navbar></Navbar> -->
     <div class="container">
-        <p>Testing vue sdg dadal</p>
+        <p class="blue-primary">Testing vue sdg dadal</p>
 
         <div class="fixed z-50 inset-0 flex items-center justify-center overflow-hidden">
           <div class="fixed inset-0 transition-opacity">
-            <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+            <div class="absolute inset-0 bg-blue-primary opacity-75"></div>
           </div>
 
           <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
