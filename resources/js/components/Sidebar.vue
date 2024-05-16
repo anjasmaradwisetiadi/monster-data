@@ -1,44 +1,70 @@
 <template>
-    <div id="Sidebar">
-        <!-- <div class="fixed z-50 inset-0 flex items-center justify-center overflow-hidden">
-          <div class="fixed inset-0 transition-opacity">
-            <div class="absolute inset-0 bg-blue-primary opacity-75"></div>
-          </div>
-
-          <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
-            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-              <h3 class="text-lg leading-6 font-medium text-gray-900">
-                Rules to Follow
-              </h3>
-              <div class="mt-2">
-                <ul class="list-disc list-inside">
-                  <li>Rule 1: Be respectful and considerate.</li>
-                  <li>
-                    Rule 2: No offensive language or inappropriate behavior.
+          <div class="ml-16 w-56 sticky">
+            <div class="mt-8 p-4 sidebar-menu transition-transform border shadow-md rounded-md">
+              <ul class="mt-2">
+                  <li class="mb-1 group">
+                      <a href="" class="flex font-semibold px-4 items-center py-2 text-blue-primary hover:bg-gray-300 rounded-md">
+                          <span class="material-icons text-blue-primary" style="font-size: 24px"> dashboard </span>
+                          <span class="text-lg pl-2 text-blue-primary">Dashboard</span>
+                      </a>
                   </li>
-                  <li>Rule 3: Do not share personal information.</li>
-                  <li>Rule 4: No spamming or advertising.</li>
-                  <li>Rule 5: Follow all community guidelines.</li>
-                </ul>
-              </div>
-            </div>
-            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-              <button
-                type="button"
-                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
-                onClick={handleAccept}
-              >
-                Accept
-              </button>
-            </div>
+                  <li class="mb-1 group">
+                      <a href="" class="flex font-semibold px-4 items-center py-2 text-blue-primary hover:bg-gray-300 rounded-md ">
+                          <span class="material-icons text-blue-primary" style="font-size: 24px"> dns </span>
+                          <span class="text-lg pl-2 text-blue-primary">Servers</span>
+                      </a>
+                  </li>
+                  <li class="mb-1 group">
+                      <a href="" class="flex font-semibold px-4 items-center py-2 text-blue-primary hover:bg-gray-300 rounded-md active">
+                          <span class="material-icons text-blue-primary" style="font-size: 24px"> timer </span>
+                          <span class="text-lg pl-2 text-blue-primary">Schedule</span>
+                      </a>
+                  </li>
+                  <li class="mb-1 group">
+                      <a href="" class="flex font-semibold px-4 items-center py-2 text-blue-primary hover:bg-gray-300 rounded-md ">
+                          <span class="material-icons text-blue-primary" style="font-size: 24px"> history </span>
+                          <span class="text-lg pl-2 text-blue-primary">Backup</span>
+                      </a>
+                  </li>
+              </ul>
           </div>
-        </div> -->
-    </div>
+          <div class="mt-8 p-4 sidebar-menu transition-transform border shadow-md rounded-md">
+              <ul class="mt-2">
+                  <li class="mb-1 group">
+                      <a href="" class="flex font-semibold px-4 items-center py-2 text-blue-primary hover:bg-gray-300 rounded-md ">
+                          <span class="material-icons text-blue-primary" style="font-size: 24px"> person </span>
+                          <span class="text-lg pl-2 text-blue-primary">Account</span>
+                      </a>
+                  </li>
+                  <li class="mb-1 group">
+                      <a href="" class="flex font-semibold px-4 items-center py-2 text-blue-primary hover:bg-gray-300 rounded-md ">
+                          <span class="material-icons text-blue-primary" style="font-size: 24px"> settings </span>
+                          <span class="text-lg pl-2 text-blue-primary">Setting</span>
+                      </a>
+                  </li>
+                  <li class="mb-1 group">
+                      <a href="" class="flex font-semibold px-4 items-center py-2 text-blue-primary hover:bg-gray-300 rounded-md ">
+                          <span class="material-icons text-blue-primary" style="font-size: 24px"> notifications_active </span>
+                          <span class="text-lg pl-2 text-blue-primary">Notification</span>
+                      </a>
+                  </li>
+                  <li class="mb-1 group">
+                      <a href="" class="flex font-semibold px-4 items-center py-2 text-blue-primary hover:bg-gray-300 rounded-md ">
+                          <span class="material-icons text-blue-primary" style="font-size: 24px"> list </span>
+                          <span class="text-lg pl-2 text-blue-primary">Activity Log</span>
+                      </a>
+                  </li>
+              </ul>
+          </div>
+          </div>
 </template>
 <script setup>
 
 </script>
 
 <style scoped>
-
-</style> 
+    .active{
+        background-color: #a7f3d0;
+        border-radius: 10px;
+    }
+</style>

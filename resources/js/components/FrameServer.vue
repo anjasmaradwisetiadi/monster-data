@@ -1,7 +1,7 @@
 <template>
-    <div id="FrameLogin" class="flex min-h-screen flex-col justify-center">
+    <div id="FrameLogin" class="flex flex-col h-screen ">
             <!-- start navbar -->
-            <nav class="lg:px-16 px-6 bg-white shadow-md flex flex-wrap items-center py-3">
+            <nav class="lg:px-16 px-6 bg-white shadow-md flex flex-wrap items-center py-3 sticky top-0">
                 <div class="flex-1 flex justify-between items-center">
                     <div v-if="dummySpesificHeader === 'dashboard'">
                         <h2 class="text-3xl font-bold text-blue-primary">Schedule</h2>
@@ -81,9 +81,11 @@
                 </div>
             </nav>
             <!-- end navbar -->
-            <slot name="content-form">
+            <main class="flex-1 relative h-screen">
+                <slot name="content-form">
 
-            </slot>
+                </slot>
+            </main>
             <!-- start footer -->
             <footer class="background-footer">
                 <div class="flex flex-row w-full px-6 lg:px-8">
@@ -107,7 +109,6 @@
 </template>
 <script setup>
 import { ref, reactive, watch, computed, onMounted, onBeforeMount } from 'vue';
-
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 
@@ -129,6 +130,7 @@ onMounted(()=>{
 </script>
 
 <style scoped>
+
     .background-footer{
         background-image: url("../../assets/image/background_smooth.png");
         background-repeat: no-repeat;
@@ -141,5 +143,4 @@ onMounted(()=>{
     .flex-end{
         align-self: flex-end;
     }
-
 </style>

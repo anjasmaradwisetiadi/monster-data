@@ -2,62 +2,20 @@
     <div id="ServerDashboard">
         <FrameServer>
             <template #content-form>
-                <div class=" flex-grow mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <div class="fixed left-8 top-20 w-56 p-4 z-50 sidebar-menu transition-transform border shadow-md rounded-md">
-                        <ul class="mt-2">
-                            <li class="mb-1 group">
-                                <a href="" class="flex font-semibold px-4 items-center py-2 text-blue-primary hover:bg-gray-300 rounded-md">
-                                    <span class="material-icons text-blue-primary" style="font-size: 24px"> dashboard </span>
-                                    <span class="text-lg pl-2 text-blue-primary">Dashboard</span>
-                                </a>
-                            </li>
-                            <li class="mb-1 group">
-                                <a href="" class="flex font-semibold px-4 items-center py-2 text-blue-primary hover:bg-gray-300 rounded-md ">
-                                    <span class="material-icons text-blue-primary" style="font-size: 24px"> dns </span>
-                                    <span class="text-lg pl-2 text-blue-primary">Servers</span>
-                                </a>
-                            </li>
-                            <li class="mb-1 group">
-                                <a href="" class="flex font-semibold px-4 items-center py-2 text-blue-primary hover:bg-gray-300 rounded-md active">
-                                    <span class="material-icons text-blue-primary" style="font-size: 24px"> timer </span>
-                                    <span class="text-lg pl-2 text-blue-primary">Schedule</span>
-                                </a>
-                            </li>
-                            <li class="mb-1 group">
-                                <a href="" class="flex font-semibold px-4 items-center py-2 text-blue-primary hover:bg-gray-300 rounded-md ">
-                                    <span class="material-icons text-blue-primary" style="font-size: 24px"> history </span>
-                                    <span class="text-lg pl-2 text-blue-primary">Backup</span>
-                                </a>
-                            </li>
-                        </ul>
+                <div class="flex flex-row">
+                    <div class="relative">
+                        <Sidebar></Sidebar>
                     </div>
-                    <div class="fixed left-8 top-80 mt-8 w-56 p-4 z-50 sidebar-menu transition-transform border shadow-md rounded-md">
-                        <ul class="mt-2">
-                            <li class="mb-1 group">
-                                <a href="" class="flex font-semibold px-4 items-center py-2 text-blue-primary hover:bg-gray-300 rounded-md ">
-                                    <span class="material-icons text-blue-primary" style="font-size: 24px"> person </span>
-                                    <span class="text-lg pl-2 text-blue-primary">Account</span>
-                                </a>
-                            </li>
-                            <li class="mb-1 group">
-                                <a href="" class="flex font-semibold px-4 items-center py-2 text-blue-primary hover:bg-gray-300 rounded-md ">
-                                    <span class="material-icons text-blue-primary" style="font-size: 24px"> settings </span>
-                                    <span class="text-lg pl-2 text-blue-primary">Setting</span>
-                                </a>
-                            </li>
-                            <li class="mb-1 group">
-                                <a href="" class="flex font-semibold px-4 items-center py-2 text-blue-primary hover:bg-gray-300 rounded-md ">
-                                    <span class="material-icons text-blue-primary" style="font-size: 24px"> notifications_active </span>
-                                    <span class="text-lg pl-2 text-blue-primary">Notification</span>
-                                </a>
-                            </li>
-                            <li class="mb-1 group">
-                                <a href="" class="flex font-semibold px-4 items-center py-2 text-blue-primary hover:bg-gray-300 rounded-md ">
-                                    <span class="material-icons text-blue-primary" style="font-size: 24px"> list </span>
-                                    <span class="text-lg pl-2 text-blue-primary">Activity Log</span>
-                                </a>
-                            </li>
-                        </ul>
+                    <div class="relative">
+                        <div class="mt-8 py-2 px-8">
+                            <p>djkabdc adhauhdabi</p>
+                            <p>djkabdc adhauhdabi</p>
+                            <p>djkabdc adhauhdabi</p>
+                            <p>djkabdc adhauhdabi</p>
+                            <p>djkabdc adhauhdabi</p>
+                            <p>djkabdc adhauhdabi</p>
+                            <p>djkabdc adhauhdabi</p>
+                        </div>
                     </div>
                 </div>
             </template>
@@ -65,7 +23,8 @@
     </div>
 </template>
 <script setup>
-import  FrameServer from '../../components/FrameServer.vue';
+import FrameServer from '../../components/FrameServer.vue';
+import Sidebar from '../../components/Sidebar.vue';
 
 </script>
 
@@ -73,5 +32,8 @@ import  FrameServer from '../../components/FrameServer.vue';
     .active{
         background-color: #a7f3d0;
         border-radius: 10px;
+    }
+    .margin-reset{
+        margin: 0px !important;
     }
 </style>
