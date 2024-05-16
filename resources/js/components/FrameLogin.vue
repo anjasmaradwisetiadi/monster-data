@@ -22,7 +22,18 @@
                 <nav>
                     <ul class="text-xl text-center items-center gap-x-5 pt-4 md:gap-x-4 lg:text-lg lg:flex  lg:pt-0">
                         <li class="py-2 lg:py-0 ">
-                            <button type="submit" class="flex justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 shadow-md hover:bg-stone-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 border">Have an Account ? <span class="text-blue-700 font-semibold pl-2"> Login</span> </button>
+                            <button
+                                v-if="paramsUrlSlug === 'login'"
+                                @click="contactUs()"
+                                type="submit" class="flex justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 shadow-md hover:bg-stone-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 border">
+                                Don’t have an Account ? <span class="text-blue-700 font-semibold pl-2"> Contact Us</span> 
+                            </button>
+                            <button 
+                                v-if="paramsUrlSlug !== 'login'"
+                                @click="login()"
+                                type="submit" class="flex justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 shadow-md hover:bg-stone-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 border">
+                                Have an Account ? <span class="text-blue-700 font-semibold pl-2"> Login</span> 
+                            </button>
                         </li>
                     </ul>
                 </nav>
@@ -54,7 +65,31 @@
     </div>
 </template>
 <script setup>
+import { ref, reactive, watch, computed, onMounted, onBeforeMount } from 'vue';
 
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+
+const store = useStore();
+const router = useRouter();
+const dummySpesificLogin = 'login';
+let paramsUrlSlug = ref('login');
+
+const state = reactive({
+    paramsUrlSlug
+})
+
+onMounted(()=>{
+    const paramsRoute = router.currentRoute.value.path;
+    state.paramsUrlSlug = paramsRoute.replace('/','');
+})
+
+function contactUs(){
+    console.log("contactUs")
+}
+function login(){
+    console.log("login")
+}
 </script>
 
 <style scoped>

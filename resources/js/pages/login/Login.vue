@@ -55,17 +55,5 @@ import  FrameLogin from '../../components/FrameLogin.vue';
 </script>
 
 <style scoped>
-    .background-footer{
-        background-image: url("../../../assets/image/background.png");
-        /* background-repeat: no-repeat; */
-        background-position: right top;
-        height: 16rem;
-        width: auto;
-        display: flex;
-    }
-
-    .flex-end{
-        align-self: flex-end;
-    }
 
 </style>
