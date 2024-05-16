@@ -4,8 +4,8 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         { path: '/', component: () => import('../components/ExampleComponent.vue')},
-        { path: '/login', component: () => import('../pages/login/login.vue')},
-        { path: '/register', component: () => import('../pages/login/register.vue')},
+        { path: '/login', component: () => import('../pages/login/Login.vue')},
+        { path: '/register', component: () => import('../pages/login/Register.vue')},
         { path: '/dashboard', component: () => import('../pages/server-page/ServerDashboard.vue')},
         { path: '/dashboard/:slug', component: () => import('../pages/server-page/ServerDetail.vue')},
         { path: '/dashboard/create', component: () => import('../pages/server-page/ServerCreate.vue')},

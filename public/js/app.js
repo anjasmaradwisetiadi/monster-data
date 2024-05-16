@@ -23788,13 +23788,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "blue-primary"
-}, "Testing vue sdg ", -1 /* HOISTED */);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_Navbar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Navbar");
   var _component_router_view = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-view");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Navbar), _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view)], 64 /* STABLE_FRAGMENT */);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <Navbar></Navbar>\r\n    <p class=\"blue-primary\">Testing vue</p> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view)], 2112 /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */);
 }
 
 /***/ }),
@@ -23944,12 +23940,12 @@ var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_0__.createRouter)({
   }, {
     path: '/login',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ "resources_js_pages_login_login_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/login/login.vue */ "./resources/js/pages/login/login.vue"));
+      return __webpack_require__.e(/*! import() */ "resources_js_pages_login_Login_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/login/Login.vue */ "./resources/js/pages/login/Login.vue"));
     }
   }, {
     path: '/register',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ "resources_js_pages_login_register_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/login/register.vue */ "./resources/js/pages/login/register.vue"));
+      return __webpack_require__.e(/*! import() */ "resources_js_pages_login_Register_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/login/Register.vue */ "./resources/js/pages/login/Register.vue"));
     }
   }, {
     path: '/dashboard',
@@ -51655,7 +51651,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"name":"axios","version":"0.21.4","de
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_ExampleComponent_vue":1,"resources_js_pages_login_login_vue":1,"resources_js_pages_login_register_vue":1,"resources_js_pages_server-page_ServerDashboard_vue":1,"resources_js_pages_server-page_ServerDetail_vue":1,"resources_js_pages_server-page_ServerCreate_vue":1,"resources_js_components_PageNotFound_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_ExampleComponent_vue":1,"resources_js_pages_login_Login_vue":1,"resources_js_pages_login_Register_vue":1,"resources_js_pages_server-page_ServerDashboard_vue":1,"resources_js_pages_server-page_ServerDetail_vue":1,"resources_js_pages_server-page_ServerCreate_vue":1,"resources_js_components_PageNotFound_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

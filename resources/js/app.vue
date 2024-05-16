@@ -1,6 +1,6 @@
 <template>
-    <Navbar></Navbar>
-    <p class="blue-primary">Testing vue sdg </p>
+    <!-- <Navbar></Navbar>
+    <p class="blue-primary">Testing vue</p> -->
     <router-view></router-view>
     
 </template>
