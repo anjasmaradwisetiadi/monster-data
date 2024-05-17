@@ -15,6 +15,20 @@ class CreateServersTable extends Migration
     {
         Schema::create('servers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
+            $table->string('schedule_name')->unique();
+            $table->string('backup_server');
+            $table->enum('backup_method', ['full','incremental','separate']);
+            $table->enum('backup_type', ['file', 'image', 'video']);
+            $table->boolean('enable_pitr');
+            $table->boolean('backup_database_per_file');
+            $table->string('storage_name');
+            $table->string('storage_directory');
+            $table->enum('retention_policy_type', ['day', 'week', 'month']);
+            $table->string('backup_name');
+            $table->boolean('use_compression');
+            $table->boolean('use_encryption');
+            $table->enum('backup_schedule', ['hourly', 'daily', 'weekly', 'monthly']);
             $table->timestamps();
         });
     }
