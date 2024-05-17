@@ -164,10 +164,10 @@ var _withScopeId = function _withScopeId(n) {
 };
 var _hoisted_1 = {
   id: "FrameLogin",
-  "class": "flex flex-col h-screen"
+  "class": "flex flex-col min-h-screen"
 };
 var _hoisted_2 = {
-  "class": "lg:px-16 px-6 bg-white z-10 shadow-md flex flex-wrap items-center py-1 sticky top-0"
+  "class": "lg:px-16 px-6 bg-white z-10 shadow-lg flex flex-wrap items-center py-1 sticky top-0"
 };
 var _hoisted_3 = {
   "class": "flex-1 flex justify-between items-center"
@@ -305,10 +305,10 @@ var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
     "class": "mt-12 flex flex-row"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit",
-    "class": "flex w-4/5 justify-center rounded-md bg-blue-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+    "class": "flex w-4/5 justify-center rounded-md bg-blue-primary text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
   }, " Schedule Detail "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit",
-    "class": "flex w-1/5 justify-center rounded-md bg-green-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ml-3"
+    "class": "flex w-1/5 justify-center rounded-md bg-green-primary text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ml-3"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     "class": "material-icons text-white border-white rounded-full border-2 p-1 cursor-pointer",
     style: {

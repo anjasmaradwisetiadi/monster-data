@@ -1,7 +1,7 @@
 <template>
     <div id="FrameLogin" class="flex min-h-screen flex-col justify-center">
             <!-- start navbar -->
-            <nav class="lg:px-16 px-6 bg-white shadow-md flex flex-wrap items-center py-3">
+            <nav class="lg:px-16 px-6 bg-white shadow-lg flex flex-wrap items-center py-3">
                 <div class="flex-1 flex justify-between items-center">
 
                 </div>

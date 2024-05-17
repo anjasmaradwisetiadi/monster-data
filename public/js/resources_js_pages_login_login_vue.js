@@ -125,7 +125,7 @@ var _hoisted_1 = {
   "class": "flex min-h-screen flex-col justify-center"
 };
 var _hoisted_2 = {
-  "class": "lg:px-16 px-6 bg-white shadow-md flex flex-wrap items-center py-3"
+  "class": "lg:px-16 px-6 bg-white shadow-lg flex flex-wrap items-center py-3"
 };
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex-1 flex justify-between items-center\" data-v-fc0afeb2></div><label for=\"menu-toggle\" class=\"cursor-pointer lg:hidden block\" data-v-fc0afeb2><svg class=\"fill-current text-gray-900\" xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" data-v-fc0afeb2><title data-v-fc0afeb2>menu</title><path d=\"M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z\" data-v-fc0afeb2></path></svg></label><input class=\"hidden\" type=\"checkbox\" id=\"menu-toggle\" data-v-fc0afeb2>", 3);
 var _hoisted_6 = {

@@ -24,10 +24,10 @@
                                         <div class="flex"> <span class="w-2/5">Storage</span> <span class="w-3/5">: local storage</span></div>
                                     </div>
                                     <div class="mt-12 flex flex-row">
-                                        <button type="submit" class="flex w-4/5 justify-center rounded-md bg-blue-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                        <button type="submit" class="flex w-4/5 justify-center rounded-md bg-blue-primary text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                             Schedule Detail
                                         </button>
-                                        <button type="submit" class="flex w-1/5 justify-center rounded-md bg-green-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ml-3">
+                                        <button type="submit" class="flex w-1/5 justify-center rounded-md bg-green-primary text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ml-3">
                                             <span 
                                                 class="material-icons text-white border-white rounded-full border-2 p-1 cursor-pointer" 
                                                 style="font-size: 16px"
