@@ -17,12 +17,12 @@ use App\Http\Controllers\DashboardController;
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/login', [DashboardController::class, 'index']);
 Route::get('/register', [DashboardController::class, 'index']);
-Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::get('/dashboard/{slug}', [DashboardController::class, 'index']);
-Route::get('/dashboard/create', [DashboardController::class, 'index']);
-Route::get('/dashboard/{slug}/edit', [DashboardController::class, 'index']);
-Route::fallback(function(){
-    return view('dashboard');
-});
+Route::get('/schedule', [DashboardController::class, 'index']);
+Route::get('/schedule/{slug}', [DashboardController::class, 'index']);
+Route::get('/schedule/create', [DashboardController::class, 'index']);
+Route::get('/schedule/{slug}/edit', [DashboardController::class, 'index']);
+// need delete example pop up dialog
+Route::get('/dialog', [DashboardController::class, 'index']);
+
 
 

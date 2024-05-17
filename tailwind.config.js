@@ -11,7 +11,8 @@ module.exports = {
       colors: {
         'blue-primary' : '#014D81',
         'red-primary': '#9D174D',
-        'green-primary': '#16A34A'
+        'green-primary': '#16A34A',
+        'green-secondary': '#a7f3d0'
       },
     },
   },

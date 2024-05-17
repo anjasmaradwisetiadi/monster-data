@@ -23951,24 +23951,31 @@ var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_0__.createRouter)({
       return __webpack_require__.e(/*! import() */ "resources_js_pages_login_Register_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/login/Register.vue */ "./resources/js/pages/login/Register.vue"));
     }
   }, {
-    path: '/dashboard',
+    path: '/schedule',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_pages_server-page_ServerDashboard_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/server-page/ServerDashboard.vue */ "./resources/js/pages/server-page/ServerDashboard.vue"));
     }
   }, {
-    path: '/dashboard/:slug',
+    path: '/schedule/:slug',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_pages_server-page_ServerDetail_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/server-page/ServerDetail.vue */ "./resources/js/pages/server-page/ServerDetail.vue"));
     }
   }, {
-    path: '/dashboard/create',
+    path: '/schedule/create',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_pages_server-page_ServerCreate_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/server-page/ServerCreate.vue */ "./resources/js/pages/server-page/ServerCreate.vue"));
     }
   }, {
-    path: '/dashboard/:slug/edit',
+    path: '/schedule/:slug/edit',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_pages_server-page_ServerCreate_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/server-page/ServerCreate.vue */ "./resources/js/pages/server-page/ServerCreate.vue"));
+    }
+  },
+  // need delete example pop up dialog
+  {
+    path: '/dialog',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_LoadingAndAlert_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/LoadingAndAlert.vue */ "./resources/js/components/LoadingAndAlert.vue"));
     }
   }, {
     path: '/:pathMatch(.*)*',
@@ -52079,7 +52086,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"name":"axios","version":"0.21.4","de
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_ExampleComponent_vue":1,"resources_js_pages_login_Login_vue":1,"resources_js_pages_login_Register_vue":1,"resources_js_pages_server-page_ServerDashboard_vue":1,"resources_js_pages_server-page_ServerDetail_vue":1,"resources_js_pages_server-page_ServerCreate_vue":1,"resources_js_components_PageNotFound_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_ExampleComponent_vue":1,"resources_js_pages_login_Login_vue":1,"resources_js_pages_login_Register_vue":1,"resources_js_pages_server-page_ServerDashboard_vue":1,"resources_js_pages_server-page_ServerDetail_vue":1,"resources_js_pages_server-page_ServerCreate_vue":1,"resources_js_components_LoadingAndAlert_vue":1,"resources_js_components_PageNotFound_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
