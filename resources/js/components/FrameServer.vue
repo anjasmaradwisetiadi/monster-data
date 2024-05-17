@@ -1,5 +1,5 @@
 <template>
-    <div id="FrameLogin" class="flex flex-col min-h-screen ">
+    <div id="FrameLogin" class="flex flex-col min-h-screen">
             <!-- start navbar -->
             <nav class="lg:px-16 px-6 bg-white z-10 shadow-lg flex flex-wrap items-center py-1 sticky top-0">
                 <div class="flex-1 flex justify-between items-center">

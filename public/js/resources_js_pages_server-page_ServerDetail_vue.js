@@ -401,7 +401,7 @@ var _hoisted_11 = {
   "class": "relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
 };
 var _hoisted_12 = {
-  "class": "block w-full overflow-x-auto"
+  "class": "block w-full"
 };
 var _hoisted_13 = {
   "class": "items-center bg-transparent w-full border-collapse"
@@ -422,16 +422,16 @@ var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
   }, " Action ")])], -1 /* HOISTED */);
 });
 var _hoisted_15 = {
-  "class": "border-b-2 border-l-0 px-6 text-center align-middle whitespace-nowrap p-4 text-left text-blueGray-700"
+  "class": "border-b-2 border-l-0 text-center align-middle whitespace-nowrap p-4 text-left text-blueGray-700"
 };
 var _hoisted_16 = {
-  "class": "border-2 px-6 text-center text-green-primary align-middle whitespace-nowrap p-4 text-left text-blueGray-700"
+  "class": "border-2 text-center text-green-primary align-middle whitespace-nowrap p-4 text-left text-blueGray-700"
 };
 var _hoisted_17 = {
-  "class": "border-2 px-6 text-center align-middle whitespace-nowrap p-4"
+  "class": "border-2 text-center align-middle whitespace-nowrap p-4"
 };
 var _hoisted_18 = {
-  "class": "border-2 px-6 text-center align-center whitespace-nowrap p-4"
+  "class": "border-2 text-center align-center whitespace-nowrap p-4"
 };
 var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
@@ -551,22 +551,22 @@ var dataDummyServer = {
 };
 var dataDummyBackupListServer = {
   'data': [{
-    'name': 'postgres1_backup_all_2023_07_26_078971.sql',
+    'name': 'postgres1_backup_all_2023_07.sql',
     'status': 'completed',
     'started': '1 week ago',
     'server': 'n1 (11.12.12)'
   }, {
-    'name': 'postgres2_backup_all_2023_07_26_078971.sql',
+    'name': 'postgres1_backup_all_2023_07.sql',
     'status': 'completed',
     'started': '1 week ago',
     'server': 'n1 (11.12.12)'
   }, {
-    'name': 'postgres3_backup_all_2023_07_26_078971.sql',
+    'name': 'postgres1_backup_all_2023_07.sql',
     'status': 'completed',
     'started': '1 week ago',
     'server': 'n1 (11.12.12)'
   }, {
-    'name': 'postgres4_backup_all_2023_07_26_078971.sql',
+    'name': 'postgres1_backup_all_2023_07.sql',
     'status': 'completed',
     'started': '1 week ago',
     'server': 'n1 (11.12.12)'

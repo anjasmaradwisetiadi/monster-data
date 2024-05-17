@@ -75,25 +75,25 @@ export const dataDummyServer = {
 export const dataDummyBackupListServer = {
     'data':[
         {
-            'name' : 'postgres1_backup_all_2023_07_26_078971.sql',
+            'name' : 'postgres1_backup_all_2023_07.sql',
             'status': 'completed',
             'started': '1 week ago',
             'server': 'n1 (11.12.12)',
         },
         {
-            'name' : 'postgres2_backup_all_2023_07_26_078971.sql',
+            'name' : 'postgres1_backup_all_2023_07.sql',
             'status': 'completed',
             'started': '1 week ago',
             'server': 'n1 (11.12.12)',
         },
         {
-            'name' : 'postgres3_backup_all_2023_07_26_078971.sql',
+            'name' : 'postgres1_backup_all_2023_07.sql',
             'status': 'completed',
             'started': '1 week ago',
             'server': 'n1 (11.12.12)',
         },
         {
-            'name' : 'postgres4_backup_all_2023_07_26_078971.sql',
+            'name' : 'postgres1_backup_all_2023_07.sql',
             'status': 'completed',
             'started': '1 week ago',
             'server': 'n1 (11.12.12)',

@@ -7,7 +7,7 @@
               <Sidebar></Sidebar>
             </div>
             <div class="relative flex-grow">
-              <div class="mt-8 py-6 px-4 mx-4 flex flex-col bg-slate-50 rounded-md">
+              <div class="mt-8 py-6 px-4 mx-4 flex flex-col bg-slate-50 shadow-md rounded-md">
                 <div class="flex justify-center mb-10">
                     <h2 class="text-3xl font-bold text-blue-primary">
                         Create Form Schedule
@@ -30,6 +30,7 @@
                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]"
                       placeholder="Schedule Name"
                     />
+                    <p class="text-red-500 text-xs italic">Please fill schedule name</p>
                   </div>
                   <div class="w-1/2 px-4">
                     <label
@@ -47,6 +48,7 @@
                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]"
                       placeholder="Backup Server"
                     />
+                    <p class="text-red-500 text-xs italic">Please fill backup server</p>
                   </div>
                 </div>
                 <!-- form option dropdown -->
@@ -59,14 +61,14 @@
                     >
                     <select
                       id="countries"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
                       <option selected>Choose a backup method</option>
-                      <option value="US">United States</option>
-                      <option value="CA">Canada</option>
-                      <option value="FR">France</option>
-                      <option value="DE">Germany</option>
+                      <option value="full">Full</option>
+                      <option value="incremental">Incremental</option>
+                      <option value="separate">Separate</option>
                     </select>
+                    <p class="text-red-500 text-xs italic">Please fill backup method</p>
                   </div>
                   <div class="w-1/4 px-4">
                     <label
@@ -76,31 +78,32 @@
                     </label>
                     <select
                       id="countries"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
                       <option selected>Choose a backup type</option>
-                      <option value="US">United States</option>
-                      <option value="CA">Canada</option>
-                      <option value="FR">France</option>
-                      <option value="DE">Germany</option>
+                      <option value="text">Text</option>
+                      <option value="file">File</option>
+                      <option value="image">Image</option>
+                      <option value="video">Video</option>
                     </select>
+                    <p class="text-red-500 text-xs italic">Please fill backup type</p>
                   </div>
                   <div class="w-1/4 px-4">
                     <label
                       for="countries"
                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-                      >Retention Policy Typ</label
+                      >Retention Policy Type</label
                     >
                     <select
                       id="countries"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
                       <option selected>Choose a retention policy type</option>
-                      <option value="US">United States</option>
-                      <option value="CA">Canada</option>
-                      <option value="FR">France</option>
-                      <option value="DE">Germany</option>
+                      <option value="day"> 1 Day</option>
+                      <option value="week">1 Week</option>
+                      <option value="month">1 Month</option>
                     </select>
+                    <p class="text-red-500 text-xs italic">Please fill retention policy type</p>
                   </div>
                   <div class="w-1/4 px-4">
                     <label
@@ -110,14 +113,15 @@
                     >
                     <select
                       id="countries"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
                       <option selected>Choose a backup schedule</option>
-                      <option value="US">United States</option>
-                      <option value="CA">Canada</option>
-                      <option value="FR">France</option>
-                      <option value="DE">Germany</option>
+                      <option value="hourly">Hourly</option>
+                      <option value="daily">Daily</option>
+                      <option value="weekly">Weekly</option>
+                      <option value="monthly">Monthly</option>
                     </select>
+                    <p class="text-red-500 text-xs italic">Please fill backup schedule</p>
                   </div>
                 </div>
                 <!-- form checked -->
@@ -296,6 +300,7 @@
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]"
                             placeholder="Storage Name"
                         />
+                        <p class="text-red-500 text-xs italic">Please fill storage name</p>
                     </div>
                     <div class="w-1/3 px-4">
                         <label
@@ -313,6 +318,7 @@
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]"
                             placeholder="Storage Directory"
                         />
+                        <p class="text-red-500 text-xs italic">Please fill storage directory</p>
                     </div>
                     <div class="w-1/3 px-4">
                         <label
@@ -330,6 +336,7 @@
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]"
                             placeholder="Backup Name"
                         />
+                        <p class="text-red-500 text-xs italic">Please fill backup name</p>
                     </div>
                 </div>
                 <div class="flex flex-row-reverse mt-6 px-4">

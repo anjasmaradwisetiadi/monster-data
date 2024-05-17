@@ -142,7 +142,7 @@
                       <div
                         class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
                       >
-                        <div class="block w-full overflow-x-auto">
+                        <div class="block w-full">
                           <table
                             class="items-center bg-transparent w-full border-collapse"
                           >
@@ -181,22 +181,22 @@
                                 :key="index"
                                 class="odd:bg-white even:bg-slate-50">
                                 <td
-                                  class="border-b-2 border-l-0 px-6 text-center align-middle whitespace-nowrap p-4 text-left text-blueGray-700"
+                                  class="border-b-2 border-l-0 text-center align-middle whitespace-nowrap p-4 text-left text-blueGray-700"
                                 >
                                     {{dataBackupListServer.name}}
                                 </td>
                                 <td
-                                  class="border-2 px-6 text-center text-green-primary align-middle whitespace-nowrap p-4 text-left text-blueGray-700"
+                                  class="border-2 text-center text-green-primary align-middle whitespace-nowrap p-4 text-left text-blueGray-700"
                                 >
                                     {{dataBackupListServer.status}}
                                 </td>
                                 <td
-                                  class="border-2 px-6 text-center align-middle whitespace-nowrap p-4"
+                                  class="border-2 text-center align-middle whitespace-nowrap p-4"
                                 >
                                     {{dataBackupListServer.started}}
                                 </td>
                                 <td
-                                  class="border-2 px-6 text-center align-center whitespace-nowrap p-4"
+                                  class="border-2 text-center align-center whitespace-nowrap p-4"
                                 >
                                     {{dataBackupListServer.server}}
                                 </td>
