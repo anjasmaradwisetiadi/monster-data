@@ -10,13 +10,13 @@
          * @param string $message
          * @return \Illuminate\Http\Response
          */
-        public function responseSuccess($data, $message="Successfull"): JsonResponse{
+        public function responseSuccess($data, $message="Successfull", $code=200): JsonResponse{
             return response()->json([
                 'status'=> true,
                 'message'=> $message,
                 'data'=>$data,
                 'error'=> null
-            ]);
+            ], $code);
         }
 
         /**
