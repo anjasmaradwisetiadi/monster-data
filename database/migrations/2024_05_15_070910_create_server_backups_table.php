@@ -15,6 +15,10 @@ class CreateServerBackupsTable extends Migration
     {
         Schema::create('server_backups', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('status');
+            $table->string('started');
+            $table->string('server');
             $table->timestamps();
         });
     }

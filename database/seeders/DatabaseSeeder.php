@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Server;
+use App\Models\ServerBackup;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -102,6 +103,34 @@ class DatabaseSeeder extends Seeder
             'use_compression'=> true,
             'use_encryption'=> true,
             'backup_schedule'=> 'daily'
+        ]);
+
+        ServerBackup::create([
+            'name' => 'postgres1_backup_all_2023_07.sql',
+            'status'=> 'completed',
+            'started'=> '1 week ago',
+            'server'=> 'n1 (11.12.12)',
+        ]);
+
+        ServerBackup::create([
+            'name'  => 'postgres2_backup_all_2023_07.sql',
+            'status' => 'completed',
+            'started' => '1 week ago',
+            'server' => 'n1 (11.12.12)',
+        ]);
+
+        ServerBackup::create([
+            'name' => 'postgres3_backup_all_2023_07.sql',
+            'status'=> 'completed',
+            'started'=> '1 week ago',
+            'server'=> 'n1 (11.12.12)',
+        ]);
+
+        ServerBackup::create([
+            'name'  => 'postgres4_backup_all_2023_07.sql',
+            'status' => 'completed',
+            'started' => '1 week ago',
+            'server' => 'n1 (11.12.12)',
         ]);
     }
 }
