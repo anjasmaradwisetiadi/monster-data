@@ -208,8 +208,15 @@ __webpack_require__.r(__webpack_exports__);
     var phone = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
     var password = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
     var confirm_password = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
+    var confirmButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
     var loading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       return store.getters.getterStateLoading;
+    });
+    var responseGeneral = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return store.getters.getterResponseGeneral;
+    });
+    var isOpenModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return store.getters.getterStateModal;
     });
     function register() {
       var payload = {
@@ -220,9 +227,15 @@ __webpack_require__.r(__webpack_exports__);
         'confirm_password': confirm_password.value
       };
       _store_auth_authService__WEBPACK_IMPORTED_MODULE_3__.authService.register(payload);
+      confirmButton.value = 'Go to Login';
     }
     function payload() {
       name.value = "enzoblackred", email.value = "enzoblackred@gmail.com", phone.value = "0812345239", password.value = "enzoblackred", confirm_password.value = "enzoblackred";
+    }
+    function isOpenModelClose($event) {
+      store.commit('mutateModal', false);
+      store.commit('mutateResponseModal', null);
+      router.push('/login');
     }
     var __returned__ = {
       store: store,
@@ -257,9 +270,18 @@ __webpack_require__.r(__webpack_exports__);
       set confirm_password(v) {
         confirm_password = v;
       },
+      get confirmButton() {
+        return confirmButton;
+      },
+      set confirmButton(v) {
+        confirmButton = v;
+      },
       loading: loading,
+      responseGeneral: responseGeneral,
+      isOpenModal: isOpenModal,
       register: register,
       payload: payload,
+      isOpenModelClose: isOpenModelClose,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
       computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
@@ -642,8 +664,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     _: 1 /* STABLE */
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LoadingAndAlert"], {
-    loading: $setup.loading
-  }, null, 8 /* PROPS */, ["loading"])]);
+    loading: $setup.loading,
+    isOpenModal: $setup.isOpenModal,
+    confirmButton: $setup.confirmButton,
+    isConfirmModal: _ctx.isConfirmModal,
+    onIsOpenModelClose: $setup.isOpenModelClose,
+    responseGeneral: $setup.responseGeneral
+  }, null, 8 /* PROPS */, ["loading", "isOpenModal", "confirmButton", "isConfirmModal", "responseGeneral"])]);
 }
 
 /***/ }),
@@ -691,8 +718,13 @@ var authService = {
                 phone: response.data.data.phone,
                 token: response.data.data.token
               };
+              var messageRegister = {
+                title: 'Registration Success',
+                message: 'Please check you email to activated your MonsterBackup Account.'
+              };
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', itemSave);
-              _routes_index__WEBPACK_IMPORTED_MODULE_3__["default"].push('/login');
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', messageRegister);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', error.message);
@@ -725,14 +757,13 @@ var authService = {
               };
               var messageLogin = {
                 title: 'Login Success',
-                message: 'You will redirect to dashboard'
+                message: 'You will redirect to dashboard MonsterBackup'
               };
               localStorage.setItem('user', JSON.stringify(itemSave));
-              // router.push('/schedule');
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', itemSave);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', messageLogin);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', error.message);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;

@@ -714,8 +714,13 @@ var authService = {
                 phone: response.data.data.phone,
                 token: response.data.data.token
               };
+              var messageRegister = {
+                title: 'Registration Success',
+                message: 'Please check you email to activated your MonsterBackup Account.'
+              };
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', itemSave);
-              _routes_index__WEBPACK_IMPORTED_MODULE_3__["default"].push('/login');
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', messageRegister);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', error.message);
@@ -748,14 +753,13 @@ var authService = {
               };
               var messageLogin = {
                 title: 'Login Success',
-                message: 'You will redirect to dashboard'
+                message: 'You will redirect to dashboard MonsterBackup'
               };
               localStorage.setItem('user', JSON.stringify(itemSave));
-              // router.push('/schedule');
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', itemSave);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', messageLogin);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', error.message);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;

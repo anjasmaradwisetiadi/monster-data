@@ -22,9 +22,14 @@ export const authService = {
                 phone: response.data.data.phone,
                 token: response.data.data.token
             }
-            store.commit('mutateResponsAuth', itemSave);
-            router.push('/login');
+            const messageRegister = {
+                title: 'Registration Success',
+                message: 'Please check you email to activated your MonsterBackup Account.'
+            }
 
+            store.commit('mutateResponsAuth', itemSave);
+            store.commit('mutateResponseModal', messageRegister);
+            store.commit('mutateModal', true);
             store.state.loading = false;
         })
         .catch(function(error) {
@@ -50,14 +55,14 @@ export const authService = {
             }
             const messageLogin = {
                 title: 'Login Success',
-                message: 'You will redirect to dashboard'
+                message: 'You will redirect to dashboard MonsterBackup'
             }
             localStorage.setItem('user', JSON.stringify(itemSave));
-            // router.push('/schedule');
-            store.state.loading = false;
+
             store.commit('mutateResponsAuth', itemSave);
             store.commit('mutateResponseModal', messageLogin);
             store.commit('mutateModal', true);
+            store.state.loading = false;
         })
         .catch(function(error) {
           store.commit('mutateResponsAuth', error.message); 

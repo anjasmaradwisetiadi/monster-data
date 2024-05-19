@@ -124,7 +124,15 @@
                 <!-- end content form -->
             </template>
         </FrameLogin>
-        <LoadingAndAlert :loading="loading" ></LoadingAndAlert>
+        <LoadingAndAlert 
+            :loading="loading" 
+            :isOpenModal="isOpenModal"
+            :confirmButton="confirmButton"  
+            :isConfirmModal="isConfirmModal"  
+            @isOpenModelClose="isOpenModelClose"
+            :responseGeneral="responseGeneral" 
+        >
+        </LoadingAndAlert>
 
     </div>
 </template>
@@ -144,9 +152,16 @@ let email = ref('');
 let phone = ref('');
 let password = ref('');
 let confirm_password = ref('');
+let confirmButton = ref('');
 
 const loading = computed(()=>{
     return store.getters.getterStateLoading
+})
+const responseGeneral = computed (()=>{
+    return store.getters.getterResponseGeneral;
+})
+const isOpenModal = computed(()=>{
+    return store.getters.getterStateModal;
 })
 
 function register(){
@@ -158,6 +173,7 @@ function register(){
         'confirm_password': confirm_password.value
     };
     authService.register(payload);
+    confirmButton.value = 'Go to Login'
 }
 
 function payload(){
@@ -166,6 +182,12 @@ function payload(){
     phone.value = "0812345239",
     password.value = "enzoblackred",
     confirm_password.value = "enzoblackred"
+}
+
+function isOpenModelClose($event){
+    store.commit('mutateModal', false)
+    store.commit('mutateResponseModal', null)
+    router.push('/login')
 }
 
 </script>
