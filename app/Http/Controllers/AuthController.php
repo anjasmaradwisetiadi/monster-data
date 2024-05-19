@@ -33,7 +33,7 @@ class AuthController extends Controller
             if(Auth::attempt($dataUserLoginEmail)){
                 // call with inject from repo file
                 $success = $this->authRepositories->authenticateLoginRepositories();
-                $message = 'User berhasil login !!!';
+                $message = 'User Successfull login !!!';
                 return $this->responseSuccess($success, $message);
             } else {
                 $message = 'Incorrect email or username and password, check again !!!';
@@ -65,7 +65,7 @@ class AuthController extends Controller
             $error = 'Wrong Validation';
             $code = 400;
 
-            return $this->responseFail($validationResult->errors(), $error, $code);
+            return $this->responseFail($message, $error, $code);
         } else{
             $success = $this->authRepositories->authenticateRegisterRepositories($request);
             $message = 'User successfull saved !!!';

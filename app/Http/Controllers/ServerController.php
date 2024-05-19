@@ -52,8 +52,26 @@ class ServerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        try{
+            $validationResult = $this->validation($request, 'create');
+            if($validationResult->fails()){
+                $message = $validationResult->errors();
+                $error = 'Wrong Validation';
+                $code = 400;
+    
+                return $this->responseFail($message, $error, $code);
+            } else {
+                $result = $this->serverRepositories->createServerRepositories($request);
+                $message = 'Server create successfull !!!';
+                return $this->responseSuccess($result, $message);
+            }  
+        } catch(\Throwable $error) {
+            $message = "Unsuccessfull create data  !!!";
+            $error = 'Bad Request !!!';
+            $code = 400;
+            return $this->responseFail($message, $error, $code);
+        }
     }
 
     /**
@@ -64,7 +82,16 @@ class ServerController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $result = $this->serverRepositories->serverDetailRepositories($id);
+            $message = 'Server get successfull !!!';
+            return $this->responseSuccess($result, $message);
+        } catch(\Throwable $error) {
+            $message = "Data Not Found !!!";
+            $error = 'Bad Request !!!';
+            $code = 400;
+            return $this->responseFail($message, $error, $code);
+        }
     }
 
     /**
@@ -75,7 +102,16 @@ class ServerController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $result = $this->serverRepositories->serverDetailRepositories($id);
+            $message = 'Server get successfull !!!';
+            return $this->responseSuccess($result, $message);
+        } catch(\Throwable $error) {
+            $message = "Data Not Found !!!";
+            $error = 'Bad Request !!!';
+            $code = 400;
+            return $this->responseFail($message, $error, $code);
+        }
     }
 
     /**
@@ -87,7 +123,25 @@ class ServerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $validationResult = $this->validation($request, 'edit');
+            if($validationResult->fails()){
+                $message = $validationResult->errors();
+                $error = 'Wrong Validation';
+                $code = 400;
+    
+                return $this->responseFail($message, $error, $code);
+            } else {
+                $result = $this->serverRepositories->updateServerRepositories($request, $id);
+                $message = 'Server update successfull !!!';
+                return $this->responseSuccess($result, $message);
+            }  
+        } catch(\Throwable $error) {
+            $message = "Unsuccessfull edit data  !!!";
+            $error = 'Bad Request !!!';
+            $code = 400;
+            return $this->responseFail($message, $error, $code);
+        }
     }
 
     /**
@@ -98,6 +152,49 @@ class ServerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $data =$this->shoppingCartRepositories->destroyShoppingCartRepositories($id);
+            $result = 'Shopping Cart berhasil didelete !!!';
+            $message = 'Shopping Cart berhasil didelete !!!';
+            return $this->responseSuccess($result, $message);
+        } catch  (\Throwable $error) {
+            $message = "Data tidak ditemukan !!!";
+            $error = 'Bad Request !!!';
+            $code = 400;
+            return $this->responseFail($message, $error, $code);
+        }
+    }
+
+    public function validation($request, $from){
+        $rules =[
+            'backup_server'=> 'required',
+            'backup_method'=> 'required',
+            'backup_type'=> 'required',
+            'storage_name'=> 'required',
+            'storage_directory'=> 'required',
+            'retention_policy_type'=>'required',
+            'backup_name'=> 'required',
+            'backup_schedule'=> 'required'
+        ];
+
+        $messages =[
+            'backup_server.required'=> 'Please fill backup server',
+            'backup_method.required'=> 'Please fill backup method',
+            'backup_type.required'=> 'Please fill backup type',
+            'storage_name.required'=> 'Please fill storage directory',
+            'storage_directory.required'=> 'Please fill storage directory',
+            'retention_policy_type.required'=> 'Please fill retention policy type',
+            'backup_name.required'=> 'Please fill backup name',
+            'backup_schedule.required'=> 'Please fill backup schedule',
+        ];
+
+        if($from === 'create'){
+            $rules['schedule_name'] = 'required|unique:servers';
+            $messages['schedule_name.required'] = 'Please fill schedule name';
+            $messages['schedule_name.unique'] = 'Schedule name has been record, change another name';
+
+        } 
+        $validator = Validator::make($request->all(), $rules, $messages);
+        return $validator;
     }
 }
