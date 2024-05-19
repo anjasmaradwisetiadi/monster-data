@@ -298,7 +298,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       nameModalButton: nameModalButton,
       responseError: responseError,
       responseAuth: responseAuth,
-      isOpenModal: isOpenModal,
+      get isOpenModal() {
+        return isOpenModal;
+      },
+      set isOpenModal(v) {
+        isOpenModal = v;
+      },
       submit: submit,
       isOpenModelClose: isOpenModelClose,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
@@ -479,7 +484,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.confirmButton), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         id: "modal-close",
-        "class": "py-2 px-6 bg-red-primary rounded-lg text-white mb-7",
+        "class": "py-2 px-6 bg-red-primary rounded-lg text-white mb-7 ml-2",
         onClick: _cache[2] || (_cache[2] = function ($event) {
           return $setup.onToggle(false);
         })
@@ -594,10 +599,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     loading: $setup.loading,
     isOpenModal: $setup.isOpenModal,
     confirmButton: $setup.nameModalButton,
-    isConfirmModal: _ctx.isConfirmModal,
     onIsOpenModelClose: $setup.isOpenModelClose,
     responseModal: $setup.responseModal
-  }, null, 8 /* PROPS */, ["loading", "isOpenModal", "confirmButton", "isConfirmModal", "responseModal"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" start footer footer "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <ExampleComponentTwo ></ExampleComponentTwo> ")]);
+  }, null, 8 /* PROPS */, ["loading", "isOpenModal", "confirmButton", "responseModal"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" start footer footer "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <ExampleComponentTwo ></ExampleComponentTwo> ")]);
 }
 
 /***/ }),
@@ -629,13 +633,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var urlBase = "".concat(_urlCollection__WEBPACK_IMPORTED_MODULE_0__.collectionUrl.baseUrlApi);
 var authService = {
+  resetModal: function resetModal() {
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', null);
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateNameModalButton', 'Ok');
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', false);
+  },
   register: function register(payload) {
+    var _this = this;
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
-            _context.next = 3;
+            _this.resetModal();
+            _context.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
               method: 'post',
               url: "".concat(urlBase, "/register"),
@@ -662,7 +673,7 @@ var authService = {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
-          case 3:
+          case 4:
           case "end":
             return _context.stop();
         }
@@ -670,12 +681,14 @@ var authService = {
     }))();
   },
   login: function login(payload) {
+    var _this2 = this;
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
             _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
-            _context2.next = 3;
+            _this2.resetModal();
+            _context2.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
               method: 'post',
               url: "".concat(urlBase, "/login"),
@@ -703,22 +716,34 @@ var authService = {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
-          case 3:
+          case 4:
           case "end":
             return _context2.stop();
         }
       }, _callee2);
     }))();
   },
+  confirmLogout: function confirmLogout() {
+    this.resetModal();
+    var messageLogin = {
+      title: 'Logout confirm',
+      message: 'Are you sure want logout ?'
+    };
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', null);
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', messageLogin);
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+  },
   logout: function logout(payload) {
+    var _this3 = this;
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
       var _localStorage;
       var tokenAuth;
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) switch (_context3.prev = _context3.next) {
           case 0:
+            _this3.resetModal();
             tokenAuth = JSON.parse((_localStorage = localStorage) === null || _localStorage === void 0 ? void 0 : _localStorage.getItem('user'));
-            _context3.next = 3;
+            _context3.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
               method: 'post',
               url: "".concat(urlBase, "/logout"),
@@ -728,14 +753,22 @@ var authService = {
               }
             }).then(function (response) {
               localStorage.removeItem('user');
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.responseAuth = {};
               _routes_index__WEBPACK_IMPORTED_MODULE_3__["default"].push('/login');
+              var messageLogin = {
+                title: 'Successfull logout',
+                message: 'You are successfull logout'
+              };
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', null);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', messageLogin);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', error.message);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize_js__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
-          case 3:
+          case 4:
           case "end":
             return _context3.stop();
         }

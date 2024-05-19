@@ -141,7 +141,6 @@
             :loading="loading" 
             :isOpenModal="isOpenModal"
             :confirmButton="nameModalButton"  
-            :isConfirmModal="isConfirmModal"  
             @isOpenModelClose="isOpenModelClose"
             :responseModal="responseModal" 
         >
@@ -195,7 +194,7 @@ watch(responseAuth, async (newValue, oldValue)=>{
     routeLogin= newValue;
 })
 
-const isOpenModal = computed(()=>{
+let isOpenModal = computed(()=>{
     return store.getters.getterStateModal;
 })
 

@@ -28,7 +28,7 @@
                         <button id="modal-close" class="py-2 px-6 bg-blue-primary rounded-lg text-white mb-7"
                             @click="onToggle(true)"
                         >{{props.confirmButton}} </button>
-                        <button id="modal-close" class="py-2 px-6 bg-red-primary rounded-lg text-white mb-7"
+                        <button id="modal-close" class="py-2 px-6 bg-red-primary rounded-lg text-white mb-7 ml-2"
                             @click="onToggle(false)"
                         >{{props.denyButton}} </button>
                     </div>

@@ -59,7 +59,6 @@
                 :loading="loading" 
                 :isOpenModal="isOpenModal"
                 :confirmButton="nameModalButton"  
-                :isConfirmModal="isConfirmModal"  
                 @isOpenModelClose="isOpenModelClose"
                 :responseModal="responseModal" 
             >
@@ -109,15 +108,13 @@ const responseAuth = computed (()=>{
     return store.getters.getterResponseAuth;
 })
 
-const isOpenModal = computed(()=>{
+let isOpenModal = computed(()=>{
     return store.getters.getterStateModal;
 })
 
 watch(responseAuth, async (newValue, oldValue)=>{
     routeLogin= newValue;
 })
-
-
 
 function submit(){
     const payload={

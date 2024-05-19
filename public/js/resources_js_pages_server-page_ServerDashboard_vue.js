@@ -13,8 +13,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _store_auth_authService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/auth/authService */ "./resources/js/store/auth/authService.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.mjs");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.mjs");
+/* harmony import */ var _LoadingAndAlert_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LoadingAndAlert.vue */ "./resources/js/components/LoadingAndAlert.vue");
+
 
 
 
@@ -25,17 +27,33 @@ var dummySpesificHeader = 'dashboard/detail';
   setup: function setup(__props, _ref) {
     var __expose = _ref.expose;
     __expose();
-    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.useStore)();
-    var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.useRouter)();
+    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.useStore)();
+    var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.useRouter)();
     var paramsUrlSlug = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('dashboard');
     var nameUser = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
     var emailUser = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
+    var isConfirmModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
     var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       paramsUrlSlug: paramsUrlSlug
+    });
+    var loading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return store.getters.getterStateLoading;
     });
     var responseAuth = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       var _store$getters;
       return store === null || store === void 0 || (_store$getters = store.getters) === null || _store$getters === void 0 ? void 0 : _store$getters.getterResponseAuth;
+    });
+    var responseModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return store.getters.getterResponseModal;
+    });
+    var nameModalButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return store.getters.getterNameModalButton;
+    });
+    var responseError = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return store.getters.getterResponseError;
+    });
+    var isOpenModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return store.getters.getterStateModal;
     });
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
       var paramsRoute = router.currentRoute.value.path;
@@ -46,12 +64,21 @@ var dummySpesificHeader = 'dashboard/detail';
       emailUser.value = getUser.name;
     });
     function logout() {
-      var _localStorage;
-      var auth = JSON.parse((_localStorage = localStorage) === null || _localStorage === void 0 ? void 0 : _localStorage.getItem('user'));
-      var payload = {
-        email: auth.email
-      };
-      _store_auth_authService__WEBPACK_IMPORTED_MODULE_1__.authService.logout(payload);
+      _store_auth_authService__WEBPACK_IMPORTED_MODULE_1__.authService.confirmLogout();
+      isConfirmModal.value = true;
+    }
+    function isOpenModelClose($event) {
+      store.commit('mutateModal', false);
+      store.commit('mutateResponseModal', null);
+      if ($event.value) {
+        var _localStorage;
+        var auth = JSON.parse((_localStorage = localStorage) === null || _localStorage === void 0 ? void 0 : _localStorage.getItem('user'));
+        var payload = {
+          email: auth.email
+        };
+        isConfirmModal.value = false;
+        _store_auth_authService__WEBPACK_IMPORTED_MODULE_1__.authService.logout(payload);
+      }
     }
     var __returned__ = {
       store: store,
@@ -75,9 +102,26 @@ var dummySpesificHeader = 'dashboard/detail';
       set emailUser(v) {
         emailUser = v;
       },
+      get isConfirmModal() {
+        return isConfirmModal;
+      },
+      set isConfirmModal(v) {
+        isConfirmModal = v;
+      },
       state: state,
+      loading: loading,
       responseAuth: responseAuth,
+      responseModal: responseModal,
+      nameModalButton: nameModalButton,
+      responseError: responseError,
+      get isOpenModal() {
+        return isOpenModal;
+      },
+      set isOpenModal(v) {
+        isOpenModal = v;
+      },
       logout: logout,
+      isOpenModelClose: isOpenModelClose,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
       watch: vue__WEBPACK_IMPORTED_MODULE_0__.watch,
@@ -88,11 +132,12 @@ var dummySpesificHeader = 'dashboard/detail';
         return _store_auth_authService__WEBPACK_IMPORTED_MODULE_1__.authService;
       },
       get useStore() {
-        return vuex__WEBPACK_IMPORTED_MODULE_2__.useStore;
+        return vuex__WEBPACK_IMPORTED_MODULE_3__.useStore;
       },
       get useRouter() {
-        return vue_router__WEBPACK_IMPORTED_MODULE_3__.useRouter;
-      }
+        return vue_router__WEBPACK_IMPORTED_MODULE_4__.useRouter;
+      },
+      LoadingAndAlert: _LoadingAndAlert_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -329,7 +374,7 @@ var _hoisted_4 = {
 };
 var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
-    "class": "text-3xl font-bold text-blue-primary"
+    "class": "text-3xl font-bold text-blue-primary py-2"
   }, "Schedule", -1 /* HOISTED */);
 });
 var _hoisted_6 = [_hoisted_5];
@@ -411,13 +456,20 @@ var _hoisted_22 = {
 };
 var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<footer class=\"background-footer\" data-v-89699c16><div class=\"flex flex-row w-full px-6 lg:px-8\" data-v-89699c16><div class=\"w-full flex-end\" data-v-89699c16><span class=\"text-slate-400 text-sm\" data-v-89699c16> Version 1.3 </span><h5 class=\"text-slate-400 mt-4\" data-v-89699c16><span class=\"text-slate-400 text-xs block\" data-v-89699c16> Last Update: </span><span class=\"text-lg\" data-v-89699c16> August 17, 2023 </span></h5></div></div></footer>", 1);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" start navbar "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [$setup.dummySpesificHeader === 'dashboard' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [].concat(_hoisted_6))) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.dummySpesificHeader !== 'dashboard' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [].concat(_hoisted_9))) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_13, [_hoisted_14, _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" start navbar "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [$setup.paramsUrlSlug === 'schedule' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [].concat(_hoisted_6))) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.paramsUrlSlug !== 'schedule' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [].concat(_hoisted_9))) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_13, [_hoisted_14, _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     "class": "hover:pb-4 hover:border-b-4 hover:border-blue-primary",
     href: "#",
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $setup.logout();
     })
-  }, " Logout ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.nameUser), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.emailUser), 1 /* TEXT */)])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end navbar "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "content-form", {}, undefined, true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" start footer "), _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end footer ")]);
+  }, " Logout ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.nameUser), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.emailUser), 1 /* TEXT */)])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end navbar "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "content-form", {}, undefined, true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" start footer "), _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end footer "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LoadingAndAlert"], {
+    loading: $setup.loading,
+    isOpenModal: $setup.isOpenModal,
+    confirmButton: $setup.nameModalButton,
+    isConfirmModal: $setup.isConfirmModal,
+    onIsOpenModelClose: $setup.isOpenModelClose,
+    responseModal: $setup.responseModal
+  }, null, 8 /* PROPS */, ["loading", "isOpenModal", "confirmButton", "isConfirmModal", "responseModal"])]);
 }
 
 /***/ }),
@@ -508,7 +560,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.confirmButton), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         id: "modal-close",
-        "class": "py-2 px-6 bg-red-primary rounded-lg text-white mb-7",
+        "class": "py-2 px-6 bg-red-primary rounded-lg text-white mb-7 ml-2",
         onClick: _cache[2] || (_cache[2] = function ($event) {
           return $setup.onToggle(false);
         })
@@ -853,13 +905,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var urlBase = "".concat(_urlCollection__WEBPACK_IMPORTED_MODULE_0__.collectionUrl.baseUrlApi);
 var authService = {
+  resetModal: function resetModal() {
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', null);
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateNameModalButton', 'Ok');
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', false);
+  },
   register: function register(payload) {
+    var _this = this;
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
-            _context.next = 3;
+            _this.resetModal();
+            _context.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
               method: 'post',
               url: "".concat(urlBase, "/register"),
@@ -886,7 +945,7 @@ var authService = {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
-          case 3:
+          case 4:
           case "end":
             return _context.stop();
         }
@@ -894,12 +953,14 @@ var authService = {
     }))();
   },
   login: function login(payload) {
+    var _this2 = this;
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
             _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
-            _context2.next = 3;
+            _this2.resetModal();
+            _context2.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
               method: 'post',
               url: "".concat(urlBase, "/login"),
@@ -927,22 +988,34 @@ var authService = {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
-          case 3:
+          case 4:
           case "end":
             return _context2.stop();
         }
       }, _callee2);
     }))();
   },
+  confirmLogout: function confirmLogout() {
+    this.resetModal();
+    var messageLogin = {
+      title: 'Logout confirm',
+      message: 'Are you sure want logout ?'
+    };
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', null);
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', messageLogin);
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+  },
   logout: function logout(payload) {
+    var _this3 = this;
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
       var _localStorage;
       var tokenAuth;
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) switch (_context3.prev = _context3.next) {
           case 0:
+            _this3.resetModal();
             tokenAuth = JSON.parse((_localStorage = localStorage) === null || _localStorage === void 0 ? void 0 : _localStorage.getItem('user'));
-            _context3.next = 3;
+            _context3.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
               method: 'post',
               url: "".concat(urlBase, "/logout"),
@@ -952,14 +1025,22 @@ var authService = {
               }
             }).then(function (response) {
               localStorage.removeItem('user');
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.responseAuth = {};
               _routes_index__WEBPACK_IMPORTED_MODULE_3__["default"].push('/login');
+              var messageLogin = {
+                title: 'Successfull logout',
+                message: 'You are successfull logout'
+              };
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', null);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', messageLogin);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', error.message);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize_js__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
-          case 3:
+          case 4:
           case "end":
             return _context3.stop();
         }

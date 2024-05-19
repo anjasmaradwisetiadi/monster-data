@@ -8,8 +8,15 @@ const urlBase = `${collectionUrl.baseUrlApi}`;
 
 
 export const authService = {
+    resetModal(){
+        store.commit('mutateResponseModal', null);
+        store.commit('mutateNameModalButton', 'Ok');
+        store.commit('mutateModal', false);
+    },
+
     async register(payload){
         store.state.loading = true;
+        this.resetModal();
 
         await axios({
             method: 'post',
@@ -43,6 +50,7 @@ export const authService = {
 
     async login(payload){
         store.state.loading = true;
+        this.resetModal();
 
         await axios({
             method: 'post',
@@ -76,7 +84,21 @@ export const authService = {
         })
     },
 
+    confirmLogout(){
+        this.resetModal();
+
+        const messageLogin = {
+            title: 'Logout confirm',
+            message: 'Are you sure want logout ?'
+        }
+        store.commit('mutateResponsAuth', null);
+        store.commit('mutateResponseModal', messageLogin);
+        store.commit('mutateModal', true);
+    },
+
     async logout(payload){
+        this.resetModal();
+
         const tokenAuth = JSON.parse(localStorage?.getItem('user'));
         await axios({
             method: 'post',
@@ -88,13 +110,21 @@ export const authService = {
         })
         .then(function(response){
             localStorage.removeItem('user');
-            store.state.responseAuth = {};
             router.push('/login');
+            const messageLogin = {
+                title: 'Successfull logout',
+                message: 'You are successfull logout'
+            }
+            store.commit('mutateResponsAuth', null);
+            store.commit('mutateResponseModal', messageLogin);
+            store.commit('mutateModal', true);
 
             store.state.loading = false;
         })
         .catch(function(error) {
-          store.commit('mutateResponsAuth', error.message); 
+          store.commit('mutateResponseError', error.response.data.message); 
+          store.commit('mutateResponseModal', defaultWrongMessage);
+          store.commit('mutateModal', true);
           store.state.loading = false;
         })
     },

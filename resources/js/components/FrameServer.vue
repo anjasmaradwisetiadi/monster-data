@@ -3,10 +3,10 @@
             <!-- start navbar -->
             <nav class="lg:px-16 px-6 bg-white z-10 shadow-lg flex flex-wrap items-center py-1 sticky top-0">
                 <div class="flex-1 flex justify-between items-center">
-                    <div v-if="dummySpesificHeader === 'dashboard'">
-                        <h2 class="text-3xl font-bold text-blue-primary">Schedule</h2>
+                    <div v-if="paramsUrlSlug === 'schedule'">
+                        <h2 class="text-3xl font-bold text-blue-primary py-2">Schedule</h2>
                     </div>
-                    <div v-if="dummySpesificHeader !== 'dashboard'">
+                    <div v-if="paramsUrlSlug !== 'schedule'">
                         <div class="flex">
                             <span class="material-icons border-slate-300 rounded-full border p-3 cursor-pointer mr-4" style="font-size: 20px">
                                 chevron_left
@@ -106,6 +106,15 @@
                 </div>
             </footer>
             <!-- end footer -->
+            <LoadingAndAlert 
+                :loading="loading" 
+                :isOpenModal="isOpenModal"
+                :confirmButton="nameModalButton"  
+                :isConfirmModal="isConfirmModal"  
+                @isOpenModelClose="isOpenModelClose"
+                :responseModal="responseModal" 
+            >
+            </LoadingAndAlert>
     </div>
 </template>
 <script setup>
@@ -113,6 +122,7 @@ import { ref, reactive, watch, computed, onMounted, onBeforeMount } from 'vue';
 import {authService} from '../store/auth/authService';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import LoadingAndAlert from './LoadingAndAlert.vue';
 
 
 const store = useStore();
@@ -121,14 +131,34 @@ const dummySpesificHeader = 'dashboard/detail';
 let paramsUrlSlug = ref('dashboard');
 let nameUser = ref('');
 let emailUser = ref('');
+let isConfirmModal = ref('');
 
 const state = reactive({
     paramsUrlSlug
 })
 
+const loading = computed(()=>{
+    return store.getters.getterStateLoading;
+})
 const responseAuth = computed(()=>{
     return store?.getters?.getterResponseAuth;
 })
+const responseModal = computed (()=>{
+    return store.getters.getterResponseModal;
+})
+
+const nameModalButton = computed(()=>{
+    return store.getters.getterNameModalButton;
+})
+
+const responseError = computed (()=>{
+    return store.getters.getterResponseError;
+})
+
+let isOpenModal = computed(()=>{
+    return store.getters.getterStateModal;
+})
+
 
 onMounted(()=>{
     const paramsRoute = router.currentRoute.value.path;
@@ -142,11 +172,21 @@ onMounted(()=>{
 })
 
 function logout(){
-    const auth = JSON.parse(localStorage?.getItem('user'));
-    const payload={
-        email: auth.email
+    authService.confirmLogout();
+    isConfirmModal.value = true;
+}
+
+function isOpenModelClose($event){
+    store.commit('mutateModal', false)
+    store.commit('mutateResponseModal', null)
+    if($event.value){
+        const auth = JSON.parse(localStorage?.getItem('user'));
+        const payload={
+            email: auth.email
+        }
+        isConfirmModal.value = false;
+        authService.logout(payload);
     }
-    authService.logout(payload);
 }
 
 

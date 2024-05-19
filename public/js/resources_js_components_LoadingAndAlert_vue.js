@@ -173,7 +173,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.confirmButton), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         id: "modal-close",
-        "class": "py-2 px-6 bg-red-primary rounded-lg text-white mb-7",
+        "class": "py-2 px-6 bg-red-primary rounded-lg text-white mb-7 ml-2",
         onClick: _cache[2] || (_cache[2] = function ($event) {
           return $setup.onToggle(false);
         })
