@@ -28,6 +28,8 @@ var dummySpesificHeader = 'dashboard/detail';
     var store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.useStore)();
     var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.useRouter)();
     var paramsUrlSlug = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('dashboard');
+    var nameUser = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
+    var emailUser = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
     var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       paramsUrlSlug: paramsUrlSlug
     });
@@ -39,6 +41,9 @@ var dummySpesificHeader = 'dashboard/detail';
       var paramsRoute = router.currentRoute.value.path;
       state.paramsUrlSlug = paramsRoute.replace('/', '');
       _store_auth_authService__WEBPACK_IMPORTED_MODULE_1__.authService.autoLogin();
+      var getUser = JSON.parse(localStorage.getItem('user'));
+      nameUser.value = getUser.name;
+      emailUser.value = getUser.name;
     });
     function logout() {
       var _localStorage;
@@ -57,6 +62,18 @@ var dummySpesificHeader = 'dashboard/detail';
       },
       set paramsUrlSlug(v) {
         paramsUrlSlug = v;
+      },
+      get nameUser() {
+        return nameUser;
+      },
+      set nameUser(v) {
+        nameUser = v;
+      },
+      get emailUser() {
+        return emailUser;
+      },
+      set emailUser(v) {
+        emailUser = v;
       },
       state: state,
       responseAuth: responseAuth,
@@ -285,7 +302,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $setup.logout();
     })
-  }, " Logout ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.responseAuth.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.responseAuth.email), 1 /* TEXT */)])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end navbar "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "content-form", {}, undefined, true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" start footer "), _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end footer ")]);
+  }, " Logout ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.nameUser), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.emailUser), 1 /* TEXT */)])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end navbar "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "content-form", {}, undefined, true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" start footer "), _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end footer ")]);
 }
 
 /***/ }),
@@ -731,10 +748,13 @@ var authService = {
               localStorage.setItem('user', JSON.stringify(itemSave));
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', itemSave);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', messageLogin);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateNameModalButton', 'Go to dashboard');
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', error.message);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize_js__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 3:

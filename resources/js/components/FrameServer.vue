@@ -70,10 +70,10 @@
                             </div>
                             <div class="block text-left pl-4">
                                 <div class="text-base">
-                                    {{responseAuth.name}}
+                                    {{nameUser}}
                                 </div>
                                 <div class="text-xs text-slate-400">
-                                    {{ responseAuth.email }}
+                                    {{ emailUser }}
                                 </div>
                             </div>
                         </li>
@@ -119,6 +119,8 @@ const store = useStore();
 const router = useRouter();
 const dummySpesificHeader = 'dashboard/detail';
 let paramsUrlSlug = ref('dashboard');
+let nameUser = ref('');
+let emailUser = ref('');
 
 const state = reactive({
     paramsUrlSlug
@@ -133,6 +135,10 @@ onMounted(()=>{
     state.paramsUrlSlug = paramsRoute.replace('/','');
 
     authService.autoLogin();
+    const getUser = JSON.parse(localStorage.getItem('user'));
+    nameUser.value = getUser.name;
+    emailUser.value = getUser.name
+
 })
 
 function logout(){

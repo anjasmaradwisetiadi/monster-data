@@ -22,7 +22,9 @@
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]" 
                                         v-model="email"
                                     >
-                                    <p class="text-red-500 text-xs italic">Please fill email</p>
+                                    <p 
+                                        v-if="responseError?.email"
+                                        class="text-red-500 text-xs italic">{{responseError?.email[0]}}</p>
                                 </div>
                             </div> 
                             <div class="flex flex-row">
@@ -40,7 +42,9 @@
                                         placeholder="Minimal 8 character"
                                         v-model="password"
                                     >
-                                    <p class="text-red-500 text-xs italic">Please fill password</p>
+                                    <p 
+                                        v-if="responseError?.password"
+                                        class="text-red-500 text-xs italic">{{responseError?.password[0]}}</p>
                                 </div>
                             </div>
                             <div class="flex justify-end">
@@ -54,11 +58,10 @@
             <LoadingAndAlert 
                 :loading="loading" 
                 :isOpenModal="isOpenModal"
-                :confirmButton="confirmButton"  
+                :confirmButton="nameModalButton"  
                 :isConfirmModal="isConfirmModal"  
                 @isOpenModelClose="isOpenModelClose"
-                :responseGeneral="responseGeneral"
-
+                :responseModal="responseModal" 
             >
             </LoadingAndAlert>
             <!-- start footer footer -->
@@ -66,9 +69,9 @@
     </div>
 </template>
 <script setup >
+import { ref, reactive, computed, onMounted, onBeforeMount, watch } from 'vue';
 import  FrameLogin from '../../components/FrameLogin.vue';
 import LoadingAndAlert from '../../components/LoadingAndAlert.vue';
-import { ref, reactive, computed, onMounted, onBeforeMount } from 'vue';
 import {authService} from '../../store/auth/authService';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
@@ -80,6 +83,7 @@ let email = ref('');
 let password = ref('');
 let confirmButton = ref('');
 let denyButton = ref('');
+let routeLogin = ref(null);
 // let isOpenModal = ref(false);
 
 const loading = computed(()=>{
@@ -88,9 +92,32 @@ const loading = computed(()=>{
 const responseGeneral = computed (()=>{
     return store.getters.getterResponseGeneral;
 })
+
+const responseModal = computed (()=>{
+    return store.getters.getterResponseModal;
+})
+
+const nameModalButton = computed(()=>{
+    return store.getters.getterNameModalButton;
+})
+
+const responseError = computed (()=>{
+    return store.getters.getterResponseError;
+})
+
+const responseAuth = computed (()=>{
+    return store.getters.getterResponseAuth;
+})
+
 const isOpenModal = computed(()=>{
     return store.getters.getterStateModal;
 })
+
+watch(responseAuth, async (newValue, oldValue)=>{
+    routeLogin= newValue;
+})
+
+
 
 function submit(){
     const payload={
@@ -98,14 +125,16 @@ function submit(){
         'password': password.value,
     };
     authService.login(payload);
-    confirmButton.value = 'Go to dashboard'
 }
 
 
 function isOpenModelClose($event){
     store.commit('mutateModal', false)
     store.commit('mutateResponseModal', null)
-    router.push('/schedule')
+    if(routeLogin?.email){
+        router.push('/schedule')
+    }
+
 }
 
 </script>

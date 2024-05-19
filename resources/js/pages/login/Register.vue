@@ -195,8 +195,6 @@ watch(responseAuth, async (newValue, oldValue)=>{
     routeLogin= newValue;
 })
 
-
-
 const isOpenModal = computed(()=>{
     return store.getters.getterStateModal;
 })

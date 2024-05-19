@@ -64,11 +64,14 @@ export const authService = {
 
             store.commit('mutateResponsAuth', itemSave);
             store.commit('mutateResponseModal', messageLogin);
+            store.commit('mutateNameModalButton', 'Go to dashboard');
             store.commit('mutateModal', true);
             store.state.loading = false;
         })
         .catch(function(error) {
-          store.commit('mutateResponsAuth', error.message); 
+          store.commit('mutateResponseError', error.response.data.message); 
+          store.commit('mutateResponseModal', defaultWrongMessage);
+          store.commit('mutateModal', true);
           store.state.loading = false;
         })
     },
