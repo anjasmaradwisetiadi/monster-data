@@ -31,7 +31,6 @@ class AuthRepositories implements AuthInterface {
             'name' => $user->name,
             'email' => $user->email,
             'phone' => $user->phone,
-            'token' => $user->createToken('auth_token')->plainTextToken,
         ];
     }
     public function logoutRepositories(Request $request):  object|null{

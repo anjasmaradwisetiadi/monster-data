@@ -66,6 +66,7 @@
 </template>
 <script setup>
 import { ref, reactive, watch, computed, onMounted, onBeforeMount } from 'vue';
+import {authService} from '../store/auth/authService';
 
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
@@ -82,6 +83,7 @@ const state = reactive({
 onMounted(()=>{
     const paramsRoute = router.currentRoute.value.path;
     state.paramsUrlSlug = paramsRoute.replace('/','');
+    authService.autoLogin();
 })
 
 function contactUs(){

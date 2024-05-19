@@ -24006,10 +24006,9 @@ var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_1__.createRouter)({
   }]
 });
 router.beforeEach(function (to, _, next) {
-  var _store$getters, _store$getters2;
-  var getToken = _store_index_js__WEBPACK_IMPORTED_MODULE_0__["default"] === null || _store_index_js__WEBPACK_IMPORTED_MODULE_0__["default"] === void 0 || (_store$getters = _store_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].getters) === null || _store$getters === void 0 || (_store$getters = _store$getters.getterResponseAuth) === null || _store$getters === void 0 ? void 0 : _store$getters.token;
-  console.log('store?.getters?.getterResponseAuth? = ');
-  console.log(_store_index_js__WEBPACK_IMPORTED_MODULE_0__["default"] === null || _store_index_js__WEBPACK_IMPORTED_MODULE_0__["default"] === void 0 || (_store$getters2 = _store_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].getters) === null || _store$getters2 === void 0 ? void 0 : _store$getters2.getterResponseAuth);
+  var _localStorage;
+  var getUser = JSON.parse((_localStorage = localStorage) === null || _localStorage === void 0 ? void 0 : _localStorage.getItem('user'));
+  var getToken = getUser === null || getUser === void 0 ? void 0 : getUser.token;
   var auth = to.meta.requiresAuth;
   var unauth = to.meta.requiresUnauth;
   if (auth && !getToken) {

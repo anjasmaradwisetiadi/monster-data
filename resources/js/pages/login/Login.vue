@@ -66,8 +66,8 @@ import { useRouter } from 'vue-router';
 const store = useStore();
 const router = useRouter();
 
-const email = ref('');
-const password = ref('');
+let email = ref('');
+let password = ref('');
 
 const loading = computed(()=>{
     return store.getters.getterStateLoading

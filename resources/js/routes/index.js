@@ -18,9 +18,8 @@ const router = createRouter({
 })
 
 router.beforeEach(function(to, _, next) {
-    const getToken = store?.getters?.getterResponseAuth?.token;
-    console.log('store?.getters?.getterResponseAuth? = ');
-    console.log(store?.getters?.getterResponseAuth);
+    const getUser = JSON.parse(localStorage?.getItem('user'));
+    const getToken = getUser?.token;
 
     const auth = to.meta.requiresAuth; 
     const unauth = to.meta.requiresUnauth; 

@@ -12,8 +12,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.mjs");
+/* harmony import */ var _store_auth_authService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/auth/authService */ "./resources/js/store/auth/authService.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.mjs");
+
 
 
 
@@ -23,8 +25,8 @@ var dummySpesificLogin = 'login';
   setup: function setup(__props, _ref) {
     var __expose = _ref.expose;
     __expose();
-    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_1__.useStore)();
-    var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.useRouter)();
+    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.useStore)();
+    var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.useRouter)();
     var paramsUrlSlug = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('login');
     var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       paramsUrlSlug: paramsUrlSlug
@@ -32,6 +34,7 @@ var dummySpesificLogin = 'login';
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
       var paramsRoute = router.currentRoute.value.path;
       state.paramsUrlSlug = paramsRoute.replace('/', '');
+      _store_auth_authService__WEBPACK_IMPORTED_MODULE_1__.authService.autoLogin();
     });
     function contactUs() {
       console.log("contactUs");
@@ -58,11 +61,14 @@ var dummySpesificLogin = 'login';
       computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
       onBeforeMount: vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeMount,
+      get authService() {
+        return _store_auth_authService__WEBPACK_IMPORTED_MODULE_1__.authService;
+      },
       get useStore() {
-        return vuex__WEBPACK_IMPORTED_MODULE_1__.useStore;
+        return vuex__WEBPACK_IMPORTED_MODULE_2__.useStore;
       },
       get useRouter() {
-        return vue_router__WEBPACK_IMPORTED_MODULE_2__.useRouter;
+        return vue_router__WEBPACK_IMPORTED_MODULE_3__.useRouter;
       }
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
@@ -163,8 +169,18 @@ __webpack_require__.r(__webpack_exports__);
     var __returned__ = {
       store: store,
       router: router,
-      email: email,
-      password: password,
+      get email() {
+        return email;
+      },
+      set email(v) {
+        email = v;
+      },
+      get password() {
+        return password;
+      },
+      set password(v) {
+        password = v;
+      },
       loading: loading,
       submit: submit,
       FrameLogin: _components_FrameLogin_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -434,6 +450,27 @@ var authService = {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
+            _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
+            _context.next = 3;
+            return axios__WEBPACK_IMPORTED_MODULE_2___default()({
+              method: 'post',
+              url: "".concat(urlBase, "/register"),
+              data: payload
+            }).then(function (response) {
+              var itemSave = {
+                name: response.data.data.name,
+                email: response.data.data.email,
+                phone: response.data.data.phone,
+                token: response.data.data.token
+              };
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', itemSave);
+              _routes_index__WEBPACK_IMPORTED_MODULE_3__["default"].push('/login');
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
+            })["catch"](function (error) {
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', error.message);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
+            });
+          case 3:
           case "end":
             return _context.stop();
         }
@@ -452,20 +489,16 @@ var authService = {
               url: "".concat(urlBase, "/login"),
               data: payload
             }).then(function (response) {
+              var itemSave = {
+                name: response.data.data.name,
+                email: response.data.data.email,
+                phone: response.data.data.phone,
+                token: response.data.data.token
+              };
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', itemSave);
+              localStorage.setItem('user', JSON.stringify(itemSave));
+              _routes_index__WEBPACK_IMPORTED_MODULE_3__["default"].push('/schedule');
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
-              if (response.data.status) {
-                var itemSave = {
-                  name: response.data.data.name,
-                  email: response.data.data.email,
-                  phone: response.data.data.phone,
-                  token: response.data.data.token
-                };
-                _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', itemSave);
-                localStorage.setItem('user', JSON.stringify(itemSave));
-                _routes_index__WEBPACK_IMPORTED_MODULE_3__["default"].push('/schedule');
-              } else {
-                _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', response.data);
-              }
             })["catch"](function (error) {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', error.message);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
@@ -477,16 +510,44 @@ var authService = {
       }, _callee2);
     }))();
   },
-  logout: function logout() {
+  logout: function logout(payload) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var _localStorage;
+      var tokenAuth;
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) switch (_context3.prev = _context3.next) {
           case 0:
+            tokenAuth = JSON.parse((_localStorage = localStorage) === null || _localStorage === void 0 ? void 0 : _localStorage.getItem('user'));
+            _context3.next = 3;
+            return axios__WEBPACK_IMPORTED_MODULE_2___default()({
+              method: 'post',
+              url: "".concat(urlBase, "/logout"),
+              data: payload,
+              headers: {
+                'Authorization': "Bearer ".concat(tokenAuth)
+              }
+            }).then(function (response) {
+              localStorage.removeItem('user');
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.responseAuth = {};
+              _routes_index__WEBPACK_IMPORTED_MODULE_3__["default"].push('/login');
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
+            })["catch"](function (error) {
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', error.message);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
+            });
+          case 3:
           case "end":
             return _context3.stop();
         }
       }, _callee3);
     }))();
+  },
+  autoLogin: function autoLogin() {
+    var getUser = localStorage.getItem('user');
+    if (getUser) {
+      var getUserParse = JSON.parse(getUser);
+      _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', getUserParse);
+    }
   }
 };
 

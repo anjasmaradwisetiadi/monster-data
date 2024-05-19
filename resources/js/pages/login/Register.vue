@@ -26,13 +26,14 @@
                     <div class="flex w-full justify-center mb-5">
                         <h3 class="text-xl text-blue-primary">Tell us about you</h3>
                     </div>
-                    <form class="space-y-6" action="#" method="POST">
+                    <div class="space-y-6">
                         <div class="flex flex-row">
                             <div class="w-3/12">
                                 <label for="name" class="block text-left text-sm font-medium leading-6 text-gray-900 px-4 py-1.5 " >Name</label>
                             </div>
                             <div class="w-9/12">
                                 <input 
+                                    v-model="name"
                                     id="name" 
                                     name="name" 
                                     autocomplete="username"
@@ -49,7 +50,9 @@
                                 <label for="email" class="block text-left text-sm font-medium leading-7 text-gray-900 px-4 py-1.5">Email </label>
                             </div> 
                             <div class="w-9/12">
-                                <input id="email" name="email" type="email" autocomplete="email" required 
+                                <input 
+                                    v-model="email"
+                                    id="email" name="email" type="email" autocomplete="email" required 
                                     placeholder="Your Email Address"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]" 
                                 >
@@ -62,6 +65,7 @@
                             </div>
                             <div class="w-9/12">
                                 <input 
+                                    v-model="phone"
                                     id="phone" 
                                     name="phone" 
                                     type="text" 
@@ -77,6 +81,7 @@
                             </div>
                             <div class="w-9/12">
                                 <input 
+                                    v-model="password"
                                     id="password" 
                                     name="password" 
                                     type="password" 
@@ -89,12 +94,13 @@
                         </div>
                         <div class="flex flex-row">
                             <div class="w-3/12">
-                                <label for="re-password" class="block text-left text-sm font-medium leading-6 text-gray-900 px-4 py-1.5 " >confirm</label>
+                                <label for="confirm_password" class="block text-left text-sm font-medium leading-6 text-gray-900 px-4 py-1.5 " >confirm</label>
                             </div>
                             <div class="w-9/12">
                                 <input 
-                                    id="re-password" 
-                                    name="re-password" 
+                                    v-model="confirm_password"
+                                    id="confirm_password" 
+                                    name="confirm_password" 
                                     type="password" 
                                     required 
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]" 
@@ -103,17 +109,64 @@
                             </div>
                         </div>
                         <div class="flex justify-end">
-                            <button type="submit" class="flex w-1/5 justify-center rounded-md bg-blue-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Register</button>
+                            <button 
+                                @click="register()"
+                                type="button" class="flex w-1/5 justify-center rounded-md bg-blue-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" >
+                            Register</button>
+                            <button 
+                                @click="payload()"
+                                type="button" class="flex w-1/5 justify-center rounded-md bg-pink-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" >
+                                Payload
+                            </button>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <!-- end content form -->
             </template>
         </FrameLogin>
+        <LoadingAndAlert :loading="loading" ></LoadingAndAlert>
+
     </div>
 </template>
 <script setup>
+import { ref, reactive, computed, onMounted, onBeforeMount } from 'vue';
 import  FrameLogin from '../../components/FrameLogin.vue';
+import LoadingAndAlert from '../../components/LoadingAndAlert.vue';
+import {authService} from '../../store/auth/authService';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+
+const store = useStore();
+const router = useRouter();
+
+let name = ref('');
+let email = ref('');
+let phone = ref('');
+let password = ref('');
+let confirm_password = ref('');
+
+const loading = computed(()=>{
+    return store.getters.getterStateLoading
+})
+
+function register(){
+    const payload={
+        'name': name.value,
+        'email': email.value,
+        'phone': phone.value,
+        'password': password.value,
+        'confirm_password': confirm_password.value
+    };
+    authService.register(payload);
+}
+
+function payload(){
+    name.value ="enzoblackred",
+    email.value = "enzoblackred@gmail.com",
+    phone.value = "0812345239",
+    password.value = "enzoblackred",
+    confirm_password.value = "enzoblackred"
+}
 
 </script>
 

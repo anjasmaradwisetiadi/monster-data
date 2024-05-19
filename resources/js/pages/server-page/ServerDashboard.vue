@@ -146,11 +146,24 @@
             </template>
         </FrameServer>
     </div>
+    <LoadingAndAlert :loading="loading"></LoadingAndAlert>
 </template>
 <script setup>
+import { ref, reactive, watch, computed, onMounted, onBeforeMount } from 'vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+
 import FrameServer from '../../components/FrameServer.vue';
 import Sidebar from '../../components/Sidebar.vue';
 import Pagination from '../../components/Pagination.vue';
+import LoadingAndAlert from '../../components/LoadingAndAlert.vue';
+
+const store = useStore();
+const router = useRouter();
+
+const loading = computed(()=>{
+    return store.getters.getterStateLoading
+})
 
 </script>
 

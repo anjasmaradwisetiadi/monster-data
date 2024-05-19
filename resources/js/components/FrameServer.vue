@@ -56,9 +56,10 @@
                             </a>
                         </li>
                         <li class="py-2 lg:py-0 pl-6">
-                            <a
+                            <a  
                                 class="hover:pb-4 hover:border-b-4 hover:border-blue-primary"
                                 href="#"
+                                @click="logout()"
                                 >
                                 Logout
                             </a>
@@ -69,10 +70,10 @@
                             </div>
                             <div class="block text-left pl-4">
                                 <div class="text-base">
-                                    Erwin
+                                    {{responseAuth.name}}
                                 </div>
                                 <div class="text-xs text-slate-400">
-                                    erwin@monsterdata.asia
+                                    {{ responseAuth.email }}
                                 </div>
                             </div>
                         </li>
@@ -109,8 +110,10 @@
 </template>
 <script setup>
 import { ref, reactive, watch, computed, onMounted, onBeforeMount } from 'vue';
+import {authService} from '../store/auth/authService';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+
 
 const store = useStore();
 const router = useRouter();
@@ -121,10 +124,24 @@ const state = reactive({
     paramsUrlSlug
 })
 
+const responseAuth = computed(()=>{
+    return store?.getters?.getterResponseAuth;
+})
+
 onMounted(()=>{
     const paramsRoute = router.currentRoute.value.path;
     state.paramsUrlSlug = paramsRoute.replace('/','');
+
+    authService.autoLogin();
 })
+
+function logout(){
+    const auth = JSON.parse(localStorage?.getItem('user'));
+    const payload={
+        email: auth.email
+    }
+    authService.logout(payload);
+}
 
 
 </script>
