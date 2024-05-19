@@ -103,15 +103,34 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'LoadingAndAlert',
-  props: ['text', 'loading', 'responseGeneral', 'confirmDelete'],
+  props: {
+    loading: {
+      "default": false
+    },
+    responseGeneral: {
+      "default": false
+    },
+    isOpenModal: {
+      "default": false
+    }
+  },
+  emits: ['confirm', 'confirmDelete', 'isOpenModelClose'],
   setup: function setup(__props, _ref) {
-    var __expose = _ref.expose;
+    var __expose = _ref.expose,
+      __emit = _ref.emit;
     __expose();
     var store = (0,vuex__WEBPACK_IMPORTED_MODULE_1__.useStore)();
     var props = __props;
+    var emit = __emit;
+    function onToggle() {
+      props.isOpenModal = !props.isOpenModal;
+      emit('isOpenModelClose', false);
+    }
     var __returned__ = {
       store: store,
       props: props,
+      emit: emit,
+      onToggle: onToggle,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
       computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
@@ -375,6 +394,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _assets_icon_spinner_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/icon/spinner.svg */ "./resources/assets/icon/spinner.svg");
+/* harmony import */ var _assets_image_logo_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/image/logo.png */ "./resources/assets/image/logo.png");
+
 
 
 var _withScopeId = function _withScopeId(n) {
@@ -400,8 +421,43 @@ var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
   }, null, -1 /* HOISTED */);
 });
 var _hoisted_5 = [_hoisted_4];
+var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    "class": "w-40",
+    src: _assets_image_logo_png__WEBPACK_IMPORTED_MODULE_2__["default"],
+    alt: "logo"
+  }, null, -1 /* HOISTED */);
+});
+var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
+    "class": "text-xl text-blue-primary font-medium mt-9"
+  }, "Registartion Success ", -1 /* HOISTED */);
+});
+var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+    "class": "text-center mt-4"
+  }, "Please check you email to activated your MonsterBackup Account.", -1 /* HOISTED */);
+});
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [$setup.props.loading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" loading "), $setup.props.loading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [].concat(_hoisted_5))) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div id=\"modal-box\" class=\"sm:w-[385px] sm:min-w-[30vw] min-w-[60vw] min-h-[30vh] flex flex-col items-center gap-2 -translate-y-1/2 p-6 bg-white rounded-lg top-1/2 left-1/2 -translate-x-1/2 shadow-md absolute z-20\">\r\n            <img class=\"w-40\" src=\"../../assets/image/logo.png\" alt=\"logo\">\r\n            <h2 class=\"text-xl text-blue-primary font-medium mt-9\">Registartion Success </h2>\r\n            <p class=\"text-center mt-4\">Please check you email to activated your MonsterBackup Account.</p>\r\n            <div class=\"w-full flex justify-center\">\r\n                <button id=\"modal-close\" class=\"py-2 px-6 bg-blue-primary rounded-lg text-white mb-7\">Go to Login </button>\r\n            </div>\r\n        </div> ")]);
+  var _$setup$props, _$setup$props2, _$setup$props3, _$setup$props4, _$setup$props5;
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(_$setup$props = $setup.props) !== null && _$setup$props !== void 0 && _$setup$props.loading || (_$setup$props2 = $setup.props) !== null && _$setup$props2 !== void 0 && _$setup$props2.isOpenModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" loading "), (_$setup$props3 = $setup.props) !== null && _$setup$props3 !== void 0 && _$setup$props3.loading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [].concat(_hoisted_5))) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (_$setup$props4 = $setup.props) !== null && _$setup$props4 !== void 0 && _$setup$props4.isOpenModal && !((_$setup$props5 = $setup.props) !== null && _$setup$props5 !== void 0 && _$setup$props5.loading) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
+    key: 2,
+    name: "fade"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+        id: "modal-box",
+        "class": "sm:w-[385px] sm:min-w-[30vw] min-w-[60vw] min-h-[30vh] flex flex-col items-center gap-2 -translate-y-1/2 p-6 bg-white rounded-lg top-1/2 left-1/2 -translate-x-1/2 shadow-md absolute z-20"
+      }, [_hoisted_6, _hoisted_7, _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+        "class": "w-full flex justify-center"
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        id: "modal-close",
+        "class": "py-2 px-6 bg-blue-primary rounded-lg text-white mb-7",
+        onClick: $setup.onToggle
+      }, "Go to Login ")])])];
+    }),
+    _: 1 /* STABLE */
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
@@ -789,8 +845,9 @@ var authService = {
               };
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', itemSave);
               localStorage.setItem('user', JSON.stringify(itemSave));
-              _routes_index__WEBPACK_IMPORTED_MODULE_3__["default"].push('/schedule');
+              // router.push('/schedule');
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
             })["catch"](function (error) {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', error.message);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
@@ -1025,6 +1082,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/database.png?5e20d5529fa08ce06f85f6be8e51662e");
+
+/***/ }),
+
+/***/ "./resources/assets/image/logo.png":
+/*!*****************************************!*\
+  !*** ./resources/assets/image/logo.png ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/logo.png?091fb8cd8d13fdf3b3e64ab991331813");
 
 /***/ }),
 

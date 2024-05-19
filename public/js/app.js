@@ -24086,9 +24086,14 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_5__.createStore)({
   },
   state: {
     loading: false,
-    error: ''
+    error: '',
+    modal: false
   },
-  mutations: {},
+  mutations: {
+    mutateModal: function mutateModal(state, payload) {
+      state.modal = payload;
+    }
+  },
   actions: {},
   getters: {
     getterResponseGeneral: function getterResponseGeneral(state) {
@@ -24097,6 +24102,9 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_5__.createStore)({
     // it need getter for loading because when read action "getListCounterStyle()" always true not false
     getterStateLoading: function getterStateLoading(state) {
       return state.loading;
+    },
+    getterStateModal: function getterStateModal(state) {
+      return state.modal;
     }
   }
 });

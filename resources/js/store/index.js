@@ -17,10 +17,13 @@ const store = createStore({
     state:{
         loading: false,
         error: '',
+        modal: false,
     },
 
     mutations:{
-
+        mutateModal(state, payload){
+            state.modal = payload;
+        }
     },
     actions:{
 
@@ -32,6 +35,10 @@ const store = createStore({
         // it need getter for loading because when read action "getListCounterStyle()" always true not false
         getterStateLoading(state){
             return state.loading;
+        },
+
+        getterStateModal(state){
+            return state.modal;
         },
     }
 })

@@ -50,9 +50,9 @@ export const authService = {
             }
             store.commit('mutateResponsAuth', itemSave);
             localStorage.setItem('user', JSON.stringify(itemSave));
-            router.push('/schedule');
-
+            // router.push('/schedule');
             store.state.loading = false;
+            store.commit('mutateModal', true);
         })
         .catch(function(error) {
           store.commit('mutateResponsAuth', error.message); 

@@ -716,8 +716,9 @@ var authService = {
               };
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', itemSave);
               localStorage.setItem('user', JSON.stringify(itemSave));
-              _routes_index__WEBPACK_IMPORTED_MODULE_3__["default"].push('/schedule');
+              // router.push('/schedule');
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
             })["catch"](function (error) {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', error.message);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;

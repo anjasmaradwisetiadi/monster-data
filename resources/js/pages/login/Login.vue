@@ -45,14 +45,16 @@
                             </div>
                             <div class="flex justify-end">
                                 <button type="submit" @click="submit()" class="flex w-2/5 justify-center rounded-md bg-blue-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+                                <button type="submit" @click="openModal()" class="flex w-2/5 justify-center rounded-md bg-blue-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Open modal</button>
                             </div>
                         </div>
                     </div>
                     <!-- end content form -->
                 </template>
             </FrameLogin>
-            <LoadingAndAlert :loading="loading" ></LoadingAndAlert>
+            <LoadingAndAlert :loading="loading" :isOpenModal="isOpenModal"  @isOpenModelClose="isOpenModelClose"></LoadingAndAlert>
             <!-- start footer footer -->
+            <!-- <ExampleComponentTwo ></ExampleComponentTwo> -->
     </div>
 </template>
 <script setup >
@@ -68,9 +70,13 @@ const router = useRouter();
 
 let email = ref('');
 let password = ref('');
+// let isOpenModal = ref(false);
 
 const loading = computed(()=>{
-    return store.getters.getterStateLoading
+    return store.getters.getterStateLoading;
+})
+const isOpenModal = computed(()=>{
+    return store.getters.getterStateModal;
 })
 
 function submit(){
@@ -81,6 +87,11 @@ function submit(){
     authService.login(payload);
 }
 
+
+function isOpenModelClose($event){
+    store.commit('mutateModal', $event)
+    router.push('/schedule')
+}
 
 </script>
 
