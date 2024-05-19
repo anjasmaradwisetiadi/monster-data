@@ -288,9 +288,14 @@ __webpack_require__.r(__webpack_exports__);
       var _store$getters;
       return store === null || store === void 0 || (_store$getters = store.getters) === null || _store$getters === void 0 || (_store$getters = _store$getters.getterDetailServer) === null || _store$getters === void 0 ? void 0 : _store$getters.data;
     });
+    var getListBackupServer = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      var _store$getters2;
+      return store === null || store === void 0 || (_store$getters2 = store.getters) === null || _store$getters2 === void 0 || (_store$getters2 = _store$getters2.getterListBackupServer) === null || _store$getters2 === void 0 || (_store$getters2 = _store$getters2.data) === null || _store$getters2 === void 0 ? void 0 : _store$getters2.data;
+    });
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
       var payloadSlug = router.currentRoute.value.params.slug;
       _store_server_serverService__WEBPACK_IMPORTED_MODULE_4__.serverService.detailServer(payloadSlug);
+      _store_server_serverService__WEBPACK_IMPORTED_MODULE_4__.serverService.getListServerBackup();
     });
     var dataBackupListServers = _assets_data_dummyData__WEBPACK_IMPORTED_MODULE_5__.dataDummyBackupListServer.data;
     var __returned__ = {
@@ -301,6 +306,7 @@ __webpack_require__.r(__webpack_exports__);
       nameModalButton: nameModalButton,
       responseError: responseError,
       getDetailServers: getDetailServers,
+      getListBackupServer: getListBackupServer,
       dataBackupListServers: dataBackupListServers,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
@@ -850,7 +856,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["FrameServer"], null, {
     "content-form": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       var _$setup$getDetailServ, _$setup$getDetailServ2, _$setup$getDetailServ3, _$setup$getDetailServ4, _$setup$getDetailServ5, _$setup$getDetailServ6;
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Sidebar"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" information server "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$getDetailServ = $setup.getDetailServers) === null || _$setup$getDetailServ === void 0 ? void 0 : _$setup$getDetailServ.schedule_name), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_15, ": " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$getDetailServ2 = $setup.getDetailServers) === null || _$setup$getDetailServ2 === void 0 ? void 0 : _$setup$getDetailServ2.backup_method), 1 /* TEXT */)]), _hoisted_16, _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_20, ": " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$getDetailServ3 = $setup.getDetailServers) === null || _$setup$getDetailServ3 === void 0 ? void 0 : _$setup$getDetailServ3.storage_name), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_24, ": " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$getDetailServ4 = $setup.getDetailServers) !== null && _$setup$getDetailServ4 !== void 0 && _$setup$getDetailServ4.use_compression ? 'Yes' : 'No'), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_27, ": " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$getDetailServ5 = $setup.getDetailServers) !== null && _$setup$getDetailServ5 !== void 0 && _$setup$getDetailServ5.use_encryption ? 'Yes' : 'No'), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [_hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_30, ": " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$getDetailServ6 = $setup.getDetailServers) === null || _$setup$getDetailServ6 === void 0 ? void 0 : _$setup$getDetailServ6.backup_name), 1 /* TEXT */)])])]), _hoisted_31])]), _hoisted_32]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" table list server "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [_hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_39, [_hoisted_40, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.dataBackupListServers, function (dataBackupListServer, index) {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Sidebar"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" information server "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$getDetailServ = $setup.getDetailServers) === null || _$setup$getDetailServ === void 0 ? void 0 : _$setup$getDetailServ.schedule_name), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_15, ": " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$getDetailServ2 = $setup.getDetailServers) === null || _$setup$getDetailServ2 === void 0 ? void 0 : _$setup$getDetailServ2.backup_method), 1 /* TEXT */)]), _hoisted_16, _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_20, ": " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$getDetailServ3 = $setup.getDetailServers) === null || _$setup$getDetailServ3 === void 0 ? void 0 : _$setup$getDetailServ3.storage_name), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_24, ": " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$getDetailServ4 = $setup.getDetailServers) !== null && _$setup$getDetailServ4 !== void 0 && _$setup$getDetailServ4.use_compression ? 'Yes' : 'No'), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_27, ": " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$getDetailServ5 = $setup.getDetailServers) !== null && _$setup$getDetailServ5 !== void 0 && _$setup$getDetailServ5.use_encryption ? 'Yes' : 'No'), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [_hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_30, ": " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$getDetailServ6 = $setup.getDetailServers) === null || _$setup$getDetailServ6 === void 0 ? void 0 : _$setup$getDetailServ6.backup_name), 1 /* TEXT */)])])]), _hoisted_31])]), _hoisted_32]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" table list server "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [_hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_39, [_hoisted_40, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.getListBackupServer, function (dataBackupListServer, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
           key: index,
           "class": "odd:bg-white even:bg-slate-50"
@@ -1180,6 +1186,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var urlBase = "".concat(_urlCollection__WEBPACK_IMPORTED_MODULE_0__.collectionUrl.baseUrlApi);
 var serverService = {
+  defaultHandlingError: function defaultHandlingError(error) {
+    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
+    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
+    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+  },
   getListServer: function getListServer() {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var tokenAuth;
@@ -1199,9 +1210,7 @@ var serverService = {
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateListServer', response.data);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
-              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
-              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+              this.defaultHandlingError(error);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 4:
@@ -1260,9 +1269,7 @@ var serverService = {
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateDetailServer', response.data);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
-              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
-              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+              this.defaultHandlingError(error);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 4:
@@ -1342,17 +1349,18 @@ var serverService = {
             _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
             _context6.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
-              method: '',
-              url: "".concat(urlBase),
+              method: 'get',
+              url: "".concat(urlBase, "/schedule-backup"),
               headers: {
-                'Content-Type': "multipart/form-data",
                 'Authorization': "Bearer ".concat(tokenAuth)
               }
             }).then(function (response) {
-              // store.commit('mutateListPlayStyle',response.data);
+              console.log('getListServerBackup');
+              console.log(response.data.data.data);
+              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateListBackupServer', response.data);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              // store.commit('mutateResponsGeneral', error.message); 
+              this.defaultHandlingError(error);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 4:

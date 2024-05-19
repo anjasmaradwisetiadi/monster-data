@@ -177,7 +177,7 @@
                             </thead>
                             <tbody>
                               <tr 
-                                v-for="(dataBackupListServer, index) of dataBackupListServers "
+                                v-for="(dataBackupListServer, index) of getListBackupServer "
                                 :key="index"
                                 class="odd:bg-white even:bg-slate-50">
                                 <td
@@ -270,9 +270,14 @@ import { useRouter } from 'vue-router';
     return store?.getters?.getterDetailServer?.data;
   })
 
+  const getListBackupServer = computed(()=>{
+    return store?.getters?.getterListBackupServer?.data?.data;
+  })
+
   onMounted(()=>{
     const payloadSlug = router.currentRoute.value.params.slug;
     serverService.detailServer(payloadSlug);
+    serverService.getListServerBackup();
   })
 
   const dataBackupListServers = dataDummyBackupListServer.data;

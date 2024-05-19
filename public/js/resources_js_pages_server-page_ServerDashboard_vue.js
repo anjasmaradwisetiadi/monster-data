@@ -1032,6 +1032,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var urlBase = "".concat(_urlCollection__WEBPACK_IMPORTED_MODULE_0__.collectionUrl.baseUrlApi);
 var serverService = {
+  defaultHandlingError: function defaultHandlingError(error) {
+    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
+    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
+    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+  },
   getListServer: function getListServer() {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var tokenAuth;
@@ -1051,9 +1056,7 @@ var serverService = {
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateListServer', response.data);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
-              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
-              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+              this.defaultHandlingError(error);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 4:
@@ -1112,9 +1115,7 @@ var serverService = {
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateDetailServer', response.data);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
-              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
-              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+              this.defaultHandlingError(error);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 4:
@@ -1194,17 +1195,18 @@ var serverService = {
             _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
             _context6.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
-              method: '',
-              url: "".concat(urlBase),
+              method: 'get',
+              url: "".concat(urlBase, "/schedule-backup"),
               headers: {
-                'Content-Type': "multipart/form-data",
                 'Authorization': "Bearer ".concat(tokenAuth)
               }
             }).then(function (response) {
-              // store.commit('mutateListPlayStyle',response.data);
+              console.log('getListServerBackup');
+              console.log(response.data.data.data);
+              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateListBackupServer', response.data);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              // store.commit('mutateResponsGeneral', error.message); 
+              this.defaultHandlingError(error);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 4:

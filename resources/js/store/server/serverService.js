@@ -7,6 +7,12 @@ import {defaultWrongMessage} from '../../utilize/utilize'
 const urlBase = `${collectionUrl.baseUrlApi}`;
 
 export const serverService = {
+    defaultHandlingError(error){
+        store.commit('mutateResponseError', error.response.data.message); 
+        store.commit('mutateResponseModal', defaultWrongMessage);
+        store.commit('mutateModal', true)
+    },
+
     async getListServer(){
         const tokenAuth = store.getters.getterResponseAuth.token;
         store.state.loading = true;
@@ -22,9 +28,7 @@ export const serverService = {
             store.state.loading = false;
         })
         .catch(function(error) {
-            store.commit('mutateResponseError', error.response.data.message); 
-            store.commit('mutateResponseModal', defaultWrongMessage);
-            store.commit('mutateModal', true)
+            this.defaultHandlingError(error)
             store.state.loading = false;
         })
     },
@@ -63,9 +67,7 @@ export const serverService = {
             store.state.loading = false;
         })
         .catch(function(error) {
-            store.commit('mutateResponseError', error.response.data.message); 
-            store.commit('mutateResponseModal', defaultWrongMessage);
-            store.commit('mutateModal', true)
+            this.defaultHandlingError(error)
             store.state.loading = false;
         })
     },
@@ -115,19 +117,20 @@ export const serverService = {
         const tokenAuth = store.getters.getterResponseAuth.token;
         store.state.loading = true;
         await axios({
-            method: '',
-            url: `${urlBase}`,
+            method: 'get',
+            url: `${urlBase}/schedule-backup`,
             headers:{
-              'Content-Type': "multipart/form-data",
               'Authorization': `Bearer ${tokenAuth}`
             },
         })
         .then(function(response){
-            // store.commit('mutateListPlayStyle',response.data);
+            console.log('getListServerBackup');
+            console.log(response.data.data.data);
+            store.commit('mutateListBackupServer',response.data);
             store.state.loading = false;
         })
         .catch(function(error) {
-            // store.commit('mutateResponsGeneral', error.message); 
+            this.defaultHandlingError(error);
             store.state.loading = false;
         })
     },
