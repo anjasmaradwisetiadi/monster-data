@@ -7,7 +7,7 @@ use Illuminate\Contracts\Pagination\Paginator;
 
 class ServerRepositories implements ServerInterface {
     public function serverListRepositories():Paginator {
-
+        return Server::where('user_id','=',auth()->user()->id)->latest()->paginate(12)->withQueryString();
     }
     public function createServerRepositories(Request $request): Server{
 

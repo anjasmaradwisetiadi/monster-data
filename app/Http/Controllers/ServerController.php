@@ -3,9 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Traits\ResponseTrait;
+use Illuminate\Support\Facades\Auth;
+use App\Repositories\ServerRepositories;
+use Illuminate\Support\Facades\Validator;
 
 class ServerController extends Controller
 {
+    use ResponseTrait;
+
+    public $serverRepositories;
+    function __construct(ServerRepositories $serverRepositories){
+        $this->serverRepositories = $serverRepositories;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +23,16 @@ class ServerController extends Controller
      */
     public function index()
     {
-        //
+        try{
+            $results = $this->serverRepositories->serverListRepositories();
+            $message = 'Server get Successfull !!!';
+            return $this->responseSuccess($results, $message);
+        } catch(\Throwable $error){
+            $message = "Data Not Found !!!";
+            $error = 'Bad Request !!!';
+            $code = 400;
+            return $this->responseFail($message, $error, $code);
+        }
     }
 
     /**

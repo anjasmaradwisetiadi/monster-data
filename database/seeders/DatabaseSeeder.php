@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
 
         Server::create([
             'schedule_name' => 'Postgres Backup 1',
+            'slug' => 'postgres-backup-1',
             'user_id'=> 1,
             'backup_server'=> 'Server: n1 (11.12.1.2)',
             'backup_method'=> 'full',
@@ -56,6 +57,7 @@ class DatabaseSeeder extends Seeder
 
         Server::create([
             'schedule_name' => 'Postgres Backup 2',
+            'slug' => 'postgres-backup-2',
             'user_id'=> 1,
             'backup_server'=> 'Server: n1 (11.12.1.2)',
             'backup_method'=> 'full',
@@ -73,6 +75,7 @@ class DatabaseSeeder extends Seeder
 
         Server::create([
             'schedule_name' => 'Postgres Backup 3',
+            'slug' => 'postgres-backup-3',
             'user_id'=> 2,
             'backup_server'=> 'Server: n1 (11.12.1.2)',
             'backup_method'=> 'full',
@@ -90,6 +93,7 @@ class DatabaseSeeder extends Seeder
 
         Server::create([
             'schedule_name' => 'Postgres Backup 4',
+            'slug' => 'postgres-backup-4',
             'user_id'=> 2,
             'backup_server'=> 'Server: n1 (11.12.1.2)',
             'backup_method'=> 'full',

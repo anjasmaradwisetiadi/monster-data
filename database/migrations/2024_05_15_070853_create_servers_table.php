@@ -17,6 +17,7 @@ class CreateServersTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('schedule_name')->unique();
+            $table->string('slug');
             $table->string('backup_server');
             $table->enum('backup_method', ['full','incremental','separate']);
             $table->enum('backup_type', ['file', 'image', 'video']);
