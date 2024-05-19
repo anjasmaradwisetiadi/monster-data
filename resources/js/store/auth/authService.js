@@ -2,6 +2,7 @@ import {collectionUrl} from '../../urlCollection';
 import store from '../index.js';
 import axios from 'axios';
 import router from '../../routes/index';
+import {defaultWrongMessage} from '../../utilize/utilize.js'
 
 const urlBase = `${collectionUrl.baseUrlApi}`;
 
@@ -14,8 +15,7 @@ export const authService = {
             method: 'post',
             url: `${urlBase}/register`,
             data: payload,
-        })
-        .then(function(response){
+        }).then(function(response){
             const itemSave = {
                 name: response.data.data.name,
                 email: response.data.data.email,
@@ -29,11 +29,14 @@ export const authService = {
 
             store.commit('mutateResponsAuth', itemSave);
             store.commit('mutateResponseModal', messageRegister);
+            store.commit('mutateNameModalButton', 'Go to Login');
             store.commit('mutateModal', true);
             store.state.loading = false;
         })
         .catch(function(error) {
-          store.commit('mutateResponsAuth', error.message); 
+          store.commit('mutateResponseError', error.response.data.message); 
+          store.commit('mutateResponseModal', defaultWrongMessage);
+          store.commit('mutateModal', true);
           store.state.loading = false;
         })
     },

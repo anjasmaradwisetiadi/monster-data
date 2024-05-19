@@ -19,6 +19,9 @@ const store = createStore({
         error: '',
         modal: false,
         responseGeneral: null,
+        responseModal: null,
+        responseError: null,
+        nameModalButton: 'Ok',
     },
 
     mutations:{
@@ -26,7 +29,16 @@ const store = createStore({
             state.modal = payload;
         },
         mutateResponseModal(state, payload){
+            state.responseModal = payload 
+        },
+        muatateresponseGeneral(state, payload){
             state.responseGeneral = payload 
+        },
+        mutateResponseError(state, payload){
+            state.responseError = payload 
+        },
+        mutateNameModalButton(state, payload){
+            state.nameModalButton = payload 
         }
     },
     actions:{
@@ -36,6 +48,10 @@ const store = createStore({
         getterResponseGeneral(state){
             return state.responseGeneral;
         },
+
+        getterResponseError(state){
+            return state.responseError;
+        },
         // it need getter for loading because when read action "getListCounterStyle()" always true not false
         getterStateLoading(state){
             return state.loading;
@@ -44,6 +60,15 @@ const store = createStore({
         getterStateModal(state){
             return state.modal;
         },
+
+        getterNameModalButton(state){
+            return state.nameModalButton;
+        },
+
+        getterResponseModal(state){
+            return state.responseModal;
+        },
+
     }
 })
 

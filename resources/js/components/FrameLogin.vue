@@ -90,7 +90,7 @@ function contactUs(){
     console.log("contactUs")
 }
 function login(){
-    console.log("login")
+    router.push('/login')
 }
 </script>
 

@@ -14,16 +14,16 @@
             <div    
                 id="modal-box" class="sm:w-[385px] sm:min-w-[30vw] min-w-[60vw] min-h-[30vh] flex flex-col items-center gap-2 -translate-y-1/2 p-6 bg-white rounded-lg top-1/2 left-1/2 -translate-x-1/2 shadow-md absolute z-20">
                 <img class="w-40" src="../../assets/image/logo.png" alt="logo">
-                <h2 class="text-xl text-blue-primary font-medium mt-9">{{responseGeneral.title}} </h2>
-                <p class="text-center mt-4">{{responseGeneral.message}}</p>
-                <template v-if="!isConfirmModal">
+                <h2 class="text-xl text-blue-primary font-medium mt-9">{{props?.responseModal?.title}} </h2>
+                <p class="text-center mt-4">{{props?.responseModal?.message}}</p>
+                <template v-if="!props.isConfirmModal">
                     <div class="w-full flex justify-center">
                         <button id="modal-close" class="py-2 px-6 bg-blue-primary rounded-lg text-white mb-7"
                             @click="onToggle(false)"
                         > {{props.confirmButton}} </button>
                     </div>
                 </template>
-                <template v-if="isConfirmModal">
+                <template v-if="props.isConfirmModal">
                     <div class="w-full flex justify-center">
                         <button id="modal-close" class="py-2 px-6 bg-blue-primary rounded-lg text-white mb-7"
                             @click="onToggle(true)"
@@ -46,27 +46,20 @@
             loading:{
                 default: false
             },
-            responseGeneral:{
-                default(data) {
+            responseModal:{
+                type: Object,
+                default() {
                     return {
-                        title: data.title ? data.title : 'Registartion Success',
-                        message: data.message ? data.message : 'Please check you email to activated your MonsterBackup Account.',
+                        title: 'Something Wrong',
+                        message: 'Please contact your admin',
                     }
                 }
             },
             confirmButton: {
-                default(data) {
-                    return {
-                        title: data ? data : 'Yes',
-                    }
-                }
+                default: 'Ok'
             },  
             denyButton: {
-                default(data) {
-                    return {
-                        title: data ? data : 'No',
-                    }
-                }
+                default: 'No'
             },
             // for add name modal unique
             nameModal: {

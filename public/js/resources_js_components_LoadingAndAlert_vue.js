@@ -21,27 +21,20 @@ __webpack_require__.r(__webpack_exports__);
     loading: {
       "default": false
     },
-    responseGeneral: {
-      "default": function _default(data) {
+    responseModal: {
+      type: Object,
+      "default": function _default() {
         return {
-          title: data.title ? data.title : 'Registartion Success',
-          message: data.message ? data.message : 'Please check you email to activated your MonsterBackup Account.'
+          title: 'Something Wrong',
+          message: 'Please contact your admin'
         };
       }
     },
     confirmButton: {
-      "default": function _default(data) {
-        return {
-          title: data ? data : 'Yes'
-        };
-      }
+      "default": 'Ok'
     },
     denyButton: {
-      "default": function _default(data) {
-        return {
-          title: data ? data : 'No'
-        };
-      }
+      "default": 'No'
     },
     // for add name modal unique
     nameModal: {
@@ -165,13 +158,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     name: "fade"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.responseGeneral.title), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.responseGeneral.message), 1 /* TEXT */), !$props.isConfirmModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      var _$setup$props6, _$setup$props7;
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$props6 = $setup.props) === null || _$setup$props6 === void 0 || (_$setup$props6 = _$setup$props6.responseModal) === null || _$setup$props6 === void 0 ? void 0 : _$setup$props6.title), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$props7 = $setup.props) === null || _$setup$props7 === void 0 || (_$setup$props7 = _$setup$props7.responseModal) === null || _$setup$props7 === void 0 ? void 0 : _$setup$props7.message), 1 /* TEXT */), !$setup.props.isConfirmModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         id: "modal-close",
         "class": "py-2 px-6 bg-blue-primary rounded-lg text-white mb-7",
         onClick: _cache[0] || (_cache[0] = function ($event) {
           return $setup.onToggle(false);
         })
-      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.confirmButton), 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.isConfirmModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.confirmButton), 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.props.isConfirmModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         id: "modal-close",
         "class": "py-2 px-6 bg-blue-primary rounded-lg text-white mb-7",
         onClick: _cache[1] || (_cache[1] = function ($event) {

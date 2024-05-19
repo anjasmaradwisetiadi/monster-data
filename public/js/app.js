@@ -24036,12 +24036,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var authStore = {
   state: {
-    responseAuth: {}
+    responseAuth: null,
+    payloadEx: null
   },
   mutations: {
     //********** */ login, register, logout need explode file
     mutateResponsAuth: function mutateResponsAuth(state, payload) {
       state.responseAuth = payload;
+    },
+    mutateEx: function mutateEx(state, payload) {
+      state.payloadEx = payload;
     }
   },
   getters: {
@@ -24088,14 +24092,26 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_5__.createStore)({
     loading: false,
     error: '',
     modal: false,
-    responseGeneral: null
+    responseGeneral: null,
+    responseModal: null,
+    responseError: null,
+    nameModalButton: 'Ok'
   },
   mutations: {
     mutateModal: function mutateModal(state, payload) {
       state.modal = payload;
     },
     mutateResponseModal: function mutateResponseModal(state, payload) {
+      state.responseModal = payload;
+    },
+    muatateresponseGeneral: function muatateresponseGeneral(state, payload) {
       state.responseGeneral = payload;
+    },
+    mutateResponseError: function mutateResponseError(state, payload) {
+      state.responseError = payload;
+    },
+    mutateNameModalButton: function mutateNameModalButton(state, payload) {
+      state.nameModalButton = payload;
     }
   },
   actions: {},
@@ -24103,12 +24119,21 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_5__.createStore)({
     getterResponseGeneral: function getterResponseGeneral(state) {
       return state.responseGeneral;
     },
+    getterResponseError: function getterResponseError(state) {
+      return state.responseError;
+    },
     // it need getter for loading because when read action "getListCounterStyle()" always true not false
     getterStateLoading: function getterStateLoading(state) {
       return state.loading;
     },
     getterStateModal: function getterStateModal(state) {
       return state.modal;
+    },
+    getterNameModalButton: function getterNameModalButton(state) {
+      return state.nameModalButton;
+    },
+    getterResponseModal: function getterResponseModal(state) {
+      return state.responseModal;
     }
   }
 });

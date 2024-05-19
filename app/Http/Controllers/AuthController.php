@@ -7,6 +7,7 @@ use App\Traits\ResponseTrait;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\AuthRepositories;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -111,15 +112,17 @@ class AuthController extends Controller
 
         } else {
             $rules =[
-                'name'=> 'required|max:256',
-                'email'=> 'required|email',
+                'name'=> 'required|max:256|unique:users',
+                'email'=> 'required|email|unique:users',
                 'phone'=> 'max:15',
                 'password'=> 'required|min:8|max:16',
             ];
     
             $messages =[
+                'name.unique'=>'Name has been record, change another name',
                 'name.required'=>'Please fill full name',
                 'name.max'=>'Full name must be at maximal 256 characters',
+                'email.unique'=>'Email has been record, change another email',
                 'email.required'=> 'Please fill email',
                 'email.email'=> 'Format email wrong',
                 'phone.max'=> 'Phone number must be maximal 15 characters',

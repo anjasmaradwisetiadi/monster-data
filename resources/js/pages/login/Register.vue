@@ -12,7 +12,10 @@
                             >   
                                 arrow_back
                             </span>
-                            <span class="pl-2 font-medium text-md">
+                            <span
+                                @click="back()"
+                                type="button"
+                                class="pl-2 font-medium text-md" >
                                 Back
                             </span>
                         </div>
@@ -41,7 +44,9 @@
                                     required 
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]" 
                                     placeholder="John Doe">
-                                <p class="text-red-500 text-xs italic">Please fill full name</p>
+                                <p 
+                                    v-if="responseError?.name"
+                                    class="text-red-500 text-xs italic">{{responseError?.name[0]}}</p>
                             </div>
                         </div>
                         <div class="flex flex-row">
@@ -56,7 +61,9 @@
                                     placeholder="Your Email Address"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]" 
                                 >
-                                <p class="text-red-500 text-xs italic">Please fill email</p>
+                                <p  
+                                    v-if="responseError?.email"
+                                    class="text-red-500 text-xs italic">{{responseError?.email[0]}}</p>
                             </div>
                         </div> 
                         <div class="flex flex-row">
@@ -72,7 +79,9 @@
                                     required 
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]" 
                                     placeholder="6573xxxx">
-                                <p class="text-red-500 text-xs italic">Please fill phone number</p>
+                                <p 
+                                    v-if="responseError?.phone"
+                                    class="text-red-500 text-xs italic">{{responseError?.phone[0]}}</p>
                             </div>
                         </div>
                         <div class="flex flex-row">
@@ -89,7 +98,9 @@
                                     required 
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]" 
                                     placeholder="Minimal 8 character">
-                                <p class="text-red-500 text-xs italic">Please fill password</p>
+                                <p 
+                                    v-if="responseError?.password"    
+                                    class="text-red-500 text-xs italic">{{responseError?.password[0]}}</p>
                             </div>
                         </div>
                         <div class="flex flex-row">
@@ -105,7 +116,9 @@
                                     required 
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]" 
                                     placeholder="Re-type password">
-                                <p class="text-red-500 text-xs italic">Please fill confirm password</p>
+                                <p 
+                                    v-if="responseError?.confirm_password"    
+                                    class="text-red-500 text-xs italic">{{responseError?.confirm_password[0]}}</p>
                             </div>
                         </div>
                         <div class="flex justify-end">
@@ -127,17 +140,17 @@
         <LoadingAndAlert 
             :loading="loading" 
             :isOpenModal="isOpenModal"
-            :confirmButton="confirmButton"  
+            :confirmButton="nameModalButton"  
             :isConfirmModal="isConfirmModal"  
             @isOpenModelClose="isOpenModelClose"
-            :responseGeneral="responseGeneral" 
+            :responseModal="responseModal" 
         >
         </LoadingAndAlert>
 
     </div>
 </template>
 <script setup>
-import { ref, reactive, computed, onMounted, onBeforeMount } from 'vue';
+import { ref, reactive, computed, onMounted, onBeforeMount, watch } from 'vue';
 import  FrameLogin from '../../components/FrameLogin.vue';
 import LoadingAndAlert from '../../components/LoadingAndAlert.vue';
 import {authService} from '../../store/auth/authService';
@@ -153,13 +166,37 @@ let phone = ref('');
 let password = ref('');
 let confirm_password = ref('');
 let confirmButton = ref('');
+let routeLogin = ref(null);
 
 const loading = computed(()=>{
     return store.getters.getterStateLoading
 })
+
+const nameModalButton = computed(()=>{
+    return store.getters.getterNameModalButton;
+})
+const responseModal = computed (()=>{
+    return store.getters.getterResponseModal;
+})
+
 const responseGeneral = computed (()=>{
     return store.getters.getterResponseGeneral;
 })
+
+const responseError = computed (()=>{
+    return store.getters.getterResponseError;
+})
+
+const responseAuth = computed (()=>{
+    return store.getters.getterResponseAuth;
+})
+
+watch(responseAuth, async (newValue, oldValue)=>{
+    routeLogin= newValue;
+})
+
+
+
 const isOpenModal = computed(()=>{
     return store.getters.getterStateModal;
 })
@@ -173,7 +210,6 @@ function register(){
         'confirm_password': confirm_password.value
     };
     authService.register(payload);
-    confirmButton.value = 'Go to Login'
 }
 
 function payload(){
@@ -187,8 +223,16 @@ function payload(){
 function isOpenModelClose($event){
     store.commit('mutateModal', false)
     store.commit('mutateResponseModal', null)
-    router.push('/login')
+    if(routeLogin?.email){
+        router.push('/login')
+    }
 }
+
+function back(){
+    router.push('/login');
+}
+
+
 
 </script>
 
