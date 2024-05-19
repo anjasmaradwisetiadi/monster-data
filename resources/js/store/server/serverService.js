@@ -1,7 +1,8 @@
-import {collectionUrl} from '../../utilize/urlCollection';
+import {collectionUrl} from '../../urlCollection';
 import store from '../index';
 import axios from 'axios';
 import router from '../../routes';
+import {defaultWrongMessage} from '../../utilize/utilize'
 
 const urlBase = `${collectionUrl.baseUrlApi}`;
 
@@ -10,19 +11,22 @@ export const serverService = {
         const tokenAuth = store.getters.getterResponseAuth.token;
         store.state.loading = true;
         await axios({
-            method: '',
-            url: `${urlBase}`,
+            method: 'get',
+            url: `${urlBase}/schedule`,
             headers:{
-              'Content-Type': "multipart/form-data",
               'Authorization': `Bearer ${tokenAuth}`
             },
         })
         .then(function(response){
-            // store.commit('mutateListPlayStyle',response.data);
+            console.log("response.data.data = ")
+            console.log(response.data.data.data)
+            store.commit('mutateListServer',response.data);
             store.state.loading = false;
         })
         .catch(function(error) {
-            // store.commit('mutateResponsGeneral', error.message); 
+            store.commit('mutateResponseError', error.response.data.message); 
+            store.commit('mutateResponseModal', defaultWrongMessage);
+            store.commit('mutateModal', true)
             store.state.loading = false;
         })
     },
@@ -46,23 +50,24 @@ export const serverService = {
             store.state.loading = false;
         })
     },
-    async detailServer(){
+    async detailServer(id){
         const tokenAuth = store.getters.getterResponseAuth.token;
         store.state.loading = true;
         await axios({
             method: '',
-            url: `${urlBase}`,
+            url: `${urlBase}/schedule/${id}`,
             headers:{
-              'Content-Type': "multipart/form-data",
               'Authorization': `Bearer ${tokenAuth}`
             },
         })
         .then(function(response){
-            // store.commit('mutateListPlayStyle',response.data);
+            store.commit('mutateDetailServer',response.data);
             store.state.loading = false;
         })
         .catch(function(error) {
-            // store.commit('mutateResponsGeneral', error.message); 
+            store.commit('mutateResponseError', error.response.data.message); 
+            store.commit('mutateResponseModal', defaultWrongMessage);
+            store.commit('mutateModal', true)
             store.state.loading = false;
         })
     },

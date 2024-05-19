@@ -17,7 +17,7 @@ export const serverStore = {
             state.getEditServer = payload;
         },
         mutateListBackupServer(state, payload){
-            state.listServer = payload;
+            state.listServerBackup = payload;
         },
     }, 
     getters:{

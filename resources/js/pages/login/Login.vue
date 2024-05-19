@@ -131,7 +131,6 @@ function isOpenModelClose($event){
     if(routeLogin?.email){
         router.push('/schedule')
     }
-
 }
 
 </script>

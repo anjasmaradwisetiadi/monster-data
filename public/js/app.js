@@ -24170,7 +24170,7 @@ var serverStore = {
       state.getEditServer = payload;
     },
     mutateListBackupServer: function mutateListBackupServer(state, payload) {
-      state.listServer = payload;
+      state.listServerBackup = payload;
     }
   },
   getters: {
