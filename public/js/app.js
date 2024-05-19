@@ -24117,9 +24117,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   serverStore: () => (/* binding */ serverStore)
 /* harmony export */ });
 var serverStore = {
-  state: {},
-  mutations: {},
-  getters: {}
+  state: {
+    listServer: {},
+    detailServer: {},
+    getEditServer: {},
+    listServerBackup: {}
+  },
+  mutations: {
+    mutateListServer: function mutateListServer(state, payload) {
+      state.listServer = payload;
+    },
+    mutateDetailServer: function mutateDetailServer(state, payload) {
+      state.detailServer = payload;
+    },
+    mutateGetEditServer: function mutateGetEditServer(state, payload) {
+      state.getEditServer = payload;
+    },
+    mutateListBackupServer: function mutateListBackupServer(state, payload) {
+      state.listServer = payload;
+    }
+  },
+  getters: {
+    getterListServer: function getterListServer(state) {
+      return state.listServer;
+    },
+    getterDetailServer: function getterDetailServer(state) {
+      return state.detailServer;
+    },
+    getterEditServer: function getterEditServer(state) {
+      return state.getEditServer;
+    },
+    getterListBackupServer: function getterListBackupServer(state) {
+      return state.listServerBackup;
+    }
+  }
 };
 
 /***/ }),

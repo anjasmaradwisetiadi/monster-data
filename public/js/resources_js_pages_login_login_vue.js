@@ -427,7 +427,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-var urlCounterStyle = "".concat(_urlCollection__WEBPACK_IMPORTED_MODULE_0__.collectionUrl.baseUrlApi);
+var urlBase = "".concat(_urlCollection__WEBPACK_IMPORTED_MODULE_0__.collectionUrl.baseUrlApi);
 var authService = {
   register: function register(payload) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -449,7 +449,7 @@ var authService = {
             _context2.next = 3;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
               method: 'post',
-              url: "".concat(urlCounterStyle, "/login"),
+              url: "".concat(urlBase, "/login"),
               data: payload
             }).then(function (response) {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;

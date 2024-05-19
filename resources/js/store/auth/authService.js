@@ -3,7 +3,7 @@ import store from '../index.js';
 import axios from 'axios';
 import router from '../../routes/index';
 
-const urlCounterStyle = `${collectionUrl.baseUrlApi}`;
+const urlBase = `${collectionUrl.baseUrlApi}`;
 
 
 export const authService = {
@@ -16,7 +16,7 @@ export const authService = {
 
         await axios({
             method: 'post',
-            url: `${urlCounterStyle}/login`,
+            url: `${urlBase}/login`,
             data: payload,
         })
         .then(function(response){
