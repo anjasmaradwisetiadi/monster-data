@@ -8,7 +8,9 @@
                     </div>
                     <div v-if="paramsUrlSlug !== 'schedule'">
                         <div class="flex">
-                            <span class="material-icons border-slate-300 rounded-full border p-3 cursor-pointer mr-4" style="font-size: 20px">
+                            <span 
+                                @click="back()"
+                                class="material-icons border-slate-300 rounded-full border p-3 cursor-pointer mr-4" style="font-size: 20px">
                                 chevron_left
                             </span>
                             <div class="block">
@@ -189,6 +191,9 @@ function isOpenModelClose($event){
     }
 }
 
+function back(){
+    this.router.go(-1)
+}
 
 </script>
 

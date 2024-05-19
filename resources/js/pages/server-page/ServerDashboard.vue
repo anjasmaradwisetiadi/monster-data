@@ -73,14 +73,14 @@
                 </div>
             </template>
         </FrameServer>
+        <LoadingAndAlert 
+            :loading="loading" 
+            :isOpenModal="isOpenModal"
+            :confirmButton="nameModalButton"  
+            @isOpenModelClose="isOpenModelClose"
+            :responseModal="responseModal"
+        ></LoadingAndAlert>
     </div>
-    <LoadingAndAlert 
-        :loading="loading" 
-        :isOpenModal="isOpenModal"
-        :confirmButton="nameModalButton"  
-        @isOpenModelClose="isOpenModelClose"
-        :responseModal="responseModal"
-    ></LoadingAndAlert>
 </template>
 <script setup>
 import { ref, reactive, watch, computed, onMounted, onBeforeMount } from 'vue';

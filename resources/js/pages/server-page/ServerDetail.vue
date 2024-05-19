@@ -21,14 +21,14 @@
                     <div class="w-4/5">
                       <div>
                         <h3 class="text-xl font-semibold">
-                          Server :n1 (11.12.1.2)
+                          {{ getDetailServers?.schedule_name}}
                         </h3>
                       </div>
                       <div class="flex flex-row mt-8">
                         <div class="w-1/2">
                           <div class="flex">
                             <span class="w-2/5">Method </span>
-                            <span class="w-3/5">: postgresbackup </span>
+                            <span class="w-3/5">: {{ getDetailServers?.backup_method }} </span>
                           </div>
                           <div class="flex">
                             <span class="w-2/5">Last Excution</span>
@@ -40,21 +40,21 @@
                           </div>
                           <div class="flex">
                             <span class="w-2/5">Storage</span>
-                            <span class="w-3/5">: local storage</span>
+                            <span class="w-3/5">: {{ getDetailServers?.storage_name }}</span>
                           </div>
                         </div>
                         <div class="w-1/2">
                           <div class="flex">
                             <span class="w-2/5">Compression </span>
-                            <span class="w-3/5">: Yes </span>
+                            <span class="w-3/5">:  {{ getDetailServers?.use_compression ? 'Yes' : 'No'}} </span>
                           </div>
                           <div class="flex">
                             <span class="w-2/5">Encryption</span>
-                            <span class="w-3/5">: No </span>
+                            <span class="w-3/5">: {{ getDetailServers?.use_encryption ? 'Yes' : 'No'}} </span>
                           </div>
                           <div class="flex">
                             <span class="w-2/5">Backup Name Template</span>
-                            <span class="w-3/5">: PC - XXXX</span>
+                            <span class="w-3/5">: {{ getDetailServers?.backup_name }}</span>
                           </div>
                         </div>
                       </div>
@@ -227,13 +227,53 @@
           </div>
         </template>
       </FrameServer>
+      <LoadingAndAlert 
+        :loading="loading" 
+        :isOpenModal="isOpenModal"
+        :confirmButton="nameModalButton"  
+        @isOpenModelClose="isOpenModelClose"
+        :responseModal="responseModal"
+    ></LoadingAndAlert>
     </div>
   </template>
   <script setup>
+  import { ref, reactive, watch, computed, onMounted, onBeforeMount } from 'vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+
   import FrameServer from '../../components/FrameServer.vue';
   import Sidebar from '../../components/Sidebar.vue';
-  import Pagination from '../../components/Pagination.vue';
+  import LoadingAndAlert from '../../components/LoadingAndAlert.vue';
+  import {serverService} from '../../store/server/serverService';
   import { dataDummyBackupListServer } from '../../../assets/data/dummyData'
+
+  const store = useStore();
+  const router = useRouter(); 
+
+  const loading = computed(()=>{
+    return store.getters.getterStateLoading
+  })
+
+  const responseModal = computed (()=>{
+    return store.getters.getterResponseModal;
+  })
+
+  const nameModalButton = computed(()=>{
+    return store.getters.getterNameModalButton;
+  })
+
+  const responseError = computed (()=>{
+    return store.getters.getterResponseError;
+  })
+
+  const getDetailServers = computed(()=>{
+    return store?.getters?.getterDetailServer?.data;
+  })
+
+  onMounted(()=>{
+    const payloadSlug = router.currentRoute.value.params.slug;
+    serverService.detailServer(payloadSlug);
+  })
 
   const dataBackupListServers = dataDummyBackupListServer.data;
 

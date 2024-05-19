@@ -18,8 +18,6 @@ export const serverService = {
             },
         })
         .then(function(response){
-            console.log("response.data.data = ")
-            console.log(response.data.data.data)
             store.commit('mutateListServer',response.data);
             store.state.loading = false;
         })
@@ -50,12 +48,12 @@ export const serverService = {
             store.state.loading = false;
         })
     },
-    async detailServer(id){
+    async detailServer(slug){
         const tokenAuth = store.getters.getterResponseAuth.token;
         store.state.loading = true;
         await axios({
-            method: '',
-            url: `${urlBase}/schedule/${id}`,
+            method: 'get',
+            url: `${urlBase}/schedule/${slug}`,
             headers:{
               'Authorization': `Bearer ${tokenAuth}`
             },
