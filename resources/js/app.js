@@ -3,7 +3,7 @@ import router from './routes/index';
 import store from './store/index.js';
 import App from './App.vue';
 import axios from 'axios';
-import {collectionUrl} from './utilize/collectionUrl.js'
+import {collectionUrl} from './urlCollection'
 const app = createApp(App);
 require("./bootstrap");
 
