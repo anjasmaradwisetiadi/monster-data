@@ -18,11 +18,15 @@ const store = createStore({
         loading: false,
         error: '',
         modal: false,
+        responseGeneral: null,
     },
 
     mutations:{
         mutateModal(state, payload){
             state.modal = payload;
+        },
+        mutateResponseModal(state, payload){
+            state.responseGeneral = payload 
         }
     },
     actions:{

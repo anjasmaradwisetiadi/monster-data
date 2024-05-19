@@ -24087,11 +24087,15 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_5__.createStore)({
   state: {
     loading: false,
     error: '',
-    modal: false
+    modal: false,
+    responseGeneral: null
   },
   mutations: {
     mutateModal: function mutateModal(state, payload) {
       state.modal = payload;
+    },
+    mutateResponseModal: function mutateResponseModal(state, payload) {
+      state.responseGeneral = payload;
     }
   },
   actions: {},

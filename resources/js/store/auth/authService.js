@@ -48,10 +48,15 @@ export const authService = {
                 phone: response.data.data.phone,
                 token: response.data.data.token
             }
-            store.commit('mutateResponsAuth', itemSave);
+            const messageLogin = {
+                title: 'Login Success',
+                message: 'You will redirect to dashboard'
+            }
             localStorage.setItem('user', JSON.stringify(itemSave));
             // router.push('/schedule');
             store.state.loading = false;
+            store.commit('mutateResponsAuth', itemSave);
+            store.commit('mutateResponseModal', messageLogin);
             store.commit('mutateModal', true);
         })
         .catch(function(error) {

@@ -6,7 +6,7 @@
                     <!-- start content form -->
                     <div class="sm:mx-auto sm:w-full sm:max-w-sm px-6 lg:px-8 pt-2">
                         <h4 class="mt-10 text-2xl font-bold leading-9 tracking-tight text-gray-900">Login</h4>
-                        <p class="text-slate-400"> Enter your email and password to login to Monster Backup Dashboard asjkcbgci</p>
+                        <p class="text-slate-400"> Enter your email and password to login to Monster Backup Dashboard</p>
                     </div>
 
                     <div class="flex-grow mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -45,14 +45,22 @@
                             </div>
                             <div class="flex justify-end">
                                 <button type="submit" @click="submit()" class="flex w-2/5 justify-center rounded-md bg-blue-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
-                                <button type="submit" @click="openModal()" class="flex w-2/5 justify-center rounded-md bg-blue-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Open modal</button>
                             </div>
                         </div>
                     </div>
                     <!-- end content form -->
                 </template>
             </FrameLogin>
-            <LoadingAndAlert :loading="loading" :isOpenModal="isOpenModal"  @isOpenModelClose="isOpenModelClose"></LoadingAndAlert>
+            <LoadingAndAlert 
+                :loading="loading" 
+                :isOpenModal="isOpenModal"
+                :confirmButton="confirmButton"  
+                :isConfirmModal="isConfirmModal"  
+                @isOpenModelClose="isOpenModelClose"
+                :responseGeneral="responseGeneral"
+
+            >
+            </LoadingAndAlert>
             <!-- start footer footer -->
             <!-- <ExampleComponentTwo ></ExampleComponentTwo> -->
     </div>
@@ -70,10 +78,15 @@ const router = useRouter();
 
 let email = ref('');
 let password = ref('');
+let confirmButton = ref('');
+let denyButton = ref('');
 // let isOpenModal = ref(false);
 
 const loading = computed(()=>{
     return store.getters.getterStateLoading;
+})
+const responseGeneral = computed (()=>{
+    return store.getters.getterResponseGeneral;
 })
 const isOpenModal = computed(()=>{
     return store.getters.getterStateModal;
@@ -85,11 +98,13 @@ function submit(){
         'password': password.value,
     };
     authService.login(payload);
+    confirmButton.value = 'Go to dashboard'
 }
 
 
 function isOpenModelClose($event){
-    store.commit('mutateModal', $event)
+    store.commit('mutateModal', false)
+    store.commit('mutateResponseModal', null)
     router.push('/schedule')
 }
 

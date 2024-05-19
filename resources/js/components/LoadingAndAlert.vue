@@ -14,13 +14,25 @@
             <div    
                 id="modal-box" class="sm:w-[385px] sm:min-w-[30vw] min-w-[60vw] min-h-[30vh] flex flex-col items-center gap-2 -translate-y-1/2 p-6 bg-white rounded-lg top-1/2 left-1/2 -translate-x-1/2 shadow-md absolute z-20">
                 <img class="w-40" src="../../assets/image/logo.png" alt="logo">
-                <h2 class="text-xl text-blue-primary font-medium mt-9">Registartion Success </h2>
-                <p class="text-center mt-4">Please check you email to activated your MonsterBackup Account.</p>
-                <div class="w-full flex justify-center">
-                    <button id="modal-close" class="py-2 px-6 bg-blue-primary rounded-lg text-white mb-7"
-                        @click="onToggle"
-                    >Go to Login </button>
-                </div>
+                <h2 class="text-xl text-blue-primary font-medium mt-9">{{responseGeneral.title}} </h2>
+                <p class="text-center mt-4">{{responseGeneral.message}}</p>
+                <template v-if="!isConfirmModal">
+                    <div class="w-full flex justify-center">
+                        <button id="modal-close" class="py-2 px-6 bg-blue-primary rounded-lg text-white mb-7"
+                            @click="onToggle(false)"
+                        > {{props.confirmButton}} </button>
+                    </div>
+                </template>
+                <template v-if="isConfirmModal">
+                    <div class="w-full flex justify-center">
+                        <button id="modal-close" class="py-2 px-6 bg-blue-primary rounded-lg text-white mb-7"
+                            @click="onToggle(true)"
+                        >{{props.confirmButton}} </button>
+                        <button id="modal-close" class="py-2 px-6 bg-red-primary rounded-lg text-white mb-7"
+                            @click="onToggle(false)"
+                        >{{props.denyButton}} </button>
+                    </div>
+                </template>
             </div>
         </transition>
     </div>
@@ -35,6 +47,32 @@
                 default: false
             },
             responseGeneral:{
+                default(data) {
+                    return {
+                        title: data.title ? data.title : 'Registartion Success',
+                        message: data.message ? data.message : 'Please check you email to activated your MonsterBackup Account.',
+                    }
+                }
+            },
+            confirmButton: {
+                default(data) {
+                    return {
+                        title: data ? data : 'Yes',
+                    }
+                }
+            },  
+            denyButton: {
+                default(data) {
+                    return {
+                        title: data ? data : 'No',
+                    }
+                }
+            },
+            // for add name modal unique
+            nameModal: {
+                default: ''
+            },
+            isConfirmModal: {
                 default: false
             },
             isOpenModal: {
@@ -48,9 +86,13 @@
             'isOpenModelClose'
         ]);
 
-        function onToggle() {
+        function onToggle(data) {
             props.isOpenModal = !props.isOpenModal;
-            emit('isOpenModelClose', false)
+            const payload = {
+                name: props.nameModal,
+                value: data
+            }
+            emit('isOpenModelClose', payload)
         }
 </script>
 

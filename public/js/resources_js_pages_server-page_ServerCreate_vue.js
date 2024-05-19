@@ -714,10 +714,15 @@ var authService = {
                 phone: response.data.data.phone,
                 token: response.data.data.token
               };
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', itemSave);
+              var messageLogin = {
+                title: 'Login Success',
+                message: 'You will redirect to dashboard'
+              };
               localStorage.setItem('user', JSON.stringify(itemSave));
               // router.push('/schedule');
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', itemSave);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', messageLogin);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
             })["catch"](function (error) {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', error.message);

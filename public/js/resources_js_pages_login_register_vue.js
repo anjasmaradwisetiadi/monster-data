@@ -102,6 +102,32 @@ __webpack_require__.r(__webpack_exports__);
       "default": false
     },
     responseGeneral: {
+      "default": function _default(data) {
+        return {
+          title: data.title ? data.title : 'Registartion Success',
+          message: data.message ? data.message : 'Please check you email to activated your MonsterBackup Account.'
+        };
+      }
+    },
+    confirmButton: {
+      "default": function _default(data) {
+        return {
+          title: data ? data : 'Yes'
+        };
+      }
+    },
+    denyButton: {
+      "default": function _default(data) {
+        return {
+          title: data ? data : 'No'
+        };
+      }
+    },
+    // for add name modal unique
+    nameModal: {
+      "default": ''
+    },
+    isConfirmModal: {
       "default": false
     },
     isOpenModal: {
@@ -116,9 +142,13 @@ __webpack_require__.r(__webpack_exports__);
     var store = (0,vuex__WEBPACK_IMPORTED_MODULE_1__.useStore)();
     var props = __props;
     var emit = __emit;
-    function onToggle() {
+    function onToggle(data) {
       props.isOpenModal = !props.isOpenModal;
-      emit('isOpenModelClose', false);
+      var payload = {
+        name: props.nameModal,
+        value: data
+      };
+      emit('isOpenModelClose', payload);
     }
     var __returned__ = {
       store: store,
@@ -360,23 +390,31 @@ var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
   }, null, -1 /* HOISTED */);
 });
 var _hoisted_5 = [_hoisted_4];
-var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_6 = {
+  id: "modal-box",
+  "class": "sm:w-[385px] sm:min-w-[30vw] min-w-[60vw] min-h-[30vh] flex flex-col items-center gap-2 -translate-y-1/2 p-6 bg-white rounded-lg top-1/2 left-1/2 -translate-x-1/2 shadow-md absolute z-20"
+};
+var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     "class": "w-40",
     src: _assets_image_logo_png__WEBPACK_IMPORTED_MODULE_2__["default"],
     alt: "logo"
   }, null, -1 /* HOISTED */);
 });
-var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
-    "class": "text-xl text-blue-primary font-medium mt-9"
-  }, "Registartion Success ", -1 /* HOISTED */);
-});
-var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": "text-center mt-4"
-  }, "Please check you email to activated your MonsterBackup Account.", -1 /* HOISTED */);
-});
+var _hoisted_8 = {
+  "class": "text-xl text-blue-primary font-medium mt-9"
+};
+var _hoisted_9 = {
+  "class": "text-center mt-4"
+};
+var _hoisted_10 = {
+  key: 0,
+  "class": "w-full flex justify-center"
+};
+var _hoisted_11 = {
+  key: 1,
+  "class": "w-full flex justify-center"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _$setup$props, _$setup$props2, _$setup$props3, _$setup$props4, _$setup$props5;
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(_$setup$props = $setup.props) !== null && _$setup$props !== void 0 && _$setup$props.loading || (_$setup$props2 = $setup.props) !== null && _$setup$props2 !== void 0 && _$setup$props2.isOpenModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" loading "), (_$setup$props3 = $setup.props) !== null && _$setup$props3 !== void 0 && _$setup$props3.loading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [].concat(_hoisted_5))) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (_$setup$props4 = $setup.props) !== null && _$setup$props4 !== void 0 && _$setup$props4.isOpenModal && !((_$setup$props5 = $setup.props) !== null && _$setup$props5 !== void 0 && _$setup$props5.loading) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
@@ -384,16 +422,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     name: "fade"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-        id: "modal-box",
-        "class": "sm:w-[385px] sm:min-w-[30vw] min-w-[60vw] min-h-[30vh] flex flex-col items-center gap-2 -translate-y-1/2 p-6 bg-white rounded-lg top-1/2 left-1/2 -translate-x-1/2 shadow-md absolute z-20"
-      }, [_hoisted_6, _hoisted_7, _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-        "class": "w-full flex justify-center"
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.responseGeneral.title), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.responseGeneral.message), 1 /* TEXT */), !$props.isConfirmModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         id: "modal-close",
         "class": "py-2 px-6 bg-blue-primary rounded-lg text-white mb-7",
-        onClick: $setup.onToggle
-      }, "Go to Login ")])])];
+        onClick: _cache[0] || (_cache[0] = function ($event) {
+          return $setup.onToggle(false);
+        })
+      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.confirmButton), 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.isConfirmModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        id: "modal-close",
+        "class": "py-2 px-6 bg-blue-primary rounded-lg text-white mb-7",
+        onClick: _cache[1] || (_cache[1] = function ($event) {
+          return $setup.onToggle(true);
+        })
+      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.confirmButton), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        id: "modal-close",
+        "class": "py-2 px-6 bg-red-primary rounded-lg text-white mb-7",
+        onClick: _cache[2] || (_cache[2] = function ($event) {
+          return $setup.onToggle(false);
+        })
+      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.denyButton), 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
     }),
     _: 1 /* STABLE */
   })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
@@ -676,10 +723,15 @@ var authService = {
                 phone: response.data.data.phone,
                 token: response.data.data.token
               };
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', itemSave);
+              var messageLogin = {
+                title: 'Login Success',
+                message: 'You will redirect to dashboard'
+              };
               localStorage.setItem('user', JSON.stringify(itemSave));
               // router.push('/schedule');
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', itemSave);
+              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', messageLogin);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
             })["catch"](function (error) {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsAuth', error.message);
