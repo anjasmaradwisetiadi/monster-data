@@ -7,13 +7,13 @@
                     <div class="w-1/5 flex self-center">
                         <div class="flex flex-row">
                             <span 
+                                @click="back()"
                                 class="material-icons border-black rounded-full border-2 p-1 cursor-pointer" 
                                 style="font-size: 14px"
                             >   
                                 arrow_back
                             </span>
                             <span
-                                @click="back()"
                                 type="button"
                                 class="pl-2 font-medium text-md" >
                                 Back
@@ -70,14 +70,24 @@
                             <div class="w-3/12">
                                 <label for="phone" class="block text-left text-sm font-medium leading-6 text-gray-900 px-4 py-1.5 " >Phone</label>
                             </div>
-                            <div class="w-9/12">
+                            <div class="w-9/12 flex flex-row">
+                                <select
+                                    v-model="frontNoPhone"
+                                    id="countries"
+                                    class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-18 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 pl-[8px]"
+                                    >
+                                    <option value="+62" selected>+62</option>
+                                    <option value="+63">+63</option>
+                                    <option value="+64">+64</option>
+                                </select>
                                 <input 
                                     v-model="phone"
+                                    @keyup="keyInputNumber($event)"
                                     id="phone" 
                                     name="phone" 
                                     type="text" 
                                     required 
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]" 
+                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px] ml-3" 
                                     placeholder="6573xxxx">
                                 <p 
                                     v-if="responseError?.phone"
@@ -126,11 +136,6 @@
                                 @click="register()"
                                 type="button" class="flex w-1/5 justify-center rounded-md bg-blue-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" >
                             Register</button>
-                            <button 
-                                @click="payload()"
-                                type="button" class="flex w-1/5 justify-center rounded-md bg-pink-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" >
-                                Payload
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -166,6 +171,7 @@ let password = ref('');
 let confirm_password = ref('');
 let confirmButton = ref('');
 let routeLogin = ref(null);
+let frontNoPhone = ref('+62');
 
 const loading = computed(()=>{
     return store.getters.getterStateLoading
@@ -199,10 +205,20 @@ let isOpenModal = computed(()=>{
 })
 
 function register(){
+    let joinPhone = '';
+    if(frontNoPhone.value === '+62'){
+        joinPhone = '081';
+    } else if(frontNoPhone.value === '+63'){
+        joinPhone = '082';
+    } else {
+        joinPhone = '083';
+    }
+    joinPhone = joinPhone.concat(phone.value);
+
     const payload={
         'name': name.value,
         'email': email.value,
-        'phone': phone.value,
+        'phone': joinPhone,
         'password': password.value,
         'confirm_password': confirm_password.value
     };
@@ -225,8 +241,12 @@ function isOpenModelClose($event){
     }
 }
 
+function keyInputNumber(event){
+    return event.target.value = event.target.value.replace(/[^0-9]/g, '');
+}
+
 function back(){
-    router.push('/login');
+    router.push('/login')
 }
 
 

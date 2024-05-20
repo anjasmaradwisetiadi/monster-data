@@ -382,11 +382,6 @@
                           @click="cancel()"
                           type="button" class="flex justify-center rounded-md mr-4 bg-red-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Cancel</button>
                     </div>
-                    <div>
-                        <button 
-                          @click="payload()"
-                          type="button" class="flex justify-center rounded-md mr-4 bg-red-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Payload</button>
-                    </div>
                 </div>
               </div>
             </div>

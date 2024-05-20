@@ -181,7 +181,7 @@
                               <tr 
                                 v-for="(dataBackupListServer, index) of getListBackupServer "
                                 :key="index"
-                                class="odd:bg-white even:bg-slate-50">
+                                class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
                                 <td
                                   class="border-b-2 border-l-0 text-center align-middle whitespace-nowrap p-4 text-left text-blueGray-700"
                                 >
@@ -215,6 +215,16 @@
                                             <span class="ml-2 text-base font-light"> Delete </span>
                                         </div>
                                     </div>
+                                </td>
+                              </tr>
+                              <tr
+                                v-if="!getListBackupServer?.length"
+                              >
+                              <td 
+                                  colspan="5"
+                                  class="border-b-2 border-l-0 text-center align-middle whitespace-nowrap p-4 text-left text-blueGray-700"
+                                >
+                                    Data not record
                                 </td>
                               </tr>
                             </tbody>
