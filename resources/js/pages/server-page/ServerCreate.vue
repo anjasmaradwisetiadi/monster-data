@@ -447,8 +447,10 @@
     return store.getters.getterResponseGeneral;
   })
 
+
   let isEdit = ref(false);
   let paramsUrl = ref('');
+  let responseGeneralCatch = ref(null);
 
   let scheduleName = ref('');
   let userId = ref('');
@@ -465,6 +467,10 @@
   let useCompression = ref(false);
   let useEncryption = ref(false);
   let backupSchedule = ref('');
+
+  watch(responseGeneral, async (newValue, oldValue)=>{
+    responseGeneralCatch= newValue;
+  })
 
   onMounted(()=>{
     decisionEditOrCreateRuler()
@@ -505,7 +511,11 @@
         // serverService.deleteServer(paramsSlug.value);
         console.log('goto dashboard edit');
     } else {
+
+      if(responseGeneralCatch?.status){
         console.log('goto dashboard create');
+        router.push('/schedule');
+      }
     }
   }
 

@@ -1490,7 +1490,6 @@ var serverService = {
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModalGlobal', messageCreate);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateNameModalButtonGlobal', 'Go to dashboard');
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModalGlobal', true);
-              _routes__WEBPACK_IMPORTED_MODULE_3__["default"].push('/schedule');
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
               reuseFunction.defaultHandlingError(error);

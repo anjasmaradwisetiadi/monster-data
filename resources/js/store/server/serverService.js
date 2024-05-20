@@ -64,8 +64,6 @@ export const serverService = {
             store.commit('mutateResponseModalGlobal', messageCreate);
             store.commit('mutateNameModalButtonGlobal', 'Go to dashboard');
             store.commit('mutateModalGlobal', true);
-
-            router.push('/schedule');
             store.state.loading = false;
         })
         .catch(function(error) {
@@ -144,6 +142,7 @@ export const serverService = {
             store.commit('mutateNameModalButtonGlobal', 'Go to dashboard');
             store.commit('mutateModalGlobal', true);
             router.push('/schedule');
+            
             store.state.loading = false;
         })
         .catch(function(error) {
