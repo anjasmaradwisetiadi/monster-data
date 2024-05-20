@@ -6,7 +6,7 @@ import {defaultWrongMessage} from '../../utilize/utilize'
 
 const urlBase = `${collectionUrl.baseUrlApi}`;
 
-export const serverService = {
+const reuseFunction ={
     resetModal(){
         store.commit('mutateResponseModalGlobal', null);
         store.commit('mutateNameModalButtonGlobal', 'Ok');
@@ -18,9 +18,11 @@ export const serverService = {
         store.commit('mutateResponseModalGlobal', defaultWrongMessage);
         store.commit('mutateModalGlobal', true)
     },
+}
+export const serverService = {
 
     async getListServer(){
-        this.resetModal();
+        reuseFunction.resetModal();
         const tokenAuth = store.getters.getterResponseAuth.token;
         store.state.loading = true;
         await axios({
@@ -35,7 +37,7 @@ export const serverService = {
             store.state.loading = false;
         })
         .catch(function(error) {
-            this.defaultHandlingError(error)
+            reuseFunction.defaultHandlingError(error)
             store.state.loading = false;
         })
     },
@@ -60,7 +62,7 @@ export const serverService = {
         })
     },
     async detailServer(slug){
-        this.resetModal();
+        reuseFunction.resetModal();
         const tokenAuth = store.getters.getterResponseAuth.token;
         store.state.loading = true;
         await axios({
@@ -75,7 +77,7 @@ export const serverService = {
             store.state.loading = false;
         })
         .catch(function(error) {
-            this.defaultHandlingError(error)
+            reuseFunction.defaultHandlingError(error)
             store.state.loading = false;
         })
     },
@@ -110,7 +112,7 @@ export const serverService = {
     },
 
     async deleteServer(slug){
-        this.resetModal();
+        reuseFunction.resetModal();
 
         const tokenAuth = store.getters.getterResponseAuth.token;
         store.state.loading = true;
@@ -134,7 +136,7 @@ export const serverService = {
             store.state.loading = false;
         })
         .catch(function(error) {
-            // this.defaultHandlingError(error);
+            // reuseFunction.defaultHandlingError(error);
             store.state.loading = false;
         })
     },
@@ -154,7 +156,7 @@ export const serverService = {
             store.state.loading = false;
         })
         .catch(function(error) {
-            this.defaultHandlingError(error);
+            reuseFunction.defaultHandlingError(error);
             store.state.loading = false;
         })
     },

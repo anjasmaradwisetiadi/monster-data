@@ -24129,8 +24129,6 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_5__.createStore)({
       state.modalGlobal = payload;
     },
     mutateResponseModalGlobal: function mutateResponseModalGlobal(state, payload) {
-      console.log('payload messageDelete = ');
-      console.log(payload);
       state.responseModalGlobal = payload;
     },
     mutateNameModalButtonGlobal: function mutateNameModalButtonGlobal(state, payload) {

@@ -56,8 +56,6 @@ const store = createStore({
             state.modalGlobal = payload;
         },
         mutateResponseModalGlobal(state, payload){
-            console.log('payload messageDelete = ');
-            console.log(payload);
             state.responseModalGlobal = payload 
         },
         mutateNameModalButtonGlobal(state, payload){

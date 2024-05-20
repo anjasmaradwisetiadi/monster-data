@@ -853,7 +853,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var urlBase = "".concat(_urlCollection__WEBPACK_IMPORTED_MODULE_0__.collectionUrl.baseUrlApi);
-var authService = {
+var reuseFunction = {
   resetModal: function resetModal() {
     _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', null);
     _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateNameModalButton', 'Ok');
@@ -863,15 +863,16 @@ var authService = {
     _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
     _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize_js__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
     _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
-  },
+  }
+};
+var authService = {
   register: function register(payload) {
-    var _this = this;
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
-            _this.resetModal();
+            reuseFunction.resetModal();
             _context.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
               method: 'post',
@@ -894,7 +895,7 @@ var authService = {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              this.defaultHandlingError(error);
+              reuseFunction.defaultHandlingError(error);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 4:
@@ -905,13 +906,12 @@ var authService = {
     }))();
   },
   login: function login(payload) {
-    var _this2 = this;
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
             _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
-            _this2.resetModal();
+            reuseFunction.resetModal();
             _context2.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
               method: 'post',
@@ -935,7 +935,7 @@ var authService = {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              this.defaultHandlingError(error);
+              reuseFunction.defaultHandlingError(error);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 4:
@@ -946,7 +946,7 @@ var authService = {
     }))();
   },
   confirmLogout: function confirmLogout() {
-    this.resetModal();
+    reuseFunction.resetModal();
     var messageLogin = {
       title: 'Logout confirm',
       message: 'Are you sure want logout ?'
@@ -956,14 +956,13 @@ var authService = {
     _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
   },
   logout: function logout(payload) {
-    var _this3 = this;
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
       var _localStorage;
       var tokenAuth;
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) switch (_context3.prev = _context3.next) {
           case 0:
-            _this3.resetModal();
+            reuseFunction.resetModal();
             tokenAuth = JSON.parse((_localStorage = localStorage) === null || _localStorage === void 0 ? void 0 : _localStorage.getItem('user'));
             _context3.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
@@ -985,7 +984,7 @@ var authService = {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              this.defaultHandlingError(error);
+              reuseFunction.defaultHandlingError(error);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 4:
@@ -1032,7 +1031,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var urlBase = "".concat(_urlCollection__WEBPACK_IMPORTED_MODULE_0__.collectionUrl.baseUrlApi);
-var serverService = {
+var reuseFunction = {
   resetModal: function resetModal() {
     _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModalGlobal', null);
     _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateNameModalButtonGlobal', 'Ok');
@@ -1042,15 +1041,16 @@ var serverService = {
     _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
     _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModalGlobal', _utilize_utilize__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
     _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModalGlobal', true);
-  },
+  }
+};
+var serverService = {
   getListServer: function getListServer() {
-    var _this = this;
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var tokenAuth;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            _this.resetModal();
+            reuseFunction.resetModal();
             tokenAuth = _index__WEBPACK_IMPORTED_MODULE_1__["default"].getters.getterResponseAuth.token;
             _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
             _context.next = 5;
@@ -1064,7 +1064,7 @@ var serverService = {
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateListServer', response.data);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              this.defaultHandlingError(error);
+              reuseFunction.defaultHandlingError(error);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 5:
@@ -1105,13 +1105,12 @@ var serverService = {
     }))();
   },
   detailServer: function detailServer(slug) {
-    var _this2 = this;
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
       var tokenAuth;
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) switch (_context3.prev = _context3.next) {
           case 0:
-            _this2.resetModal();
+            reuseFunction.resetModal();
             tokenAuth = _index__WEBPACK_IMPORTED_MODULE_1__["default"].getters.getterResponseAuth.token;
             _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
             _context3.next = 5;
@@ -1125,7 +1124,7 @@ var serverService = {
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateDetailServer', response.data);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              this.defaultHandlingError(error);
+              reuseFunction.defaultHandlingError(error);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 5:
@@ -1174,13 +1173,12 @@ var serverService = {
     _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModalGlobal', true);
   },
   deleteServer: function deleteServer(slug) {
-    var _this3 = this;
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
       var tokenAuth;
       return _regeneratorRuntime().wrap(function _callee5$(_context5) {
         while (1) switch (_context5.prev = _context5.next) {
           case 0:
-            _this3.resetModal();
+            reuseFunction.resetModal();
             tokenAuth = _index__WEBPACK_IMPORTED_MODULE_1__["default"].getters.getterResponseAuth.token;
             _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
             _context5.next = 5;
@@ -1202,7 +1200,7 @@ var serverService = {
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModalGlobal', true);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              // this.defaultHandlingError(error);
+              // reuseFunction.defaultHandlingError(error);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 5:
@@ -1231,7 +1229,7 @@ var serverService = {
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateListBackupServer', response.data);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              this.defaultHandlingError(error);
+              reuseFunction.defaultHandlingError(error);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 4:

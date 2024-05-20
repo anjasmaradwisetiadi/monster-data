@@ -6,8 +6,7 @@ import {defaultWrongMessage} from '../../utilize/utilize.js'
 
 const urlBase = `${collectionUrl.baseUrlApi}`;
 
-
-export const authService = {
+const reuseFunction ={
     resetModal(){
         store.commit('mutateResponseModal', null);
         store.commit('mutateNameModalButton', 'Ok');
@@ -20,9 +19,14 @@ export const authService = {
         store.commit('mutateModal', true)
     },
 
+} 
+
+export const authService = {
+
+
     async register(payload){
         store.state.loading = true;
-        this.resetModal();
+        reuseFunction.resetModal();
 
         await axios({
             method: 'post',
@@ -47,14 +51,14 @@ export const authService = {
             store.state.loading = false;
         })
         .catch(function(error) {
-          this.defaultHandlingError(error);
+          reuseFunction.defaultHandlingError(error);
           store.state.loading = false;
         })
     },
 
     async login(payload){
         store.state.loading = true;
-        this.resetModal();
+        reuseFunction.resetModal();
 
         await axios({
             method: 'post',
@@ -81,13 +85,13 @@ export const authService = {
             store.state.loading = false;
         })
         .catch(function(error) {
-          this.defaultHandlingError(error);
+          reuseFunction.defaultHandlingError(error);
           store.state.loading = false;
         })
     },
 
     confirmLogout(){
-        this.resetModal();
+        reuseFunction.resetModal();
 
         const messageLogin = {
             title: 'Logout confirm',
@@ -99,7 +103,7 @@ export const authService = {
     },
 
     async logout(payload){
-        this.resetModal();
+        reuseFunction.resetModal();
 
         const tokenAuth = JSON.parse(localStorage?.getItem('user'));
         await axios({
@@ -124,7 +128,7 @@ export const authService = {
             store.state.loading = false;
         })
         .catch(function(error) {
-          this.defaultHandlingError(error);
+          reuseFunction.defaultHandlingError(error);
           store.state.loading = false;
         })
     },
