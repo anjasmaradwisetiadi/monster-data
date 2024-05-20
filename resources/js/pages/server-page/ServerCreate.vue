@@ -71,7 +71,7 @@
                       id="countries"
                       class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
-                      <option selected>Choose a backup method</option>
+                      <option selected disabled>Choose a backup method</option>
                       <option value="full">Full</option>
                       <option value="incremental">Incremental</option>
                       <option value="separate">Separate</option>
@@ -91,7 +91,7 @@
                       id="countries"
                       class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
-                      <option selected>Choose a backup type</option>
+                      <option selected disabled>Choose a backup type</option>
                       <option value="file">File</option>
                       <option value="image">Image</option>
                       <option value="video">Video</option>
@@ -111,7 +111,7 @@
                       id="countries"
                       class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
-                      <option selected>Choose a retention policy type</option>
+                      <option selected disabled>Choose a retention policy type</option>
                       <option value="day"> 1 Day</option>
                       <option value="week">1 Week</option>
                       <option value="month">1 Month</option>
@@ -131,7 +131,7 @@
                       id="countries"
                       class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
-                      <option selected>Choose a backup schedule</option>
+                      <option selected disabled>Choose a backup schedule</option>
                       <option value="hourly">Hourly</option>
                       <option value="daily">Daily</option>
                       <option value="weekly">Weekly</option>
@@ -477,19 +477,19 @@
 
   watch(getEditServer, async (newValue, oldValue)=>{
     const getData = newValue.data;
-    scheduleName.value = getData.schedule_name
-    backupServer.value = getData.backup_server
-    backupMethod.value = getData.backup_method
-    backupType.value = getData.backup_type
-    enablePitr.value = getData.enable_pitr
-    backupDatabasePerFile.value = getData.backup_database_per_file
-    storageName.value = getData.storage_name
-    storageDirectory.value = getData.storage_directory
-    retentionPolicyType.value = getData.retention_policy_type
-    backupName.value = getData.backup_name
-    useCompression.value = getData.use_compression
-    useEncryption.value = getData.use_encryption
-    backupSchedule.value = getData.backup_schedule
+    scheduleName.value = getData.schedule_name;
+    backupServer.value = getData.backup_server;
+    backupMethod.value = getData.backup_method;
+    backupType.value = getData.backup_type;
+    enablePitr.value = getData.enable_pitr ? true: false;
+    backupDatabasePerFile.value = getData.backup_database_per_file ? true: false;
+    storageName.value = getData.storage_name;
+    storageDirectory.value = getData.storage_directory;
+    retentionPolicyType.value = getData.retention_policy_type;
+    backupName.value = getData.backup_name;
+    useCompression.value = getData.use_compression ? true: false;
+    useEncryption.value = getData.use_encryption ? true: false;
+    backupSchedule.value = getData.backup_schedule;
   })
 
 
@@ -507,10 +507,7 @@
   }
 
   function submit(){
-    const slugConvert = scheduleName.value.toLowerCase().replaceAll(' ', '-');
-    const payload = {
-      'schedule_name': scheduleName.value,
-      'slug': slugConvert,
+    let payload = {
       'backup_server':backupServer.value,
       'backup_method':backupMethod.value,
       'backup_type':backupType.value,
@@ -527,8 +524,19 @@
 
     store.commit('mutateConfirmModalGlobal', false);
     if(isEdit.value){
-      console.log('edit nih');
+      const addedPayload = {
+        '_method': 'PUT'
+      }
+      payload = {...payload, ...addedPayload}
+
+      serverService.updateServer(payload, paramsUrl.value)
     } else {
+      const slugConvert = scheduleName.value.toLowerCase().replaceAll(' ', '-');
+      const addedPayload = {
+        'schedule_name': scheduleName.value,
+        'slug': slugConvert,
+      }
+      payload = {...payload, ...addedPayload}
       serverService.createServer(payload)
     }
   }
@@ -536,14 +544,9 @@
   function isOpenModelCloseServer($event){
     store.commit('mutateModalGlobal', false)
     store.commit('mutateResponseModalGlobal', null)
-    if(isEdit.value){
-        // store.commit('mutateConfirmModalGlobal', false)
-        // serverService.deleteServer(paramsSlug.value);
-        console.log('goto dashboard edit');
-    } else {
-      if(responseGeneralCatch?.status){
+
+    if(responseGeneralCatch?.status){
         router.push('/schedule');
-      }
     }
   }
 

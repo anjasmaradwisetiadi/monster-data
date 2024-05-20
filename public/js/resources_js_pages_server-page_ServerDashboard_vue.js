@@ -1173,15 +1173,7 @@ var serverService = {
       }, _callee4);
     }))();
   },
-  confirmDelete: function confirmDelete() {
-    var messageDelete = {
-      title: 'Delete confirm',
-      message: 'Are you sure want delete ?'
-    };
-    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModalGlobal', messageDelete);
-    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModalGlobal', true);
-  },
-  deleteServer: function deleteServer(slug) {
+  updateServer: function updateServer(payload, slug) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
       var tokenAuth;
       return _regeneratorRuntime().wrap(function _callee5$(_context5) {
@@ -1191,6 +1183,52 @@ var serverService = {
             tokenAuth = _index__WEBPACK_IMPORTED_MODULE_1__["default"].getters.getterResponseAuth.token;
             _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
             _context5.next = 5;
+            return axios__WEBPACK_IMPORTED_MODULE_2___default()({
+              method: 'post',
+              url: "".concat(urlBase, "/schedule/").concat(slug),
+              data: payload,
+              headers: {
+                'Authorization': "Bearer ".concat(tokenAuth)
+              }
+            }).then(function (response) {
+              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsGeneral', response.data);
+              var messageUpdate = {
+                title: 'Successfull update server',
+                message: 'You will redirect to dashboard MonsterBackup'
+              };
+              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModalGlobal', messageUpdate);
+              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateNameModalButtonGlobal', 'Go to dashboard');
+              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModalGlobal', true);
+              return _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
+            })["catch"](function (error) {
+              reuseFunction.defaultHandlingError(error);
+              _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
+            });
+          case 5:
+          case "end":
+            return _context5.stop();
+        }
+      }, _callee5);
+    }))();
+  },
+  confirmDelete: function confirmDelete() {
+    var messageDelete = {
+      title: 'Delete confirm',
+      message: 'Are you sure want delete ?'
+    };
+    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModalGlobal', messageDelete);
+    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModalGlobal', true);
+  },
+  deleteServer: function deleteServer(slug) {
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+      var tokenAuth;
+      return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+        while (1) switch (_context6.prev = _context6.next) {
+          case 0:
+            reuseFunction.resetModal();
+            tokenAuth = _index__WEBPACK_IMPORTED_MODULE_1__["default"].getters.getterResponseAuth.token;
+            _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
+            _context6.next = 5;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
               method: 'delete',
               url: "".concat(urlBase, "/schedule/").concat(slug),
@@ -1213,20 +1251,20 @@ var serverService = {
             });
           case 5:
           case "end":
-            return _context5.stop();
+            return _context6.stop();
         }
-      }, _callee5);
+      }, _callee6);
     }))();
   },
   getListServerBackup: function getListServerBackup() {
-    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
       var tokenAuth;
-      return _regeneratorRuntime().wrap(function _callee6$(_context6) {
-        while (1) switch (_context6.prev = _context6.next) {
+      return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+        while (1) switch (_context7.prev = _context7.next) {
           case 0:
             tokenAuth = _index__WEBPACK_IMPORTED_MODULE_1__["default"].getters.getterResponseAuth.token;
             _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
-            _context6.next = 4;
+            _context7.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
               method: 'get',
               url: "".concat(urlBase, "/schedule-backup"),
@@ -1242,9 +1280,9 @@ var serverService = {
             });
           case 4:
           case "end":
-            return _context6.stop();
+            return _context7.stop();
         }
-      }, _callee6);
+      }, _callee7);
     }))();
   }
 };

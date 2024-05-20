@@ -114,6 +114,37 @@ export const serverService = {
         })
     },
 
+    async updateServer(payload, slug){
+        reuseFunction.resetModal();
+
+        const tokenAuth = store.getters.getterResponseAuth.token;
+        store.state.loading = true;
+        await axios({
+            method: 'post',
+            url: `${urlBase}/schedule/${slug}`,
+            data: payload,
+            headers:{
+              'Authorization': `Bearer ${tokenAuth}`
+            },
+        })
+        .then(function(response){
+            store.commit('mutateResponsGeneral', response.data); 
+
+            const messageUpdate = {
+                title: 'Successfull update server',
+                message: 'You will redirect to dashboard MonsterBackup'
+            }
+            store.commit('mutateResponseModalGlobal', messageUpdate);
+            store.commit('mutateNameModalButtonGlobal', 'Go to dashboard');
+            store.commit('mutateModalGlobal', true);
+            return store.state.loading = false;
+        })
+        .catch(function(error) {
+            reuseFunction.defaultHandlingError(error) ;
+            store.state.loading = false;
+        })
+    },
+
     confirmDelete(){
         const messageDelete = {
             title: 'Delete confirm',
