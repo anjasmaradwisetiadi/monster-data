@@ -133,7 +133,6 @@ const dummySpesificHeader = 'dashboard/detail';
 let paramsUrlSlug = ref('dashboard');
 let nameUser = ref('');
 let emailUser = ref('');
-let isConfirmModal = ref('');
 
 const state = reactive({
     paramsUrlSlug
@@ -161,6 +160,9 @@ let isOpenModal = computed(()=>{
     return store.getters.getterStateModal;
 })
 
+const isConfirmModal = computed(()=>{
+    return store.state.confirmModal
+  })
 
 onMounted(()=>{
     const paramsRoute = router.currentRoute.value.path;
@@ -175,7 +177,7 @@ onMounted(()=>{
 
 function logout(){
     authService.confirmLogout();
-    isConfirmModal.value = true;
+    store.commit('mutateConfirmModal', true)
 }
 
 function isOpenModelClose($event){
@@ -186,13 +188,13 @@ function isOpenModelClose($event){
         const payload={
             email: auth.email
         }
-        isConfirmModal.value = false;
+        store.commit('mutateConfirmModal', false)
         authService.logout(payload);
     }
 }
 
 function back(){
-    this.router.go(-1)
+    router.go(-1)
 }
 
 </script>

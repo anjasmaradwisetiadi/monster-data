@@ -769,6 +769,11 @@ var authService = {
     _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateNameModalButton', 'Ok');
     _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', false);
   },
+  defaultHandlingError: function defaultHandlingError(error) {
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize_js__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+  },
   register: function register(payload) {
     var _this = this;
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -799,9 +804,7 @@ var authService = {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize_js__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+              this.defaultHandlingError(error);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 4:
@@ -842,9 +845,7 @@ var authService = {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize_js__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+              this.defaultHandlingError(error);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 4:
@@ -894,9 +895,7 @@ var authService = {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize_js__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+              this.defaultHandlingError(error);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 4:

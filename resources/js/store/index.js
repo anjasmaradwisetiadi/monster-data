@@ -17,19 +17,33 @@ const store = createStore({
     state:{
         loading: false,
         error: '',
-        modal: false,
         responseGeneral: null,
+        modal: false,
+        // modal frame
         responseModal: null,
-        responseError: null,
         nameModalButton: 'Ok',
+        confirmModal: false,
+        responseError: null,
+        // modal Global
+        modalGlobal: false,
+        responseModalGlobal: null,
+        nameModalButtonGlobal: 'Ok',
+        confirmModalGlobal: false,
     },
 
     mutations:{
         mutateModal(state, payload){
             state.modal = payload;
         },
+        // modal frame
         mutateResponseModal(state, payload){
             state.responseModal = payload 
+        },
+        mutateNameModalButton(state, payload){
+            state.nameModalButton = payload 
+        },
+        mutateConfirmModal(state, payload){
+            state.confirmModal = payload  
         },
         muatateresponseGeneral(state, payload){
             state.responseGeneral = payload 
@@ -37,9 +51,21 @@ const store = createStore({
         mutateResponseError(state, payload){
             state.responseError = payload 
         },
-        mutateNameModalButton(state, payload){
-            state.nameModalButton = payload 
-        }
+        // modal Global
+        mutateModalGlobal(state, payload){
+            state.modalGlobal = payload;
+        },
+        mutateResponseModalGlobal(state, payload){
+            console.log('payload messageDelete = ');
+            console.log(payload);
+            state.responseModalGlobal = payload 
+        },
+        mutateNameModalButtonGlobal(state, payload){
+            state.nameModalButtonGlobal = payload 
+        },
+        mutateConfirmModalGlobal(state, payload){
+            state.confirmModalGlobal = payload  
+        },
     },
     actions:{
 
@@ -57,6 +83,7 @@ const store = createStore({
             return state.loading;
         },
 
+        // modal frame
         getterStateModal(state){
             return state.modal;
         },
@@ -69,6 +96,18 @@ const store = createStore({
             return state.responseModal;
         },
 
+        // modal Global
+        getterStateModalGlobal(state){
+            return state.modalGlobal;
+        },
+
+        getterNameModalButtonGlobal(state){
+            return state.nameModalButtonGlobal;
+        },
+
+        getterResponseModalGlobal(state){
+            return state.responseModalGlobal;
+        },
     }
 })
 

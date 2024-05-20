@@ -24091,18 +24091,32 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_5__.createStore)({
   state: {
     loading: false,
     error: '',
-    modal: false,
     responseGeneral: null,
+    modal: false,
+    // modal frame
     responseModal: null,
+    nameModalButton: 'Ok',
+    confirmModal: false,
     responseError: null,
-    nameModalButton: 'Ok'
+    // modal Global
+    modalGlobal: false,
+    responseModalGlobal: null,
+    nameModalButtonGlobal: 'Ok',
+    confirmModalGlobal: false
   },
   mutations: {
     mutateModal: function mutateModal(state, payload) {
       state.modal = payload;
     },
+    // modal frame
     mutateResponseModal: function mutateResponseModal(state, payload) {
       state.responseModal = payload;
+    },
+    mutateNameModalButton: function mutateNameModalButton(state, payload) {
+      state.nameModalButton = payload;
+    },
+    mutateConfirmModal: function mutateConfirmModal(state, payload) {
+      state.confirmModal = payload;
     },
     muatateresponseGeneral: function muatateresponseGeneral(state, payload) {
       state.responseGeneral = payload;
@@ -24110,8 +24124,20 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_5__.createStore)({
     mutateResponseError: function mutateResponseError(state, payload) {
       state.responseError = payload;
     },
-    mutateNameModalButton: function mutateNameModalButton(state, payload) {
-      state.nameModalButton = payload;
+    // modal Global
+    mutateModalGlobal: function mutateModalGlobal(state, payload) {
+      state.modalGlobal = payload;
+    },
+    mutateResponseModalGlobal: function mutateResponseModalGlobal(state, payload) {
+      console.log('payload messageDelete = ');
+      console.log(payload);
+      state.responseModalGlobal = payload;
+    },
+    mutateNameModalButtonGlobal: function mutateNameModalButtonGlobal(state, payload) {
+      state.nameModalButtonGlobal = payload;
+    },
+    mutateConfirmModalGlobal: function mutateConfirmModalGlobal(state, payload) {
+      state.confirmModalGlobal = payload;
     }
   },
   actions: {},
@@ -24126,6 +24152,7 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_5__.createStore)({
     getterStateLoading: function getterStateLoading(state) {
       return state.loading;
     },
+    // modal frame
     getterStateModal: function getterStateModal(state) {
       return state.modal;
     },
@@ -24134,6 +24161,16 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_5__.createStore)({
     },
     getterResponseModal: function getterResponseModal(state) {
       return state.responseModal;
+    },
+    // modal Global
+    getterStateModalGlobal: function getterStateModalGlobal(state) {
+      return state.modalGlobal;
+    },
+    getterNameModalButtonGlobal: function getterNameModalButtonGlobal(state) {
+      return state.nameModalButtonGlobal;
+    },
+    getterResponseModalGlobal: function getterResponseModalGlobal(state) {
+      return state.responseModalGlobal;
     }
   }
 });

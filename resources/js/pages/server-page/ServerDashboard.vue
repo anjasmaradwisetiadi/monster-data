@@ -59,8 +59,10 @@
                                             <img class="w-32" src="../../../assets/image/database.png" alt="image">
                                         </div>
                                         <div class="flex justify-center">
-                                            <button type="submit" class="flex w-4/5 justify-center rounded-md bg-green-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                                Schedule Detail
+                                            <button
+                                                @click="createSchedule" 
+                                                type="button" class="flex w-4/5 justify-center rounded-md bg-green-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                                Create Schedule 
                                             </button>
                                         </div>
                                     </div>
@@ -130,6 +132,10 @@ function isOpenModelClose($event){
 
 function scheduleDetail(slug){
     router.push(`/schedule/${slug}`);
+}
+
+function createSchedule(){
+    router.push(`/schedule/create`);
 }
 
 </script>

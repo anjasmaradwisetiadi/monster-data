@@ -25,7 +25,7 @@ class ServerController extends Controller
     {
         try{
             $results = $this->serverRepositories->serverListRepositories();
-            $message = 'Server get Successfull !!!';
+            $message = 'Server successfull get !!!';
             return $this->responseSuccess($results, $message);
         } catch(\Throwable $error){
             $message = "Data Not Found !!!";
@@ -63,7 +63,7 @@ class ServerController extends Controller
                 return $this->responseFail($message, $error, $code);
             } else {
                 $result = $this->serverRepositories->createServerRepositories($request);
-                $message = 'Server create successfull !!!';
+                $message = 'Server successfull create !!!';
                 return $this->responseSuccess($result, $message);
             }  
         } catch(\Throwable $error) {
@@ -84,7 +84,7 @@ class ServerController extends Controller
     {
         try {
             $result = $this->serverRepositories->serverDetailRepositories($id);
-            $message = 'Server get successfull !!!';
+            $message = 'Server successfull get it !!!';
             return $this->responseSuccess($result, $message);
         } catch(\Throwable $error) {
             $message = "Data Not Found !!!";
@@ -104,7 +104,7 @@ class ServerController extends Controller
     {
         try {
             $result = $this->serverRepositories->serverDetailRepositories($id);
-            $message = 'Server get successfull !!!';
+            $message = 'Server successfull get it !!!';
             return $this->responseSuccess($result, $message);
         } catch(\Throwable $error) {
             $message = "Data Not Found !!!";
@@ -133,7 +133,7 @@ class ServerController extends Controller
                 return $this->responseFail($message, $error, $code);
             } else {
                 $result = $this->serverRepositories->updateServerRepositories($request, $id);
-                $message = 'Server update successfull !!!';
+                $message = 'Server successfull update  !!!';
                 return $this->responseSuccess($result, $message);
             }  
         } catch(\Throwable $error) {
@@ -153,12 +153,12 @@ class ServerController extends Controller
     public function destroy($id)
     {
         try {
-            $data =$this->shoppingCartRepositories->destroyShoppingCartRepositories($id);
-            $result = 'Shopping Cart berhasil didelete !!!';
-            $message = 'Shopping Cart berhasil didelete !!!';
+            $data =$this->serverRepositories->destroyServerRepositories($id);
+            $result = 'Server successfull delete  !!!';
+            $message = 'Server successfull delete !!!';
             return $this->responseSuccess($result, $message);
         } catch  (\Throwable $error) {
-            $message = "Data tidak ditemukan !!!";
+            $message = "Unsuccessfull delete data !!!";
             $error = 'Bad Request !!!';
             $code = 400;
             return $this->responseFail($message, $error, $code);

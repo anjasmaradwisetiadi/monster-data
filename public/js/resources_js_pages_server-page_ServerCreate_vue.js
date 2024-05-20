@@ -32,7 +32,6 @@ var dummySpesificHeader = 'dashboard/detail';
     var paramsUrlSlug = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('dashboard');
     var nameUser = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
     var emailUser = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
-    var isConfirmModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
     var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       paramsUrlSlug: paramsUrlSlug
     });
@@ -55,6 +54,9 @@ var dummySpesificHeader = 'dashboard/detail';
     var isOpenModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       return store.getters.getterStateModal;
     });
+    var isConfirmModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return store.state.confirmModal;
+    });
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
       var paramsRoute = router.currentRoute.value.path;
       state.paramsUrlSlug = paramsRoute.replace('/', '');
@@ -65,7 +67,7 @@ var dummySpesificHeader = 'dashboard/detail';
     });
     function logout() {
       _store_auth_authService__WEBPACK_IMPORTED_MODULE_1__.authService.confirmLogout();
-      isConfirmModal.value = true;
+      store.commit('mutateConfirmModal', true);
     }
     function isOpenModelClose($event) {
       store.commit('mutateModal', false);
@@ -76,12 +78,12 @@ var dummySpesificHeader = 'dashboard/detail';
         var payload = {
           email: auth.email
         };
-        isConfirmModal.value = false;
+        store.commit('mutateConfirmModal', false);
         _store_auth_authService__WEBPACK_IMPORTED_MODULE_1__.authService.logout(payload);
       }
     }
     function back() {
-      this.router.go(-1);
+      router.go(-1);
     }
     var __returned__ = {
       store: store,
@@ -105,12 +107,6 @@ var dummySpesificHeader = 'dashboard/detail';
       set emailUser(v) {
         emailUser = v;
       },
-      get isConfirmModal() {
-        return isConfirmModal;
-      },
-      set isConfirmModal(v) {
-        isConfirmModal = v;
-      },
       state: state,
       loading: loading,
       responseAuth: responseAuth,
@@ -123,6 +119,7 @@ var dummySpesificHeader = 'dashboard/detail';
       set isOpenModal(v) {
         isOpenModal = v;
       },
+      isConfirmModal: isConfirmModal,
       logout: logout,
       isOpenModelClose: isOpenModelClose,
       back: back,
@@ -938,6 +935,11 @@ var authService = {
     _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateNameModalButton', 'Ok');
     _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', false);
   },
+  defaultHandlingError: function defaultHandlingError(error) {
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize_js__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+  },
   register: function register(payload) {
     var _this = this;
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -968,9 +970,7 @@ var authService = {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize_js__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+              this.defaultHandlingError(error);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 4:
@@ -1011,9 +1011,7 @@ var authService = {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize_js__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+              this.defaultHandlingError(error);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 4:
@@ -1063,9 +1061,7 @@ var authService = {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize_js__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+              this.defaultHandlingError(error);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 4:

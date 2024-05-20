@@ -32,7 +32,6 @@ var dummySpesificHeader = 'dashboard/detail';
     var paramsUrlSlug = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('dashboard');
     var nameUser = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
     var emailUser = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
-    var isConfirmModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
     var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       paramsUrlSlug: paramsUrlSlug
     });
@@ -55,6 +54,9 @@ var dummySpesificHeader = 'dashboard/detail';
     var isOpenModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       return store.getters.getterStateModal;
     });
+    var isConfirmModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return store.state.confirmModal;
+    });
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
       var paramsRoute = router.currentRoute.value.path;
       state.paramsUrlSlug = paramsRoute.replace('/', '');
@@ -65,7 +67,7 @@ var dummySpesificHeader = 'dashboard/detail';
     });
     function logout() {
       _store_auth_authService__WEBPACK_IMPORTED_MODULE_1__.authService.confirmLogout();
-      isConfirmModal.value = true;
+      store.commit('mutateConfirmModal', true);
     }
     function isOpenModelClose($event) {
       store.commit('mutateModal', false);
@@ -76,12 +78,12 @@ var dummySpesificHeader = 'dashboard/detail';
         var payload = {
           email: auth.email
         };
-        isConfirmModal.value = false;
+        store.commit('mutateConfirmModal', false);
         _store_auth_authService__WEBPACK_IMPORTED_MODULE_1__.authService.logout(payload);
       }
     }
     function back() {
-      this.router.go(-1);
+      router.go(-1);
     }
     var __returned__ = {
       store: store,
@@ -105,12 +107,6 @@ var dummySpesificHeader = 'dashboard/detail';
       set emailUser(v) {
         emailUser = v;
       },
-      get isConfirmModal() {
-        return isConfirmModal;
-      },
-      set isConfirmModal(v) {
-        isConfirmModal = v;
-      },
       state: state,
       loading: loading,
       responseAuth: responseAuth,
@@ -123,6 +119,7 @@ var dummySpesificHeader = 'dashboard/detail';
       set isOpenModal(v) {
         isOpenModal = v;
       },
+      isConfirmModal: isConfirmModal,
       logout: logout,
       isOpenModelClose: isOpenModelClose,
       back: back,
@@ -344,6 +341,9 @@ __webpack_require__.r(__webpack_exports__);
     function scheduleDetail(slug) {
       router.push("/schedule/".concat(slug));
     }
+    function createSchedule() {
+      router.push("/schedule/create");
+    }
     var __returned__ = {
       store: store,
       router: router,
@@ -354,6 +354,7 @@ __webpack_require__.r(__webpack_exports__);
       getListServers: getListServers,
       isOpenModelClose: isOpenModelClose,
       scheduleDetail: scheduleDetail,
+      createSchedule: createSchedule,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
       watch: vue__WEBPACK_IMPORTED_MODULE_0__.watch,
@@ -780,21 +781,12 @@ var _hoisted_24 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_25 = [_hoisted_24];
 var _hoisted_26 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "w-64 height-card"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "flex flex-col justify-center content-center height-card bg-teal-50"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "flex justify-center"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     "class": "w-32",
     src: _assets_image_database_png__WEBPACK_IMPORTED_MODULE_1__["default"],
     alt: "image"
-  })]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "flex justify-center"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    type: "submit",
-    "class": "flex w-4/5 justify-center rounded-md bg-green-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-  }, " Schedule Detail ")])])], -1 /* HOISTED */);
+  })], -1 /* HOISTED */);
 });
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["FrameServer"], null, {
@@ -811,7 +803,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           type: "button",
           "class": "flex w-4/5 justify-center rounded-md bg-blue-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         }, " Schedule Detail ", 8 /* PROPS */, _hoisted_21), _hoisted_22])]);
-      }), 128 /* KEYED_FRAGMENT */)), !((_$setup$getListServer = $setup.getListServers) !== null && _$setup$getListServer !== void 0 && _$setup$getListServer.length) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [].concat(_hoisted_25))) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_26]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" pagination "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Pagination"])])])])];
+      }), 128 /* KEYED_FRAGMENT */)), !((_$setup$getListServer = $setup.getListServers) !== null && _$setup$getListServer !== void 0 && _$setup$getListServer.length) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [].concat(_hoisted_25))) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+        "class": "w-64 height-card"
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+        "class": "flex flex-col justify-center content-center height-card bg-teal-50"
+      }, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+        "class": "flex justify-center"
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        onClick: $setup.createSchedule,
+        type: "button",
+        "class": "flex w-4/5 justify-center rounded-md bg-green-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      }, " Create Schedule ")])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" pagination "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Pagination"])])])])];
     }),
     _: 1 /* STABLE */
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LoadingAndAlert"], {
@@ -857,6 +859,11 @@ var authService = {
     _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateNameModalButton', 'Ok');
     _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', false);
   },
+  defaultHandlingError: function defaultHandlingError(error) {
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize_js__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
+    _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+  },
   register: function register(payload) {
     var _this = this;
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -887,9 +894,7 @@ var authService = {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize_js__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+              this.defaultHandlingError(error);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 4:
@@ -930,9 +935,7 @@ var authService = {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize_js__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+              this.defaultHandlingError(error);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 4:
@@ -982,9 +985,7 @@ var authService = {
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize_js__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
-              _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+              this.defaultHandlingError(error);
               _index_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 4:
@@ -1032,20 +1033,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var urlBase = "".concat(_urlCollection__WEBPACK_IMPORTED_MODULE_0__.collectionUrl.baseUrlApi);
 var serverService = {
+  resetModal: function resetModal() {
+    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModalGlobal', null);
+    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateNameModalButtonGlobal', 'Ok');
+    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModalGlobal', false);
+  },
   defaultHandlingError: function defaultHandlingError(error) {
     _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
-    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModal', _utilize_utilize__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
-    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModal', true);
+    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModalGlobal', _utilize_utilize__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
+    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModalGlobal', true);
   },
   getListServer: function getListServer() {
+    var _this = this;
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var tokenAuth;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
+            _this.resetModal();
             tokenAuth = _index__WEBPACK_IMPORTED_MODULE_1__["default"].getters.getterResponseAuth.token;
             _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
-            _context.next = 4;
+            _context.next = 5;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
               method: 'get',
               url: "".concat(urlBase, "/schedule"),
@@ -1059,7 +1067,7 @@ var serverService = {
               this.defaultHandlingError(error);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
-          case 4:
+          case 5:
           case "end":
             return _context.stop();
         }
@@ -1097,14 +1105,16 @@ var serverService = {
     }))();
   },
   detailServer: function detailServer(slug) {
+    var _this2 = this;
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
       var tokenAuth;
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) switch (_context3.prev = _context3.next) {
           case 0:
+            _this2.resetModal();
             tokenAuth = _index__WEBPACK_IMPORTED_MODULE_1__["default"].getters.getterResponseAuth.token;
             _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
-            _context3.next = 4;
+            _context3.next = 5;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
               method: 'get',
               url: "".concat(urlBase, "/schedule/").concat(slug),
@@ -1118,7 +1128,7 @@ var serverService = {
               this.defaultHandlingError(error);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
-          case 4:
+          case 5:
           case "end":
             return _context3.stop();
         }
@@ -1155,30 +1165,47 @@ var serverService = {
       }, _callee4);
     }))();
   },
-  deleteServer: function deleteServer() {
+  confirmDelete: function confirmDelete() {
+    var messageDelete = {
+      title: 'Delete confirm',
+      message: 'Are you sure want delete ?'
+    };
+    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModalGlobal', messageDelete);
+    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModalGlobal', true);
+  },
+  deleteServer: function deleteServer(slug) {
+    var _this3 = this;
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
       var tokenAuth;
       return _regeneratorRuntime().wrap(function _callee5$(_context5) {
         while (1) switch (_context5.prev = _context5.next) {
           case 0:
+            _this3.resetModal();
             tokenAuth = _index__WEBPACK_IMPORTED_MODULE_1__["default"].getters.getterResponseAuth.token;
             _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
-            _context5.next = 4;
+            _context5.next = 5;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
-              method: '',
-              url: "".concat(urlBase),
+              method: 'delete',
+              url: "".concat(urlBase, "/schedule/").concat(slug),
               headers: {
-                'Content-Type': "multipart/form-data",
                 'Authorization': "Bearer ".concat(tokenAuth)
               }
             }).then(function (response) {
               // store.commit('mutateListPlayStyle',response.data);
+              _routes__WEBPACK_IMPORTED_MODULE_3__["default"].push('/schedule');
+              var messageDelete = {
+                title: 'Delete Success',
+                message: 'You will redirect to dashboard MonsterBackup'
+              };
+              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModalGlobal', messageDelete);
+              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateNameModalButtonGlobal', 'Go to dashboard');
+              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModalGlobal', true);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              // store.commit('mutateResponsGeneral', error.message); 
+              // this.defaultHandlingError(error);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
-          case 4:
+          case 5:
           case "end":
             return _context5.stop();
         }
@@ -1201,8 +1228,6 @@ var serverService = {
                 'Authorization': "Bearer ".concat(tokenAuth)
               }
             }).then(function (response) {
-              console.log('getListServerBackup');
-              console.log(response.data.data.data);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateListBackupServer', response.data);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {

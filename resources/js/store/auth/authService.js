@@ -14,6 +14,12 @@ export const authService = {
         store.commit('mutateModal', false);
     },
 
+    defaultHandlingError(error){
+        store.commit('mutateResponseError', error.response.data.message); 
+        store.commit('mutateResponseModal', defaultWrongMessage);
+        store.commit('mutateModal', true)
+    },
+
     async register(payload){
         store.state.loading = true;
         this.resetModal();
@@ -41,9 +47,7 @@ export const authService = {
             store.state.loading = false;
         })
         .catch(function(error) {
-          store.commit('mutateResponseError', error.response.data.message); 
-          store.commit('mutateResponseModal', defaultWrongMessage);
-          store.commit('mutateModal', true);
+          this.defaultHandlingError(error);
           store.state.loading = false;
         })
     },
@@ -77,9 +81,7 @@ export const authService = {
             store.state.loading = false;
         })
         .catch(function(error) {
-          store.commit('mutateResponseError', error.response.data.message); 
-          store.commit('mutateResponseModal', defaultWrongMessage);
-          store.commit('mutateModal', true);
+          this.defaultHandlingError(error);
           store.state.loading = false;
         })
     },
@@ -122,9 +124,7 @@ export const authService = {
             store.state.loading = false;
         })
         .catch(function(error) {
-          store.commit('mutateResponseError', error.response.data.message); 
-          store.commit('mutateResponseModal', defaultWrongMessage);
-          store.commit('mutateModal', true);
+          this.defaultHandlingError(error);
           store.state.loading = false;
         })
     },

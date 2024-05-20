@@ -675,9 +675,6 @@ video {
 .h-screen {
   height: 100vh;
 }
-.h-2\/5 {
-  height: 40%;
-}
 .max-h-\[40px\] {
   max-height: 40px;
 }
@@ -865,9 +862,6 @@ video {
 }
 .self-center {
   align-self: center;
-}
-.overflow-auto {
-  overflow: auto;
 }
 .overflow-hidden {
   overflow: hidden;
@@ -1067,6 +1061,10 @@ video {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
+.py-24 {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -1078,14 +1076,6 @@ video {
 .py-6 {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
-}
-.px-24 {
-  padding-left: 6rem;
-  padding-right: 6rem;
-}
-.py-24 {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
 }
 .pl-12 {
   padding-left: 3rem;

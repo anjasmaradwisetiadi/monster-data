@@ -77,7 +77,7 @@
                   <div class="w-1/5 flex">
                     <div class="flex items-end">
                       <button
-                        type="submit"
+                        type="button"
                         class="flex justify-center rounded-md bg-green-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ml-3"
                       >
                         <span
@@ -90,7 +90,8 @@
                     </div>
                     <div class="flex items-end ml-2">
                       <button
-                        type="submit"
+                        @click="editServer(getDetailServers?.slug)"
+                        type="button"
                         class="flex justify-center rounded-md bg-blue-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ml-3"
                       >
                         <span
@@ -103,7 +104,8 @@
                     </div>
                     <div class="flex items-end ml-2">
                       <button
-                        type="submit"
+                        @click="deleteServer(getDetailServers?.slug)"
+                        type="button"
                         class="flex justify-center rounded-md bg-red-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ml-3"
                       >
                         <span
@@ -227,13 +229,15 @@
           </div>
         </template>
       </FrameServer>
-      <LoadingAndAlert 
+      <LoadingAndAlertGlobal 
         :loading="loading" 
-        :isOpenModal="isOpenModal"
-        :confirmButton="nameModalButton"  
-        @isOpenModelClose="isOpenModelClose"
-        :responseModal="responseModal"
-    ></LoadingAndAlert>
+        :isOpenModal="isOpenModalGlobal"
+        :confirmButton="nameModalButtonGlobal" 
+        :nameModal="nameModal" 
+        :isConfirmModal="isConfirmModalGlobal"  
+        @isOpenModelCloseGeneral="isOpenModelCloseServer"
+        :responseModal="responseModalGlobal" 
+    ></LoadingAndAlertGlobal>
     </div>
   </template>
   <script setup>
@@ -243,7 +247,7 @@ import { useRouter } from 'vue-router';
 
   import FrameServer from '../../components/FrameServer.vue';
   import Sidebar from '../../components/Sidebar.vue';
-  import LoadingAndAlert from '../../components/LoadingAndAlert.vue';
+  import LoadingAndAlertGlobal from '../../components/LoadingAndAlertGlobal.vue';
   import {serverService} from '../../store/server/serverService';
   import { dataDummyBackupListServer } from '../../../assets/data/dummyData'
 
@@ -254,13 +258,21 @@ import { useRouter } from 'vue-router';
     return store.getters.getterStateLoading
   })
 
-  const responseModal = computed (()=>{
-    return store.getters.getterResponseModal;
+  let isOpenModalGlobal = computed(()=>{
+    return store.getters.getterStateModalGlobal;
+})
+
+  const responseModalGlobal = computed (()=>{
+    return store.getters.getterResponseModalGlobal;
   })
 
-  const nameModalButton = computed(()=>{
-    return store.getters.getterNameModalButton;
+  const nameModalButtonGlobal = computed(()=>{
+    return store.getters.getterNameModalButtonGlobal;
   })
+
+  const isConfirmModalGlobal = computed(()=>{
+    return store.state.confirmModalGlobal
+  }) 
 
   const responseError = computed (()=>{
     return store.getters.getterResponseError;
@@ -274,13 +286,39 @@ import { useRouter } from 'vue-router';
     return store?.getters?.getterListBackupServer?.data?.data;
   })
 
+
+  const paramsSlug = ref('');
+  const nameModal = ref('modal_server');
+
   onMounted(()=>{
     const payloadSlug = router.currentRoute.value.params.slug;
+    paramsSlug.value = payloadSlug;
     serverService.detailServer(payloadSlug);
     serverService.getListServerBackup();
   })
 
+
   const dataBackupListServers = dataDummyBackupListServer.data;
+
+  function editServer(slug){
+    router.push(`/schedule/${slug}/edit`);
+  }
+
+  function deleteServer(slug){
+    store.commit('mutateConfirmModalGlobal', true)
+    serverService.confirmDelete();
+  }
+
+  function isOpenModelCloseServer($event){
+    store.commit('mutateModalGlobal', false)
+    store.commit('mutateResponseModalGlobal', null)
+    if($event.value){
+        store.commit('mutateConfirmModalGlobal', false)
+        serverService.deleteServer(paramsSlug.value);
+    }
+}
+
+
 
   </script>
   
