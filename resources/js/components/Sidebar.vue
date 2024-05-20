@@ -16,7 +16,7 @@
                       </a>
                   </li>
                   <li class="mb-1 group">
-                      <a href="" class="flex font-semibold px-4 items-center py-2 text-blue-primary hover:bg-gray-300 rounded-md active">
+                      <a href="/schedule" class="flex font-semibold px-4 items-center py-2 text-blue-primary hover:bg-gray-300 rounded-md active">
                           <span class="material-icons text-blue-primary" style="font-size: 24px"> timer </span>
                           <span class="text-lg pl-2 text-blue-primary">Schedule</span>
                       </a>

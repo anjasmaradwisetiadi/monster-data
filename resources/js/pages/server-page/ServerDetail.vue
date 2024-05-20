@@ -242,8 +242,8 @@
   </template>
   <script setup>
   import { ref, reactive, watch, computed, onMounted, onBeforeMount } from 'vue';
-import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
+  import { useStore } from 'vuex';
+  import { useRouter } from 'vue-router';
 
   import FrameServer from '../../components/FrameServer.vue';
   import Sidebar from '../../components/Sidebar.vue';
@@ -260,7 +260,7 @@ import { useRouter } from 'vue-router';
 
   let isOpenModalGlobal = computed(()=>{
     return store.getters.getterStateModalGlobal;
-})
+  })
 
   const responseModalGlobal = computed (()=>{
     return store.getters.getterResponseModalGlobal;
@@ -315,7 +315,7 @@ import { useRouter } from 'vue-router';
     if($event.value){
         store.commit('mutateConfirmModalGlobal', false)
         serverService.deleteServer(paramsSlug.value);
-    }
+  }
 }
 
 

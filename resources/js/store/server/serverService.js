@@ -42,22 +42,34 @@ export const serverService = {
         })
     },
     async createServer(payload){
+        reuseFunction.resetModal();
+
         const tokenAuth = store.getters.getterResponseAuth.token;
         store.state.loading = true;
         await axios({
-            method: '',
-            url: `${urlBase}`,
+            method: 'post',
+            url: `${urlBase}/schedule`,
+            data: payload,
             headers:{
-              'Content-Type': "multipart/form-data",
               'Authorization': `Bearer ${tokenAuth}`
             },
         })
         .then(function(response){
-            // store.commit('mutateListPlayStyle',response.data);
+            store.commit('mutateResponsGeneral', response.data); 
+
+            const messageCreate = {
+                title: 'Successfull create server',
+                message: 'You will redirect to dashboard MonsterBackup'
+            }
+            store.commit('mutateResponseModalGlobal', messageCreate);
+            store.commit('mutateNameModalButtonGlobal', 'Go to dashboard');
+            store.commit('mutateModalGlobal', true);
+
+            router.push('/schedule');
             store.state.loading = false;
         })
         .catch(function(error) {
-            // store.commit('mutateResponsGeneral', error.message); 
+            reuseFunction.defaultHandlingError(error)
             store.state.loading = false;
         })
     },
@@ -124,8 +136,6 @@ export const serverService = {
             },
         })
         .then(function(response){
-            // store.commit('mutateListPlayStyle',response.data);
-            router.push('/schedule');
             const messageDelete = {
                 title: 'Delete Success',
                 message: 'You will redirect to dashboard MonsterBackup'
@@ -133,10 +143,11 @@ export const serverService = {
             store.commit('mutateResponseModalGlobal', messageDelete);
             store.commit('mutateNameModalButtonGlobal', 'Go to dashboard');
             store.commit('mutateModalGlobal', true);
+            router.push('/schedule');
             store.state.loading = false;
         })
         .catch(function(error) {
-            // reuseFunction.defaultHandlingError(error);
+            reuseFunction.defaultHandlingError(error);
             store.state.loading = false;
         })
     },

@@ -23,7 +23,6 @@ const reuseFunction ={
 
 export const authService = {
 
-
     async register(payload){
         store.state.loading = true;
         reuseFunction.resetModal();

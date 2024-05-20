@@ -1470,24 +1470,33 @@ var serverService = {
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
+            reuseFunction.resetModal();
             tokenAuth = _index__WEBPACK_IMPORTED_MODULE_1__["default"].getters.getterResponseAuth.token;
             _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
-            _context2.next = 4;
+            _context2.next = 5;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
-              method: '',
-              url: "".concat(urlBase),
+              method: 'post',
+              url: "".concat(urlBase, "/schedule"),
+              data: payload,
               headers: {
-                'Content-Type': "multipart/form-data",
                 'Authorization': "Bearer ".concat(tokenAuth)
               }
             }).then(function (response) {
-              // store.commit('mutateListPlayStyle',response.data);
+              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponsGeneral', response.data);
+              var messageCreate = {
+                title: 'Successfull create server',
+                message: 'You will redirect to dashboard MonsterBackup'
+              };
+              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModalGlobal', messageCreate);
+              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateNameModalButtonGlobal', 'Go to dashboard');
+              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModalGlobal', true);
+              _routes__WEBPACK_IMPORTED_MODULE_3__["default"].push('/schedule');
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              // store.commit('mutateResponsGeneral', error.message); 
+              reuseFunction.defaultHandlingError(error);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
-          case 4:
+          case 5:
           case "end":
             return _context2.stop();
         }
@@ -1579,8 +1588,6 @@ var serverService = {
                 'Authorization': "Bearer ".concat(tokenAuth)
               }
             }).then(function (response) {
-              // store.commit('mutateListPlayStyle',response.data);
-              _routes__WEBPACK_IMPORTED_MODULE_3__["default"].push('/schedule');
               var messageDelete = {
                 title: 'Delete Success',
                 message: 'You will redirect to dashboard MonsterBackup'
@@ -1588,9 +1595,10 @@ var serverService = {
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModalGlobal', messageDelete);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateNameModalButtonGlobal', 'Go to dashboard');
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModalGlobal', true);
+              _routes__WEBPACK_IMPORTED_MODULE_3__["default"].push('/schedule');
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              // reuseFunction.defaultHandlingError(error);
+              reuseFunction.defaultHandlingError(error);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
           case 5:

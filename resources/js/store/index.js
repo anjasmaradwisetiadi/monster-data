@@ -35,6 +35,7 @@ const store = createStore({
         mutateModal(state, payload){
             state.modal = payload;
         },
+        
         // modal frame
         mutateResponseModal(state, payload){
             state.responseModal = payload 
@@ -45,7 +46,7 @@ const store = createStore({
         mutateConfirmModal(state, payload){
             state.confirmModal = payload  
         },
-        muatateresponseGeneral(state, payload){
+        mutateResponsGeneral(state, payload){
             state.responseGeneral = payload 
         },
         mutateResponseError(state, payload){

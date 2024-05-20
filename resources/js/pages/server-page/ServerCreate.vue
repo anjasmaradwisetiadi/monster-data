@@ -22,6 +22,7 @@
                       Schedule Name</label
                     >
                     <input
+                      v-model="scheduleName"
                       id="name"
                       name="name"
                       autocomplete="username"
@@ -40,6 +41,7 @@
                       Backup Server</label
                     >
                     <input
+                      v-model="backupServer"
                       id="backup-server"
                       name="backup-server"
                       autocomplete="username"
@@ -60,6 +62,7 @@
                       >Backup Method</label
                     >
                     <select
+                      v-model="backupMethod"
                       id="countries"
                       class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
@@ -77,6 +80,7 @@
                       >Backup Type
                     </label>
                     <select
+                      v-model="backupType"
                       id="countries"
                       class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
@@ -94,6 +98,7 @@
                       >Retention Policy Type</label
                     >
                     <select
+                      v-model="retentionPolicyType"
                       id="countries"
                       class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
@@ -111,6 +116,7 @@
                       >Backup Schedule</label
                     >
                     <select
+                      v-model="backupSchedule"
                       id="countries"
                       class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
@@ -133,6 +139,7 @@
                             data-ripple-dark="true"
                         >
                             <input
+                                v-model="enablePitr"
                                 id="ripple-on"
                                 type="checkbox"
                                 class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-blue-primary checked:bg-blue-primary checked:before:bg-blue-primary hover:before:opacity-10"
@@ -172,6 +179,7 @@
                             data-ripple-dark="true"
                         >
                             <input
+                                v-model="backupDatabasePerFile"
                                 id="ripple-on"
                                 type="checkbox"
                                 class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-blue-primary checked:bg-blue-primary checked:before:bg-blue-primary hover:before:opacity-10"
@@ -211,6 +219,7 @@
                             data-ripple-dark="true"
                         >
                             <input
+                                v-model="useCompression"
                                 id="ripple-on"
                                 type="checkbox"
                                 class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-blue-primary checked:bg-blue-primary checked:before:bg-blue-primary hover:before:opacity-10"
@@ -250,6 +259,7 @@
                             data-ripple-dark="true"
                         >
                             <input
+                                v-model="useEncryption"
                                 id="ripple-on"
                                 type="checkbox"
                                 class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-blue-primary checked:bg-blue-primary checked:before:bg-blue-primary hover:before:opacity-10"
@@ -291,6 +301,7 @@
                             Storage Name
                         </label>
                         <input
+                            v-model="storageName"
                             id="storage-name"
                             name="storage-name"
                             autocomplete="storage-name"
@@ -309,6 +320,7 @@
                             Storage Directory
                         </label>
                         <input
+                            v-model="storageDirectory"
                             id="storage-directory"
                             name="storage-directory"
                             autocomplete="storage-directory"
@@ -327,6 +339,7 @@
                             Backup Name
                         </label>
                         <input
+                            v-model="backupName"
                             id="backup-name"
                             name="backup-name"
                             autocomplete="backup-name"
@@ -340,11 +353,20 @@
                 </div>
                 <div class="flex flex-row-reverse mt-6 px-4">
                     <div>
-                        <button type="submit" class="flex justify-center rounded-md bg-blue-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
+                        <button 
+                          @click="submit()"
+                          type="button" class="flex justify-center rounded-md bg-blue-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
                     </div>
 
                     <div>
-                        <button type="submit" class="flex justify-center rounded-md mr-4 bg-red-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Cancel</button>
+                        <button 
+                          @click="cancel()"
+                          type="button" class="flex justify-center rounded-md mr-4 bg-red-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Cancel</button>
+                    </div>
+                    <div>
+                        <button 
+                          @click="payload()"
+                          type="button" class="flex justify-center rounded-md mr-4 bg-red-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Payload</button>
                     </div>
                 </div>
               </div>
@@ -352,12 +374,154 @@
           </div>
         </template>
       </FrameServer>
+      <LoadingAndAlertGlobal 
+          :loading="loading" 
+          :isOpenModal="isOpenModalGlobal"
+          :confirmButton="nameModalButtonGlobal" 
+          :nameModal="nameModal" 
+          :isConfirmModal="isConfirmModalGlobal"  
+          @isOpenModelCloseGeneral="isOpenModelCloseServer"
+          :responseModal="responseModalGlobal" 
+      ></LoadingAndAlertGlobal>
     </div>
   </template>
   <script setup>
+  import { ref, reactive, watch, computed, onMounted, onBeforeMount } from 'vue';
+  import { useStore } from 'vuex';
+  import { useRouter } from 'vue-router';
+
   import FrameServer from '../../components/FrameServer.vue';
   import Sidebar from '../../components/Sidebar.vue';
   import Pagination from '../../components/Pagination.vue';
+  import {serverService} from '../../store/server/serverService';
+  import LoadingAndAlertGlobal from '../../components/LoadingAndAlertGlobal.vue';
+
+  const store = useStore();
+  const router = useRouter(); 
+  
+  const loading = computed(()=>{
+    return store.getters.getterStateLoading
+  })
+
+  let isOpenModalGlobal = computed(()=>{
+    console.log("store.getters.getterStateModalGlobal = ");
+    console.log(store.getters.getterStateModalGlobal);
+    return store.getters.getterStateModalGlobal;
+  })
+
+  const responseModalGlobal = computed (()=>{
+    return store.getters.getterResponseModalGlobal;
+  })
+
+  const nameModalButtonGlobal = computed(()=>{
+    return store.getters.getterNameModalButtonGlobal;
+  })
+
+  const isConfirmModalGlobal = computed(()=>{
+    return store.state.confirmModalGlobal
+  }) 
+
+  const responseError = computed (()=>{
+    return store.getters.getterResponseError;
+  })
+
+  const responseGeneral = computed (()=>{
+    return store.getters.getterResponseGeneral;
+  })
+
+  let isEdit = ref(false);
+  let paramsUrl = ref('');
+
+  let scheduleName = ref('');
+  let userId = ref('');
+  let slug = ref('');
+  let backupServer = ref('');
+  let backupMethod = ref('');
+  let backupType = ref('');
+  let enablePitr = ref(false);
+  let backupDatabasePerFile = ref(false);
+  let storageName = ref('');
+  let storageDirectory = ref('');
+  let retentionPolicyType = ref('');
+  let backupName = ref('');
+  let useCompression = ref(false);
+  let useEncryption = ref(false);
+  let backupSchedule = ref('');
+
+  onMounted(()=>{
+    decisionEditOrCreateRuler()
+  })
+
+  function submit(){
+    const slugConvert = scheduleName.value.toLowerCase().replaceAll(' ', '-');
+    const payload = {
+      'schedule_name': scheduleName.value,
+      'slug': slugConvert,
+      'backup_server':backupServer.value,
+      'backup_method':backupMethod.value,
+      'backup_type':backupType.value,
+      'enable_pitr':enablePitr.value,
+      'backup_database_per_file':backupDatabasePerFile.value,
+      'storage_name':storageName.value,
+      'storage_directory':storageDirectory.value,
+      'retention_policy_type':retentionPolicyType.value,
+      'backup_name':backupName.value,
+      'use_compression':useCompression.value,
+      'use_encryption':useEncryption.value,
+      'backup_schedule':backupSchedule.value
+    }
+
+    store.commit('mutateConfirmModalGlobal', false);
+    if(isEdit.value){
+      console.log('edit nih');
+    } else {
+      serverService.createServer(payload)
+    }
+  }
+  
+  function isOpenModelCloseServer($event){
+    store.commit('mutateModalGlobal', false)
+    store.commit('mutateResponseModalGlobal', null)
+    if(isEdit.value){
+        // store.commit('mutateConfirmModalGlobal', false)
+        // serverService.deleteServer(paramsSlug.value);
+        console.log('goto dashboard edit');
+    } else {
+        console.log('goto dashboard create');
+    }
+  }
+
+  function cancel(){
+    router.go(-1);
+  }
+
+  function decisionEditOrCreateRuler(){
+    const payload = router.currentRoute.value.params.slug
+    paramsUrl.value = payload;
+    if(payload){
+        isEdit.value = true;
+        // playStyleDeckService.getEditPlayStyle(payload);
+    } 
+  }
+
+
+  function payload(){
+    scheduleName.value = 'Postgres Backup 6';
+    backupServer.value = 'Server: n1 (11.12.1.2)';
+    backupMethod.value = 'full';
+    backupType.value = 'file';
+    enablePitr.value = true;
+    backupDatabasePerFile.value  = true;
+    storageName.value = 'local storage';
+    storageDirectory.value = 'public';
+    retentionPolicyType.value = 'week';
+    backupName.value = 'PC - XXXX';
+    useCompression.value = false;
+    useEncryption.value = true;
+    backupSchedule.value = 'daily';
+  }
+
+
   </script>
   
   <style scoped>
