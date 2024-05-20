@@ -14,7 +14,7 @@ const reuseFunction ={
     },
 
     defaultHandlingError(error){
-        store.commit('mutateResponseError', error.response.data.message); 
+        store.commit('mutateResponseError', error?.response?.data?.message); 
         store.commit('mutateResponseModalGlobal', defaultWrongMessage);
         store.commit('mutateModalGlobal', true)
     },
@@ -91,23 +91,25 @@ export const serverService = {
             store.state.loading = false;
         })
     },
-    async getEditServer(){
+    async getEditServer(payload){
+        reuseFunction.resetModal();
+
         const tokenAuth = store.getters.getterResponseAuth.token;
         store.state.loading = true;
         await axios({
-            method: '',
-            url: `${urlBase}`,
+            method: 'get',
+            url: `${urlBase}/schedule/${payload}`,
             headers:{
-              'Content-Type': "multipart/form-data",
               'Authorization': `Bearer ${tokenAuth}`
             },
         })
         .then(function(response){
-            // store.commit('mutateListPlayStyle',response.data);
-            store.state.loading = false;
+            store.commit('mutateGetEditServer', response.data);
+
+            return store.state.loading = false;
         })
         .catch(function(error) {
-            // store.commit('mutateResponsGeneral', error.message); 
+            reuseFunction.defaultHandlingError(error) ;
             store.state.loading = false;
         })
     },

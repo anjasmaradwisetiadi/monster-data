@@ -1428,7 +1428,8 @@ var reuseFunction = {
     _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModalGlobal', false);
   },
   defaultHandlingError: function defaultHandlingError(error) {
-    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error.response.data.message);
+    var _error$response;
+    _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseError', error === null || error === void 0 || (_error$response = error.response) === null || _error$response === void 0 || (_error$response = _error$response.data) === null || _error$response === void 0 ? void 0 : _error$response.message);
     _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateResponseModalGlobal', _utilize_utilize__WEBPACK_IMPORTED_MODULE_4__.defaultWrongMessage);
     _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateModalGlobal', true);
   }
@@ -1532,30 +1533,30 @@ var serverService = {
       }, _callee3);
     }))();
   },
-  getEditServer: function getEditServer() {
+  getEditServer: function getEditServer(payload) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
       var tokenAuth;
       return _regeneratorRuntime().wrap(function _callee4$(_context4) {
         while (1) switch (_context4.prev = _context4.next) {
           case 0:
+            reuseFunction.resetModal();
             tokenAuth = _index__WEBPACK_IMPORTED_MODULE_1__["default"].getters.getterResponseAuth.token;
             _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
-            _context4.next = 4;
+            _context4.next = 5;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
-              method: '',
-              url: "".concat(urlBase),
+              method: 'get',
+              url: "".concat(urlBase, "/schedule/").concat(payload),
               headers: {
-                'Content-Type': "multipart/form-data",
                 'Authorization': "Bearer ".concat(tokenAuth)
               }
             }).then(function (response) {
-              // store.commit('mutateListPlayStyle',response.data);
-              _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
+              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateGetEditServer', response.data);
+              return _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             })["catch"](function (error) {
-              // store.commit('mutateResponsGeneral', error.message); 
+              reuseFunction.defaultHandlingError(error);
               _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
             });
-          case 4:
+          case 5:
           case "end":
             return _context4.stop();
         }

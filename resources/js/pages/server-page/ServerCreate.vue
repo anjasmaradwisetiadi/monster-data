@@ -10,7 +10,7 @@
               <div class="mt-8 py-6 px-4 mx-4 flex flex-col bg-slate-50 shadow-md rounded-md">
                 <div class="flex justify-center mb-10">
                     <h2 class="text-3xl font-bold text-blue-primary">
-                        Create Form Schedule
+                         {{isEdit ? 'Edit Form Schedule' : 'Create Form Schedule'}}
                     </h2>
                 </div>
                 <div class="flex flex-row">
@@ -30,6 +30,7 @@
                       required
                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]"
                       placeholder="Schedule Name"
+                      :disabled="isEdit"
                     />
                     <p
                       v-if="responseError?.schedule_name" 
@@ -422,8 +423,6 @@
   })
 
   let isOpenModalGlobal = computed(()=>{
-    console.log("store.getters.getterStateModalGlobal = ");
-    console.log(store.getters.getterStateModalGlobal);
     return store.getters.getterStateModalGlobal;
   })
 
@@ -445,6 +444,10 @@
 
   const responseGeneral = computed (()=>{
     return store.getters.getterResponseGeneral;
+  })
+
+  const getEditServer = computed (()=>{
+    return store.getters.getterEditServer;
   })
 
 
@@ -472,9 +475,36 @@
     responseGeneralCatch= newValue;
   })
 
+  watch(getEditServer, async (newValue, oldValue)=>{
+    const getData = newValue.data;
+    scheduleName.value = getData.schedule_name
+    backupServer.value = getData.backup_server
+    backupMethod.value = getData.backup_method
+    backupType.value = getData.backup_type
+    enablePitr.value = getData.enable_pitr
+    backupDatabasePerFile.value = getData.backup_database_per_file
+    storageName.value = getData.storage_name
+    storageDirectory.value = getData.storage_directory
+    retentionPolicyType.value = getData.retention_policy_type
+    backupName.value = getData.backup_name
+    useCompression.value = getData.use_compression
+    useEncryption.value = getData.use_encryption
+    backupSchedule.value = getData.backup_schedule
+  })
+
+
   onMounted(()=>{
     decisionEditOrCreateRuler()
   })
+
+  function decisionEditOrCreateRuler(){
+    const payload = router.currentRoute.value.params.slug
+    paramsUrl.value = payload;
+    if(payload){
+        isEdit.value = true;
+        serverService.getEditServer(paramsUrl.value);
+    } 
+  }
 
   function submit(){
     const slugConvert = scheduleName.value.toLowerCase().replaceAll(' ', '-');
@@ -511,9 +541,7 @@
         // serverService.deleteServer(paramsSlug.value);
         console.log('goto dashboard edit');
     } else {
-
       if(responseGeneralCatch?.status){
-        console.log('goto dashboard create');
         router.push('/schedule');
       }
     }
@@ -522,16 +550,6 @@
   function cancel(){
     router.go(-1);
   }
-
-  function decisionEditOrCreateRuler(){
-    const payload = router.currentRoute.value.params.slug
-    paramsUrl.value = payload;
-    if(payload){
-        isEdit.value = true;
-        // playStyleDeckService.getEditPlayStyle(payload);
-    } 
-  }
-
 
   function payload(){
     scheduleName.value = 'Postgres Backup 6';
