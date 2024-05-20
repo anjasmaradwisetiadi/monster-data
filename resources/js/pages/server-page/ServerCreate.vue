@@ -31,7 +31,9 @@
                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]"
                       placeholder="Schedule Name"
                     />
-                    <p class="text-red-500 text-xs italic">Please fill schedule name</p>
+                    <p
+                      v-if="responseError?.schedule_name" 
+                      class="text-red-500 text-xs italic">{{responseError?.schedule_name[0]}}</p>
                   </div>
                   <div class="w-1/2 px-4">
                     <label
@@ -50,7 +52,9 @@
                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]"
                       placeholder="Backup Server"
                     />
-                    <p class="text-red-500 text-xs italic">Please fill backup server</p>
+                    <p 
+                      v-if="responseError?.backup_server" 
+                      class="text-red-500 text-xs italic">{{responseError?.backup_server[0]}}</p>
                   </div>
                 </div>
                 <!-- form option dropdown -->
@@ -71,7 +75,9 @@
                       <option value="incremental">Incremental</option>
                       <option value="separate">Separate</option>
                     </select>
-                    <p class="text-red-500 text-xs italic">Please fill backup method</p>
+                    <p 
+                      v-if="responseError?.backup_method" 
+                      class="text-red-500 text-xs italic">{{ responseError?.backup_method[0] }}</p>
                   </div>
                   <div class="w-1/4 px-4">
                     <label
@@ -89,7 +95,9 @@
                       <option value="image">Image</option>
                       <option value="video">Video</option>
                     </select>
-                    <p class="text-red-500 text-xs italic">Please fill backup type</p>
+                    <p
+                      v-if="responseError?.backup_type" 
+                      class="text-red-500 text-xs italic">{{ responseError?.backup_type[0] }}</p>
                   </div>
                   <div class="w-1/4 px-4">
                     <label
@@ -107,7 +115,9 @@
                       <option value="week">1 Week</option>
                       <option value="month">1 Month</option>
                     </select>
-                    <p class="text-red-500 text-xs italic">Please fill retention policy type</p>
+                    <p
+                      v-if="responseError?.retention_policy_type" 
+                      class="text-red-500 text-xs italic">{{ responseError?.retention_policy_type[0] }}</p>
                   </div>
                   <div class="w-1/4 px-4">
                     <label
@@ -126,7 +136,9 @@
                       <option value="weekly">Weekly</option>
                       <option value="monthly">Monthly</option>
                     </select>
-                    <p class="text-red-500 text-xs italic">Please fill backup schedule</p>
+                    <p 
+                      v-if="responseError?.backup_schedule" 
+                      class="text-red-500 text-xs italic">{{ responseError?.backup_schedule[0] }}</p>
                   </div>
                 </div>
                 <!-- form checked -->
@@ -310,7 +322,9 @@
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]"
                             placeholder="Storage Name"
                         />
-                        <p class="text-red-500 text-xs italic">Please fill storage name</p>
+                        <p 
+                          v-if="responseError?.storage_name" 
+                          class="text-red-500 text-xs italic">{{responseError?.storage_name[0]}}</p>
                     </div>
                     <div class="w-1/3 px-4">
                         <label
@@ -329,7 +343,9 @@
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]"
                             placeholder="Storage Directory"
                         />
-                        <p class="text-red-500 text-xs italic">Please fill storage directory</p>
+                        <p 
+                          v-if="responseError?.storage_directory" 
+                          class="text-red-500 text-xs italic">{{responseError?.storage_directory[0]}}</p>
                     </div>
                     <div class="w-1/3 px-4">
                         <label
@@ -348,7 +364,9 @@
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-[8px]"
                             placeholder="Backup Name"
                         />
-                        <p class="text-red-500 text-xs italic">Please fill backup name</p>
+                        <p
+                          v-if="responseError?.backup_name" 
+                          class="text-red-500 text-xs italic">{{responseError?.backup_name[0]}}</p>
                     </div>
                 </div>
                 <div class="flex flex-row-reverse mt-6 px-4">
