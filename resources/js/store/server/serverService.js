@@ -184,6 +184,27 @@ export const serverService = {
         })
     },
 
+    async getListServerByPage(page){
+        reuseFunction.resetModal();
+        const tokenAuth = store.getters.getterResponseAuth.token;
+        store.state.loading = true;
+        await axios({
+            method: 'get',
+            url: `${urlBase}/schedule?page=${page}`,
+            headers:{
+              'Authorization': `Bearer ${tokenAuth}`
+            },
+        })
+        .then(function(response){
+            store.commit('mutateListServer',response.data);
+            store.state.loading = false;
+        })
+        .catch(function(error) {
+            reuseFunction.defaultHandlingError(error)
+            store.state.loading = false;
+        })
+    },
+
     async getListServerBackup(){
         const tokenAuth = store.getters.getterResponseAuth.token;
         store.state.loading = true;

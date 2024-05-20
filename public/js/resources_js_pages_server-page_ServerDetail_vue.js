@@ -1656,15 +1656,45 @@ var serverService = {
       }, _callee6);
     }))();
   },
-  getListServerBackup: function getListServerBackup() {
+  getListServerByPage: function getListServerByPage(page) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
       var tokenAuth;
       return _regeneratorRuntime().wrap(function _callee7$(_context7) {
         while (1) switch (_context7.prev = _context7.next) {
           case 0:
+            reuseFunction.resetModal();
             tokenAuth = _index__WEBPACK_IMPORTED_MODULE_1__["default"].getters.getterResponseAuth.token;
             _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
-            _context7.next = 4;
+            _context7.next = 5;
+            return axios__WEBPACK_IMPORTED_MODULE_2___default()({
+              method: 'get',
+              url: "".concat(urlBase, "/schedule?page=").concat(page),
+              headers: {
+                'Authorization': "Bearer ".concat(tokenAuth)
+              }
+            }).then(function (response) {
+              _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('mutateListServer', response.data);
+              _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
+            })["catch"](function (error) {
+              reuseFunction.defaultHandlingError(error);
+              _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = false;
+            });
+          case 5:
+          case "end":
+            return _context7.stop();
+        }
+      }, _callee7);
+    }))();
+  },
+  getListServerBackup: function getListServerBackup() {
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
+      var tokenAuth;
+      return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+        while (1) switch (_context8.prev = _context8.next) {
+          case 0:
+            tokenAuth = _index__WEBPACK_IMPORTED_MODULE_1__["default"].getters.getterResponseAuth.token;
+            _index__WEBPACK_IMPORTED_MODULE_1__["default"].state.loading = true;
+            _context8.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_2___default()({
               method: 'get',
               url: "".concat(urlBase, "/schedule-backup"),
@@ -1680,9 +1710,9 @@ var serverService = {
             });
           case 4:
           case "end":
-            return _context7.stop();
+            return _context8.stop();
         }
-      }, _callee7);
+      }, _callee8);
     }))();
   }
 };

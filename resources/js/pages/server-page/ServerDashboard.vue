@@ -10,7 +10,7 @@
                         <div class="mt-8 py-2 px-8 flex flex-col " style="min-height: calc(100vh - 14rem);">
                             <div class="flex flex-row flex-wrap justify-center gap-2">
                                 <div
-                                    v-for="(getListServer, index) of getListServers" 
+                                    v-for="(getListServer, index) of getListServers?.data" 
                                     :key="index"
                                     class="w-64 height-card"> 
                                     <div class="flex justify-center mb-4">
@@ -43,7 +43,7 @@
                                     </div>
                                 </div>
                                 <div
-                                    v-if="!getListServers?.length" 
+                                    v-if="!getListServers?.data?.length" 
                                     class="w-64 height-card ">
                                     <div class="flex flex-col justify-center content-center  height-card bg-teal-50">
                                         <div class="flex justify-center">
@@ -69,7 +69,14 @@
                                 </div>
                             </div>
                             <!-- pagination -->
-                            <Pagination></Pagination>
+                            <template                                     
+                                v-if="getListServers?.data?.length" 
+                            >
+                                <Pagination
+                                    :data="getListServers"
+                                >
+                                </Pagination>
+                            </template>
                         </div> 
                     </div>
                 </div>
@@ -115,7 +122,7 @@ const responseError = computed (()=>{
 })
 
 const getListServers = computed(()=>{
-    return store.getters.getterListServer?.data?.data;
+    return store.getters.getterListServer?.data;
 })
 
 onMounted(()=>{
