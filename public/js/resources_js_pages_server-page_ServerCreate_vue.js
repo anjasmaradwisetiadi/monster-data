@@ -352,6 +352,8 @@ __webpack_require__.r(__webpack_exports__);
     __expose();
     var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.useRouter)();
     var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.useStore)();
+    var isNext = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
+    var isBack = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
     var pageNumber = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(1);
     var props = __props;
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {});
@@ -359,12 +361,39 @@ __webpack_require__.r(__webpack_exports__);
       pageNumber.value = payload;
       _store_server_serverService__WEBPACK_IMPORTED_MODULE_1__.serverService.getListServerByPage(payload);
     }
+    function next() {
+      var _props$data;
+      if (pageNumber.value < (props === null || props === void 0 || (_props$data = props.data) === null || _props$data === void 0 ? void 0 : _props$data.last_page)) {
+        pageNumber.value += 1;
+        _store_server_serverService__WEBPACK_IMPORTED_MODULE_1__.serverService.getListServerByPage(pageNumber.value);
+      }
+    }
+    function back() {
+      if (pageNumber.value > 1) {
+        pageNumber.value -= 1;
+        _store_server_serverService__WEBPACK_IMPORTED_MODULE_1__.serverService.getListServerByPage(pageNumber.value);
+      }
+    }
     var __returned__ = {
       router: router,
       store: store,
+      get isNext() {
+        return isNext;
+      },
+      set isNext(v) {
+        isNext = v;
+      },
+      get isBack() {
+        return isBack;
+      },
+      set isBack(v) {
+        isBack = v;
+      },
       pageNumber: pageNumber,
       props: props,
       selectPage: selectPage,
+      next: next,
+      back: back,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
       computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
@@ -501,14 +530,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               backupServer.value = getData.backup_server;
               backupMethod.value = getData.backup_method;
               backupType.value = getData.backup_type;
-              enablePitr.value = getData.enable_pitr ? true : false;
-              backupDatabasePerFile.value = getData.backup_database_per_file ? true : false;
+              enablePitr.value = Number(getData.enable_pitr) ? true : false;
+              backupDatabasePerFile.value = Number(getData.backup_database_per_file) ? true : false;
               storageName.value = getData.storage_name;
               storageDirectory.value = getData.storage_directory;
               retentionPolicyType.value = getData.retention_policy_type;
               backupName.value = getData.backup_name;
-              useCompression.value = getData.use_compression ? true : false;
-              useEncryption.value = getData.use_encryption ? true : false;
+              useCompression.value = Number(getData.use_compression) ? true : false;
+              useEncryption.value = Number(getData.use_encryption) ? true : false;
               backupSchedule.value = getData.backup_schedule;
             case 14:
             case "end":
@@ -1103,17 +1132,14 @@ var _withScopeId = function _withScopeId(n) {
 };
 var _hoisted_1 = {
   id: "Pagination",
-  "class": "flex justify-center"
+  "class": "flex justify-center mt-3"
 };
 var _hoisted_2 = {
   "class": "flex items-center gap-2 mt-2"
 };
-var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    disabled: "",
-    "class": "flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none",
-    type: "button"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_3 = ["disabled"];
+var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     fill: "none",
     viewBox: "0 0 24 24",
@@ -1125,18 +1151,15 @@ var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
     "stroke-linecap": "round",
     "stroke-linejoin": "round",
     d: "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-  })]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Previous ")], -1 /* HOISTED */);
+  })], -1 /* HOISTED */);
 });
-var _hoisted_4 = {
+var _hoisted_5 = {
   "class": "flex items-center gap-2"
 };
-var _hoisted_5 = ["onClick"];
-var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none",
-    type: "button",
-    disabled: ""
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Next "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_6 = ["onClick"];
+var _hoisted_7 = ["disabled"];
+var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     fill: "none",
     viewBox: "0 0 24 24",
@@ -1148,11 +1171,18 @@ var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
     "stroke-linecap": "round",
     "stroke-linejoin": "round",
     d: "M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-  })])], -1 /* HOISTED */);
+  })], -1 /* HOISTED */);
 });
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _$setup$props;
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" start pagination "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)((_$setup$props = $setup.props) === null || _$setup$props === void 0 || (_$setup$props = _$setup$props.data) === null || _$setup$props === void 0 ? void 0 : _$setup$props.last_page, function (n, index) {
+  var _$setup$props, _$setup$props2;
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" start pagination "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $setup.back();
+    }),
+    disabled: !($setup.pageNumber > 1),
+    "class": "flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none",
+    type: "button"
+  }, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Previous ")], 8 /* PROPS */, _hoisted_3), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)((_$setup$props = $setup.props) === null || _$setup$props === void 0 || (_$setup$props = _$setup$props.data) === null || _$setup$props === void 0 ? void 0 : _$setup$props.last_page, function (n, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
       key: index,
       onClick: function onClick($event) {
@@ -1160,8 +1190,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       },
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$setup.pageNumber === n ? 'bg-blue-primary text-white' : 'bg-white text-gray-900', "relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"]),
       type: "button"
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(n), 11 /* TEXT, CLASS, PROPS */, _hoisted_5);
-  }), 128 /* KEYED_FRAGMENT */))]), _hoisted_6]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end pagination ")]);
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(n), 11 /* TEXT, CLASS, PROPS */, _hoisted_6);
+  }), 128 /* KEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none",
+    type: "button",
+    disabled: !($setup.pageNumber < ((_$setup$props2 = $setup.props) === null || _$setup$props2 === void 0 || (_$setup$props2 = _$setup$props2.data) === null || _$setup$props2 === void 0 ? void 0 : _$setup$props2.last_page)),
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return $setup.next();
+    })
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Next "), _hoisted_8], 8 /* PROPS */, _hoisted_7)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end pagination ")]);
 }
 
 /***/ }),
@@ -1391,7 +1428,7 @@ var _hoisted_52 = {
 };
 var _hoisted_53 = {
   "class": "relative flex cursor-pointer items-center rounded-full p-3",
-  "for": "ripple-on",
+  "for": "enable-ptr",
   "data-ripple-dark": "true"
 };
 var _hoisted_54 = /*#__PURE__*/_withScopeId(function () {
@@ -1412,8 +1449,7 @@ var _hoisted_54 = /*#__PURE__*/_withScopeId(function () {
 });
 var _hoisted_55 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "class": "mt-px cursor-pointer select-none font-light text-gray-700",
-    "for": "ripple-on"
+    "class": "mt-px cursor-pointer select-none font-light text-gray-700"
   }, " Enable PITR ", -1 /* HOISTED */);
 });
 var _hoisted_56 = {
@@ -1424,7 +1460,7 @@ var _hoisted_57 = {
 };
 var _hoisted_58 = {
   "class": "relative flex cursor-pointer items-center rounded-full p-3",
-  "for": "ripple-on",
+  "for": "backup-database-per-file",
   "data-ripple-dark": "true"
 };
 var _hoisted_59 = /*#__PURE__*/_withScopeId(function () {
@@ -1445,8 +1481,7 @@ var _hoisted_59 = /*#__PURE__*/_withScopeId(function () {
 });
 var _hoisted_60 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "class": "mt-px cursor-pointer select-none font-light text-gray-700",
-    "for": "ripple-on"
+    "class": "mt-px cursor-pointer select-none font-light text-gray-700"
   }, " Backup a database per file ", -1 /* HOISTED */);
 });
 var _hoisted_61 = {
@@ -1457,7 +1492,7 @@ var _hoisted_62 = {
 };
 var _hoisted_63 = {
   "class": "relative flex cursor-pointer items-center rounded-full p-3",
-  "for": "ripple-on",
+  "for": "use-compression",
   "data-ripple-dark": "true"
 };
 var _hoisted_64 = /*#__PURE__*/_withScopeId(function () {
@@ -1478,8 +1513,7 @@ var _hoisted_64 = /*#__PURE__*/_withScopeId(function () {
 });
 var _hoisted_65 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "class": "mt-px cursor-pointer select-none font-light text-gray-700",
-    "for": "ripple-on"
+    "class": "mt-px cursor-pointer select-none font-light text-gray-700"
   }, " Use Compression ", -1 /* HOISTED */);
 });
 var _hoisted_66 = {
@@ -1490,7 +1524,7 @@ var _hoisted_67 = {
 };
 var _hoisted_68 = {
   "class": "relative flex cursor-pointer items-center rounded-full p-3",
-  "for": "ripple-on",
+  "for": "use-encryption",
   "data-ripple-dark": "true"
 };
 var _hoisted_69 = /*#__PURE__*/_withScopeId(function () {
@@ -1511,8 +1545,7 @@ var _hoisted_69 = /*#__PURE__*/_withScopeId(function () {
 });
 var _hoisted_70 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "class": "mt-px cursor-pointer select-none font-light text-gray-700",
-    "for": "ripple-on"
+    "class": "mt-px cursor-pointer select-none font-light text-gray-700"
   }, " Use Encryption ", -1 /* HOISTED */);
 });
 var _hoisted_71 = {
@@ -1611,32 +1644,32 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }),
         id: "countries",
         "class": "bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-      }, [].concat(_hoisted_48), 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $setup.backupSchedule]]), (_$setup$responseError11 = $setup.responseError) !== null && _$setup$responseError11 !== void 0 && _$setup$responseError11.backup_schedule ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_49, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$responseError12 = $setup.responseError) === null || _$setup$responseError12 === void 0 ? void 0 : _$setup$responseError12.backup_schedule[0]), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" form checked "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_52, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_53, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }, [].concat(_hoisted_48), 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $setup.backupSchedule]]), (_$setup$responseError11 = $setup.responseError) !== null && _$setup$responseError11 !== void 0 && _$setup$responseError11.backup_schedule ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_49, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$responseError12 = $setup.responseError) === null || _$setup$responseError12 === void 0 ? void 0 : _$setup$responseError12.backup_schedule[0]), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" form checked "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_52, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_53, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
           return $setup.enablePitr = $event;
         }),
-        id: "ripple-on",
+        id: "enable-ptr",
         type: "checkbox",
         "class": "before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-blue-primary checked:bg-blue-primary checked:before:bg-blue-primary hover:before:opacity-10"
-      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.enablePitr]]), _hoisted_54]), _hoisted_55])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_57, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_58, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.enablePitr]]), _hoisted_54])]), _hoisted_55])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_57, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_58, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
           return $setup.backupDatabasePerFile = $event;
         }),
-        id: "ripple-on",
+        id: "backup-database-per-file",
         type: "checkbox",
         "class": "before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-blue-primary checked:bg-blue-primary checked:before:bg-blue-primary hover:before:opacity-10"
       }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.backupDatabasePerFile]]), _hoisted_59]), _hoisted_60])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_61, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_62, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_63, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
           return $setup.useCompression = $event;
         }),
-        id: "ripple-on",
+        id: "use-compression",
         type: "checkbox",
         "class": "before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-blue-primary checked:bg-blue-primary checked:before:bg-blue-primary hover:before:opacity-10"
       }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.useCompression]]), _hoisted_64]), _hoisted_65])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_66, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_67, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_68, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
           return $setup.useEncryption = $event;
         }),
-        id: "ripple-on",
+        id: "use-encryption",
         type: "checkbox",
         "class": "before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-blue-primary checked:bg-blue-primary checked:before:bg-blue-primary hover:before:opacity-10"
       }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.useEncryption]]), _hoisted_69]), _hoisted_70])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_71, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_72, [_hoisted_73, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {

@@ -266,6 +266,8 @@ __webpack_require__.r(__webpack_exports__);
     __expose();
     var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.useRouter)();
     var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.useStore)();
+    var isNext = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
+    var isBack = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
     var pageNumber = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(1);
     var props = __props;
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {});
@@ -273,12 +275,39 @@ __webpack_require__.r(__webpack_exports__);
       pageNumber.value = payload;
       _store_server_serverService__WEBPACK_IMPORTED_MODULE_1__.serverService.getListServerByPage(payload);
     }
+    function next() {
+      var _props$data;
+      if (pageNumber.value < (props === null || props === void 0 || (_props$data = props.data) === null || _props$data === void 0 ? void 0 : _props$data.last_page)) {
+        pageNumber.value += 1;
+        _store_server_serverService__WEBPACK_IMPORTED_MODULE_1__.serverService.getListServerByPage(pageNumber.value);
+      }
+    }
+    function back() {
+      if (pageNumber.value > 1) {
+        pageNumber.value -= 1;
+        _store_server_serverService__WEBPACK_IMPORTED_MODULE_1__.serverService.getListServerByPage(pageNumber.value);
+      }
+    }
     var __returned__ = {
       router: router,
       store: store,
+      get isNext() {
+        return isNext;
+      },
+      set isNext(v) {
+        isNext = v;
+      },
+      get isBack() {
+        return isBack;
+      },
+      set isBack(v) {
+        isBack = v;
+      },
       pageNumber: pageNumber,
       props: props,
       selectPage: selectPage,
+      next: next,
+      back: back,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
       computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
@@ -668,17 +697,14 @@ var _withScopeId = function _withScopeId(n) {
 };
 var _hoisted_1 = {
   id: "Pagination",
-  "class": "flex justify-center"
+  "class": "flex justify-center mt-3"
 };
 var _hoisted_2 = {
   "class": "flex items-center gap-2 mt-2"
 };
-var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    disabled: "",
-    "class": "flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none",
-    type: "button"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_3 = ["disabled"];
+var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     fill: "none",
     viewBox: "0 0 24 24",
@@ -690,18 +716,15 @@ var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
     "stroke-linecap": "round",
     "stroke-linejoin": "round",
     d: "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-  })]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Previous ")], -1 /* HOISTED */);
+  })], -1 /* HOISTED */);
 });
-var _hoisted_4 = {
+var _hoisted_5 = {
   "class": "flex items-center gap-2"
 };
-var _hoisted_5 = ["onClick"];
-var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none",
-    type: "button",
-    disabled: ""
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Next "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_6 = ["onClick"];
+var _hoisted_7 = ["disabled"];
+var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     fill: "none",
     viewBox: "0 0 24 24",
@@ -713,11 +736,18 @@ var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
     "stroke-linecap": "round",
     "stroke-linejoin": "round",
     d: "M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-  })])], -1 /* HOISTED */);
+  })], -1 /* HOISTED */);
 });
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _$setup$props;
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" start pagination "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)((_$setup$props = $setup.props) === null || _$setup$props === void 0 || (_$setup$props = _$setup$props.data) === null || _$setup$props === void 0 ? void 0 : _$setup$props.last_page, function (n, index) {
+  var _$setup$props, _$setup$props2;
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" start pagination "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $setup.back();
+    }),
+    disabled: !($setup.pageNumber > 1),
+    "class": "flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none",
+    type: "button"
+  }, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Previous ")], 8 /* PROPS */, _hoisted_3), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)((_$setup$props = $setup.props) === null || _$setup$props === void 0 || (_$setup$props = _$setup$props.data) === null || _$setup$props === void 0 ? void 0 : _$setup$props.last_page, function (n, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
       key: index,
       onClick: function onClick($event) {
@@ -725,8 +755,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       },
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$setup.pageNumber === n ? 'bg-blue-primary text-white' : 'bg-white text-gray-900', "relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"]),
       type: "button"
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(n), 11 /* TEXT, CLASS, PROPS */, _hoisted_5);
-  }), 128 /* KEYED_FRAGMENT */))]), _hoisted_6]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end pagination ")]);
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(n), 11 /* TEXT, CLASS, PROPS */, _hoisted_6);
+  }), 128 /* KEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none",
+    type: "button",
+    disabled: !($setup.pageNumber < ((_$setup$props2 = $setup.props) === null || _$setup$props2 === void 0 || (_$setup$props2 = _$setup$props2.data) === null || _$setup$props2 === void 0 ? void 0 : _$setup$props2.last_page)),
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return $setup.next();
+    })
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Next "), _hoisted_8], 8 /* PROPS */, _hoisted_7)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end pagination ")]);
 }
 
 /***/ }),

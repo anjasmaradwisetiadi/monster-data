@@ -1,9 +1,10 @@
 <template>
-  <div id="Pagination" class="flex justify-center">
+  <div id="Pagination" class="flex justify-center mt-3">
     <!-- start pagination -->
     <div class="flex items-center gap-2 mt-2">
         <button
-          disabled
+          @click="back()"
+          :disabled="!(pageNumber > 1)"
           class="flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button"
         >
@@ -39,7 +40,8 @@
         <button
           class="flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button"
-          disabled
+          :disabled="!(((pageNumber) < props?.data?.last_page) )"
+          @click="next()"
         >
           Next
           <svg
@@ -70,6 +72,9 @@ import { useStore } from 'vuex';
 const router = useRouter();
 const store = useStore();
 
+let isNext=ref(false);
+let isBack=ref(true);
+
 const pageNumber = ref(1);
 
 const props = defineProps({
@@ -84,6 +89,20 @@ onMounted(()=>{
 function selectPage(payload){
   pageNumber.value = payload;
   serverService.getListServerByPage(payload);
+}
+
+function next(){
+  if( pageNumber.value < props?.data?.last_page){
+    pageNumber.value += 1;
+    serverService.getListServerByPage(pageNumber.value);
+  } 
+} 
+
+function back(){
+  if( pageNumber.value > 1){
+    pageNumber.value -= 1;
+    serverService.getListServerByPage(pageNumber.value);
+  } 
 }
 
 </script>
