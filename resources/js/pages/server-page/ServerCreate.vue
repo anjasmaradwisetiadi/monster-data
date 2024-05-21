@@ -574,5 +574,8 @@
   .margin-reset {
     margin: 0px !important;
   }
+  .testing{
+    margin:0px;
+  }
   </style>
   
