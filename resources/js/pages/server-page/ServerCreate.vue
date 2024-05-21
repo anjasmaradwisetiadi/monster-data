@@ -146,39 +146,40 @@
                 <div class="flex flex-row px-1 mt-4">
                   <div class="w-48">
                     <div class="inline-flex items-center">
+                      <div>
                         <label
                             class="relative flex cursor-pointer items-center rounded-full p-3"
-                            for="ripple-on"
+                            for="enable-ptr"
                             data-ripple-dark="true"
                         >
                             <input
                                 v-model="enablePitr"
-                                id="ripple-on"
+                                id="enable-ptr"
                                 type="checkbox"
                                 class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-blue-primary checked:bg-blue-primary checked:before:bg-blue-primary hover:before:opacity-10"
                             />
                             <div
                             class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100"
                             >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-3.5 w-3.5"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                                stroke="currentColor"
-                                stroke-width="1"
-                            >
-                                <path
-                                fill-rule="evenodd"
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                clip-rule="evenodd"
-                                ></path>
-                            </svg>
+                              <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  class="h-3.5 w-3.5"
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                  stroke="currentColor"
+                                  stroke-width="1"
+                              >
+                                  <path
+                                  fill-rule="evenodd"
+                                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                  clip-rule="evenodd"
+                                  ></path>
+                              </svg>
                             </div>
                         </label>
+                      </div>
                         <label
                             class="mt-px cursor-pointer select-none font-light text-gray-700"
-                            for="ripple-on"
                         >
                             Enable PITR
                         </label>
@@ -188,12 +189,12 @@
                     <div class="inline-flex items-center">
                         <label
                             class="relative flex cursor-pointer items-center rounded-full p-3"
-                            for="ripple-on"
+                            for="backup-database-per-file"
                             data-ripple-dark="true"
                         >
                             <input
                                 v-model="backupDatabasePerFile"
-                                id="ripple-on"
+                                id="backup-database-per-file"
                                 type="checkbox"
                                 class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-blue-primary checked:bg-blue-primary checked:before:bg-blue-primary hover:before:opacity-10"
                             />
@@ -218,7 +219,6 @@
                         </label>
                         <label
                             class="mt-px cursor-pointer select-none font-light text-gray-700"
-                            for="ripple-on"
                         >
                             Backup a database per file
                         </label>
@@ -228,12 +228,12 @@
                     <div class="inline-flex items-center">
                         <label
                             class="relative flex cursor-pointer items-center rounded-full p-3"
-                            for="ripple-on"
+                            for="use-compression"
                             data-ripple-dark="true"
                         >
                             <input
                                 v-model="useCompression"
-                                id="ripple-on"
+                                id="use-compression"
                                 type="checkbox"
                                 class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-blue-primary checked:bg-blue-primary checked:before:bg-blue-primary hover:before:opacity-10"
                             />
@@ -258,7 +258,6 @@
                         </label>
                         <label
                             class="mt-px cursor-pointer select-none font-light text-gray-700"
-                            for="ripple-on"
                         >
                             Use Compression
                         </label>
@@ -268,12 +267,12 @@
                     <div class="inline-flex items-center">
                         <label
                             class="relative flex cursor-pointer items-center rounded-full p-3"
-                            for="ripple-on"
+                            for="use-encryption"
                             data-ripple-dark="true"
                         >
                             <input
                                 v-model="useEncryption"
-                                id="ripple-on"
+                                id="use-encryption"
                                 type="checkbox"
                                 class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-blue-primary checked:bg-blue-primary checked:before:bg-blue-primary hover:before:opacity-10"
                             />
@@ -298,7 +297,6 @@
                         </label>
                         <label
                             class="mt-px cursor-pointer select-none font-light text-gray-700"
-                            for="ripple-on"
                         >
                             Use Encryption
                         </label>
@@ -476,14 +474,14 @@
     backupServer.value = getData.backup_server;
     backupMethod.value = getData.backup_method;
     backupType.value = getData.backup_type;
-    enablePitr.value = getData.enable_pitr ? true: false;
-    backupDatabasePerFile.value = getData.backup_database_per_file ? true: false;
+    enablePitr.value = Number(getData.enable_pitr) ? true: false;
+    backupDatabasePerFile.value = Number(getData.backup_database_per_file) ? true: false;
     storageName.value = getData.storage_name;
     storageDirectory.value = getData.storage_directory;
     retentionPolicyType.value = getData.retention_policy_type;
     backupName.value = getData.backup_name;
-    useCompression.value = getData.use_compression ? true: false;
-    useEncryption.value = getData.use_encryption ? true: false;
+    useCompression.value = Number(getData.use_compression) ? true: false;
+    useEncryption.value = Number(getData.use_encryption) ? true: false;
     backupSchedule.value = getData.backup_schedule;
   })
 
