@@ -71,7 +71,7 @@
                       id="countries"
                       class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
-                      <option selected disabled>Choose a backup method</option>
+                      <option selected disabled value="">Choose a backup method</option>
                       <option value="full">Full</option>
                       <option value="incremental">Incremental</option>
                       <option value="separate">Separate</option>
@@ -91,7 +91,7 @@
                       id="countries"
                       class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
-                      <option selected disabled>Choose a backup type</option>
+                      <option selected disabled value="">Choose a backup type</option>
                       <option value="file">File</option>
                       <option value="image">Image</option>
                       <option value="video">Video</option>
@@ -111,7 +111,7 @@
                       id="countries"
                       class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
-                      <option selected disabled>Choose a retention policy type</option>
+                      <option selected disabled value="">Choose a retention policy type</option>
                       <option value="day"> 1 Day</option>
                       <option value="week">1 Week</option>
                       <option value="month">1 Month</option>
@@ -131,7 +131,7 @@
                       id="countries"
                       class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
-                      <option selected disabled>Choose a backup schedule</option>
+                      <option selected disabled value="">Choose a backup schedule</option>
                       <option value="hourly">Hourly</option>
                       <option value="daily">Daily</option>
                       <option value="weekly">Weekly</option>

@@ -1284,7 +1284,8 @@ var _hoisted_18 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     selected: "",
-    disabled: ""
+    disabled: "",
+    value: ""
   }, "Choose a backup method", -1 /* HOISTED */);
 });
 var _hoisted_20 = /*#__PURE__*/_withScopeId(function () {
@@ -1319,7 +1320,8 @@ var _hoisted_26 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_27 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     selected: "",
-    disabled: ""
+    disabled: "",
+    value: ""
   }, "Choose a backup type", -1 /* HOISTED */);
 });
 var _hoisted_28 = /*#__PURE__*/_withScopeId(function () {
@@ -1354,7 +1356,8 @@ var _hoisted_34 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_35 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     selected: "",
-    disabled: ""
+    disabled: "",
+    value: ""
   }, "Choose a retention policy type", -1 /* HOISTED */);
 });
 var _hoisted_36 = /*#__PURE__*/_withScopeId(function () {
@@ -1389,7 +1392,8 @@ var _hoisted_42 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_43 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     selected: "",
-    disabled: ""
+    disabled: "",
+    value: ""
   }, "Choose a backup schedule", -1 /* HOISTED */);
 });
 var _hoisted_44 = /*#__PURE__*/_withScopeId(function () {
